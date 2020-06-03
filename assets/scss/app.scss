@@ -1,11 +1,13 @@
 @import "vars";
 
-body {
-  background-color: $light-color;
+body
+{
+    background-color: $light-color;
 }
 
-a {
-  color: $widget-color;
+a
+{
+    color: $widget-color;
 }
 
 $theme-colors: (
