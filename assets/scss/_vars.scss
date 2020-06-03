@@ -9,6 +9,16 @@ $light-color: #ffffff;
 $font-text: 'Open Sans', sans-serif;
 $font-title: 'Open Sans', sans-serif;
 
+@mixin fontText
+{
+  @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap');
+  font-family: 'Open Sans', sans-serif;
+}
+@mixin fontTitle
+{
+  @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@700&display=swap');
+  font-family: 'Open Sans', sans-serif;
+}
 $size-text: 16pt;
 $size-intermediate :calc(2.5 * var($size-text));
 $size-title: calc(3 * var($size-text));
