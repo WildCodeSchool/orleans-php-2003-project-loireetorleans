@@ -1,15 +1,14 @@
 @import "app";
-@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@700&display=swap');
 
-@font-face {
+@font-face
+{
     font-family: 'Open Sans Light';
     url('OpenSans-Light-webfont.woff2') format('woff2');
     font-weight: normal;
     font-style: normal;
-
 }
-@font-face {
+@font-face
+{
     font-family: 'Open Sans Bold';
     url('OpenSans-Bold-webfont.woff2') format('woff2'),
     font-weight: normal;
