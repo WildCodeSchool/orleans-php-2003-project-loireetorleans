@@ -1,8 +1,13 @@
 @import "app";
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@700&display=swap');
 
 $nav-bar: #151210;
 $widget-color: #C7B494;
 $light-color: #ffffff;
+
+$font-text: 'Open Sans', sans-serif;
+$font-title: 'Open Sans', sans-serif;
 
 $size-text: 16pt;
 $size-intermediate :calc(2.5 * var($size-text));
