@@ -1,16 +1,16 @@
 @import "vars";
 
 body {
-    background-color: $light-color;
+  background-color: $light-color;
 }
 
 a {
-    color: $widget-color;
+  color: $widget-color;
 }
 
 $theme-colors: (
-        "primary": $nav-bar,
-        "danger": #ff4136,
-        "info": $widget-color,
+    "primary": $nav-bar,
+    "danger": #ff4136,
+    "info": $widget-color,
 );
 @import "~bootstrap/scss/bootstrap";
