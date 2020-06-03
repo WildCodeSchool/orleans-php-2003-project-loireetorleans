@@ -1,3 +1,17 @@
-$primary-color: #f76c6c;
-$secondary-color: #f99797;
-$warm-color: #ffd64f;
+@import "app";
+
+$nav-bar: #151210;
+$widget-color: #C7B494;
+$light-color: #ffffff;
+
+$size-text: 16pt;
+$size-intermediate :calc(2.5 * var($size-text));
+$size-title: calc(3 * var($size-text));
+
+$padding : 20px;
+$padding-sm : calc(var($padding) *2);
+$padding-lg : calc(var($padding) *4);
+
+$margin: 20px;
+$margin-sm : calc(var($margin) *2);
+$margin-lg : calc(var($margin) *4);
