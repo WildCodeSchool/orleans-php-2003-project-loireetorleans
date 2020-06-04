@@ -1,7 +1,4 @@
-@import "app";
-
-@font-face
-{
+@font-face {
     font-family: 'Open Sans Bold';
     src: url('../fonts/opensans_bold_macroman/OpenSans-Bold-webfont.eot');
     src: url('../fonts/opensans_bold_macroman/OpenSans-Bold-webfont.eot?#iefix') format('embedded-opentype'),
@@ -12,8 +9,7 @@
     font-style: normal;
 }
 
-@font-face
-{
+@font-face {
     font-family: 'Open Sans Light';
     src: url('../fonts/opensans_light_macroman/OpenSans-Light-webfont.eot');
     src: url('../fonts/opensans_light_macroman/OpenSans-Light-webfont.eot?#iefix') format('embedded-opentype'),

@@ -1,12 +1,11 @@
 @import "vars";
+@import "home";
 
-body
-{
+body {
     background-color: $light-color;
 }
 
-a
-{
+a {
     color: $widget-color;
 }
 
@@ -15,4 +14,5 @@ $theme-colors: (
     "danger": #ff4136,
     "info": $widget-color,
 );
+
 @import "~bootstrap/scss/bootstrap";
