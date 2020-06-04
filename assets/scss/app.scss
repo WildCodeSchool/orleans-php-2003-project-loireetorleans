@@ -8,12 +8,12 @@ body {
 a {
     color: $widget-color;
 }
+
 h1
 {
     font-family: $font-title;
     font-size: $size-title;
 }
-
 
 $theme-colors: (
     "primary": $nav-bar,
