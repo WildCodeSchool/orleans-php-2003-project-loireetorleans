@@ -1,8 +1,23 @@
 @import "vars";
-@import "home";
+
+html{
+    height: 100%;
+}
+
+.footer {
+    background-color: $widget-color;
+    & > .row {
+        margin-top: auto;
+        bottom: 0;
+    }
+
+}
 
 body {
     background-color: $light-color;
+    display:flex;
+    flex-direction:column;
+    min-height: 100%;
 }
 
 a {
