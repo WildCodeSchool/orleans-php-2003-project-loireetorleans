@@ -1,0 +1,10 @@
+@import "vars";
+h1  {
+  font-family: $font-title;
+  font-size: $size-title;
+}
+
+p{
+  font-family: $font-text;
+}
+@import "~bootstrap/scss/bootstrap";
