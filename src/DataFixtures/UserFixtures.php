@@ -3,6 +3,7 @@
 namespace App\DataFixtures;
 
 use App\Entity\User;
+use Faker;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
@@ -18,23 +19,24 @@ class UserFixtures extends Fixture
 
     public function load(ObjectManager $manager)
     {
+        $faker = Faker\Factory::create('fr_FR');
         $subscriber = new User();
-        $subscriber->setLogin('toto');
+        $subscriber->setLogin($faker->userName);
         $subscriber->setRoles(['ROLE_SUBSCRIBER']);
-        $subscriber->setFirstname('toto');
-        $subscriber->setLastname('toto2');
-        $subscriber->setEmail('toto@maggle.fr');
+        $subscriber->setFirstname($faker->firstName);
+        $subscriber->setLastname($faker->lastName);
+        $subscriber->setEmail($faker->email);
         $subscriber->setDescription('golf');
-        $subscriber->setPhoneNumber('3615ULA');
-        $subscriber->setPicture('dqedazeazee');
-        $subscriber->setCompany('Wild');
+        $subscriber->setPhoneNumber($faker->e164PhoneNumber);
+        $subscriber->setPicture('http://lorempixel.com/gray/800/400/cats/Faker/');
+        $subscriber->setCompany($faker->company);
         $subscriber->setActivity('industrie');
         $subscriber->setCity('Orleans');
         $subscriber->setStreet('5 rue des champs');
         $subscriber->setPostalCode('45000');
         $subscriber->setPassword($this->passwordEncoder->encodePassword(
             $subscriber,
-            'rototo'
+            'loireetorleans'
         ));
 
         $manager->persist($subscriber);
