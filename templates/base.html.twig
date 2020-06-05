@@ -3,7 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
     <title>{% block title %}{% endblock %}</title>
+    {{ encore_entry_link_tags('app') }}
+
     {% block stylesheets %}
     {% endblock %}
 </head>
@@ -12,6 +15,7 @@
 {% include '_navbar.html.twig' %}
 {% block body %}
 {% endblock %}
+{% include 'footer.html.twig' %}
 {% block javascripts %}
 {% endblock %}
 </body>
