@@ -1,0 +1,45 @@
+{% extends '_layout.html.twig' %}
+{% block title %} Loire et Orleans {% endblock %}
+
+  {% block stylesheets %}
+      {{ encore_entry_link_tags('home') }}
+  {% endblock %}
+
+{% block body %}
+    <main class="container">
+        <section>
+            <h1 class="text-center m-3">Loire et Orléans</h1>
+            <div class="container">
+                <div class="row align-items-center justify-content-between ">
+                    <div class="col-xl-6">
+                        <a href="https://placeholder.com"><img src="https://via.placeholder.com/500x250" alt="Description"></a>
+                    </div>
+                    <div class="col-xl-6">
+                        <p>Ce site web a pour objectif de constituer une communauté
+                            d’acteurs économiques loirétains (chefs d’entreprise, salariés...)
+                            prêts à revendiquer les valeurs de LOIRE&ORLEANS, à participer au
+                            rayonnement du territoire sur les plans national et international
+                            et à co-construire, avec les élus locaux, les stratégies futures de
+                            développement économique.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section>
+            <h2 class="text-center my-5">Qui sont les ambassadeurs ?</h2>
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-sm-6">
+                        <p>Chefs d’entreprises, salariés, personnalités publiques (artistes, sportifs...) originaires, résidents ou attachés au Loiret. Ils incarnent les valeurs de la marque : l’authenticité, le courage, l’audace, la responsabilité, la transmission et la profondeur. Ils s’engagent à porter ces valeurs fièrement, dans le temps, sans en détourner l’usage pour un objectif autre que celui de Loire&Orléans (commercial, politique...).<br>
+                            Ils favorisent les produits et services du territoire, appliquent une politique et une gestion de ressources humaines responsable et s’impliquent dans des initiatives de la société civile.<br>
+                            Le rôle des Ambassadeurs est de revendiquer leur adhésion à la marque Loire&Orléans et leur attachement au territoire sur ses supports de communication, de partager toutes leurs informations positives sur les supports de communication de Loire&Orléans Eco, de relayer les informations positives du territoire sur leurs propres outils de communication et de s'impliquer dans le développement économique du territoire en étant force de proposition sur les actions à conduire (politiques publiques : emploi, formation, mobilité…)<br>
+                            Vivre bien, vivre beau, vivre bon, telle est la « profession de foi » des Ambassadeurs Loire&Orléans.</p>
+                    </div>
+                    <div class="col-sm-6">
+                        <a href="https://placeholder.com"><img src="https://via.placeholder.com/500x250" alt="Description"></a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+{% endblock %}

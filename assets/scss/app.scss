@@ -1,9 +1,40 @@
 @import "vars";
 
+html{
+    height: 100%;
+}
+
+.footer {
+    background-color: $widget-color;
+
+    & > .row {
+        margin-top: auto;
+        bottom: 0;
+    }
+
+}
+
 body {
-    background-color: $secondary-color;
+    background-color: $light-color;
+    display:flex;
+    flex-direction:column;
+    min-height: 100%;
 }
 
 a {
-    color: $warm-color;
+    color: $widget-color;
 }
+
+h1
+{
+    font-family: $font-title;
+    font-size: $size-title;
+}
+
+$theme-colors: (
+    "primary": $nav-bar,
+    "danger": #ff4136,
+    "info": $widget-color,
+);
+
+@import "~bootstrap/scss/bootstrap";
