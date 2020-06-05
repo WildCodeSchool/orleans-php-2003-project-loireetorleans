@@ -1,0 +1,9 @@
+@import "app";
+
+form {
+    & > div {
+        background-color: $light-color;
+        border: 1px solid $widget-color;
+    }
+}
+@import "~bootstrap/scss/bootstrap";
