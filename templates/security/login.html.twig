@@ -7,7 +7,7 @@
 {% block body %}
     <section class="col-12 d-flex flex-column align-items-center">
         <h1 class="my-4">Connexion</h1>
-        <form method="post" class="col-12 d-flex flex-column align-items-center">
+        <form method="post" class="col-12 d-flex flex-column align-items-center mb-5">
             {% if error %}
                 <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
             {% endif %}
