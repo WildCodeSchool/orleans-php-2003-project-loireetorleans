@@ -1,26 +1,20 @@
 @import "vars";
-
 html{
     height: 100%;
 }
-
 .footer {
     font-family: $font-title;
     background-color: $widget-color;
-
     & h5{
         font-size: $size-text;
     }
-
     & p{
         font-family: $font-text;
     }
-
     & > .row {
         margin-top: auto;
         bottom: 0;
     }
-
     & a, h5 {
         color: $nav-bar;
         &:hover{
@@ -29,39 +23,43 @@ html{
             color: $nav-bar;
         }
     }
+    & a > img {
+        margin-left: 43%;
+    }
 }
-
 .contact {
     background-color: $light-color;
     border-radius: 5px;
     box-shadow: 2px 2px 2px 2px rgba(21, 18, 16, 0.2);
 }
-
 body {
     background-color: $light-color;
     display:flex;
     flex-direction:column;
     min-height: 100%;
 }
-
 a {
     color: $widget-color;
 }
-
 h1
 {
     font-family: $font-title;
     font-size: $size-title;
 }
-
 .navbar {
     background-color: $nav-bar;
 }
-
+@media screen and (max-width: 768px){
+    .footer {
+        & a > img {
+            margin-left: 0;
+            margin-top: 2%;
+        }
+    }
+}
 $theme-colors: (
-    "primary": $nav-bar,
-    "danger": #ff4136,
-    "info": $widget-color,
+        "primary": $nav-bar,
+        "danger": #FF4136,
+        "info": $widget-color,
 );
-
 @import "~bootstrap/scss/bootstrap";
