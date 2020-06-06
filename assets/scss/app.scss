@@ -9,30 +9,30 @@ html {
     background-color: $widget-color;
 
     & h5 {
-      font-size: $size-text;
+        font-size: $size-text;
     }
 
     & p {
-      font-family: $font-text;
+        font-family: $font-text;
     }
 
     & > .row {
-      margin-top: auto;
-      bottom: 0;
+        margin-top: auto;
+        bottom: 0;
     }
 
     & a, h5 {
-      color: $nav-bar;
+        color: $nav-bar;
 
     &:hover {
-      text-decoration: none;
-      outline: none;
-      color: $nav-bar;
+            text-decoration: none;
+            outline: none;
+            color: $nav-bar;
     }
   }
 
     & a > img {
-      margin-left: 43%;
+        margin-left: 43%;
     }
 }
 
@@ -64,17 +64,17 @@ h1 {
 
 @media screen and (max-width: 768px) {
     .footer {
-      & a > img {
-        margin-left: 0;
-        margin-top: 2%;
+        & a > img {
+            margin-left: 0;
+            margin-top: 2%;
       }
     }
 }
 
 $theme-colors: (
-        "primary": $nav-bar,
-        "danger": #FF4136,
-        "info": $widget-color,
+    "primary": $nav-bar,
+    "danger": #FF4136,
+    "info": $widget-color,
 );
 
 @import "~bootstrap/scss/bootstrap";
