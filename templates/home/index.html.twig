@@ -6,10 +6,10 @@
 {% block body %}
     <section>
         <h1 class="text-center my-5">Loire et Orléans</h1>
-        <div class="row  d-flex align-items-center justify-content-center ">
-            <div class=" col-10 col-lg-4 text-center">
-                <a class="col-12" href="https://placeholder.com"><img class="col-12" src="{{ asset('build/work.jpg') }}"></a>
-            </div>
+        <div class="row d-flex align-items-center justify-content-center ">
+            <figure class=" col-10 col-lg-4 text-center">
+                <img class="col-12" src="{{ asset('build/work.jpg') }}" alt="work">
+            </figure>
             <div class="col-10 col-lg-4">
                 <p>Ce site web a pour objectif de constituer une communauté
                     d’acteurs économiques loirétains (chefs d’entreprise, salariés...)
@@ -29,9 +29,9 @@
                     Le rôle des Ambassadeurs est de revendiquer leur adhésion à la marque Loire&Orléans et leur attachement au territoire sur ses supports de communication, de partager toutes leurs informations positives sur les supports de communication de Loire&Orléans Eco, de relayer les informations positives du territoire sur leurs propres outils de communication et de s'impliquer dans le développement économique du territoire en étant force de proposition sur les actions à conduire (politiques publiques : emploi, formation, mobilité…)<br>
                     Vivre bien, vivre beau, vivre bon, telle est la « profession de foi » des Ambassadeurs Loire&Orléans.</p>
             </div>
-            <div class="col-10 col-lg-4 text-center">
-                <a class="col-12" href="https://placeholder.com"><img class="col-12" src="{{ asset('build/ambassadeur.jpeg') }}" alt="Description"></a>
-            </div>
+            <figure class="col-10 col-lg-4 text-center">
+                <img class="col-12" src="{{ asset('build/ambassadeur.jpeg') }}" alt="Description">
+            </figure>
         </div>
     </section>
 {% endblock %}

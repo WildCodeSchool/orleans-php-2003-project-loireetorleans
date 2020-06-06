@@ -9,11 +9,12 @@ html {
     background-color: $widget-color;
 
     & h5 {
-        font-size: $size-text;
+        font-size: $size-footer-text;
     }
 
     & p {
         font-family: $font-text;
+        font-size: $size-footer-text;
     }
 
     & > .row {
@@ -21,25 +22,19 @@ html {
         bottom: 0;
     }
 
-    & a, h5 {
+    & a, h6 {
         color: $nav-bar;
 
         &:hover {
             text-decoration: none;
             outline: none;
-            color: $nav-bar;
+            color: lighten($nav-bar, 30%);
     }
   }
 
     & a > img {
         margin-left: 43%;
     }
-}
-
-.contact {
-    background-color: $light-color;
-    border-radius: 5px;
-    box-shadow: 2px 2px 2px 2px rgba(21, 18, 16, 0.2);
 }
 
 body {
