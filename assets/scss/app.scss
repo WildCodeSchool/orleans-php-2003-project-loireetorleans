@@ -1,23 +1,46 @@
 @import "vars";
 
-html{
+html {
     height: 100%;
 }
 
 .footer {
+    font-family: $font-title;
     background-color: $widget-color;
+
+    & h5 {
+        font-size: $size-footer-text;
+    }
+
+    & p {
+        font-family: $font-text;
+        font-size: $size-footer-text;
+    }
 
     & > .row {
         margin-top: auto;
         bottom: 0;
     }
 
+    & a, h6 {
+        color: $nav-bar;
+
+        &:hover {
+            text-decoration: none;
+            outline: none;
+            color: lighten($nav-bar, 30%);
+    }
+  }
+
+    & a > img {
+        margin-left: 43%;
+    }
 }
 
 body {
     background-color: $light-color;
-    display:flex;
-    flex-direction:column;
+    display: flex;
+    flex-direction: column;
     min-height: 100%;
 }
 
@@ -25,15 +48,27 @@ a {
     color: $widget-color;
 }
 
-h1
-{
+h1 {
     font-family: $font-title;
     font-size: $size-title;
 }
 
+.navbar {
+    background-color: $nav-bar;
+}
+
+@media screen and (max-width: 768px) {
+    .footer {
+        & a > img {
+            margin-left: 0;
+            margin-top: 2%;
+      }
+    }
+}
+
 $theme-colors: (
     "primary": $nav-bar,
-    "danger": #ff4136,
+    "danger": #FF4136,
     "info": $widget-color,
 );
 
