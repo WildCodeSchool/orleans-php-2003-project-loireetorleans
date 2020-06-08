@@ -39,3 +39,9 @@ $padding-lg : calc(var($padding) *4);
 $margin: 20px;
 $margin-sm : calc(var($margin) *2);
 $margin-lg : calc(var($margin) *4);
+
+$theme-colors: (
+        "primary": $nav-bar,
+        "danger": #FF4136,
+        "info": $widget-color,
+);

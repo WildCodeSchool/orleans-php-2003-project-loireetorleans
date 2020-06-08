@@ -66,10 +66,4 @@ h1 {
     }
 }
 
-$theme-colors: (
-    "primary": $nav-bar,
-    "danger": #FF4136,
-    "info": $widget-color,
-);
-
 @import "~bootstrap/scss/bootstrap";
