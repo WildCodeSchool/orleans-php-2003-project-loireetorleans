@@ -10,12 +10,12 @@ use Symfony\Component\Routing\Annotation\Route;
 class TrombiController extends AbstractController
 {
     /**
-     * @Route("/trombi", name="trombi_index")
+     * @Route("/trombinoscope", name="trombi_index")
      * @return Response
      *
      */
     public function index(): Response
     {
-        return $this->render('Trombinoscope/index.html.twig');
+        return $this->render('trombinoscope/index.html.twig');
     }
 }
