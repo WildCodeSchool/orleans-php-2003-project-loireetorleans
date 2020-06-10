@@ -1,15 +1,63 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Register{% endblock %}
+
+{% block title %}Profil{% endblock %}
 
 {% block body %}
-    <h1>Register</h1>
+    <main class="container">
+        <h1>Votre profil ambassadeur</h1>
 
-    {{ form_start(registrationForm) }}
-        {{ form_row(registrationForm.login) }}
-        {{ form_row(registrationForm.plainPassword) }}
-        {{ form_row(registrationForm.agreeTerms) }}
+        {{ form_start(registrationForm) }}
 
-        <button type="submit" class="btn">Register</button>
-    {{ form_end(registrationForm) }}
+        <div class="form-group">
+            {{ form_row(registrationForm.firstname) }}
+        </div>
+
+        <div class="form-group">
+            {{ form_row(registrationForm.lastName) }}
+        </div>
+
+        <div class="form-group">
+            {{ form_row(registrationForm.company) }}
+        </div>
+
+        <div class="form-group">
+            {{ form_row(registrationForm.activity) }}
+        </div>
+
+        <div class="form-group">
+            {{ form_row(registrationForm.email) }}
+        </div>
+
+        <div class="form-group">
+            {{ form_row(registrationForm.phoneNumber) }}
+        </div>
+
+        <div class="form-group">
+            {{ form_row(registrationForm.street) }}
+        </div>
+
+        <div class="form-group">
+            {{ form_row(registrationForm.city) }}
+        </div>
+
+        <div class="form-group">
+            {{ form_row(registrationForm.postalCode) }}
+        </div>
+
+        <div class="form-group">
+            {{ form_row(registrationForm.login) }}
+        </div>
+
+        <div class="form-group">
+            {{ form_row(registrationForm.plainPassword) }}
+        </div>
+
+        <div class="form-group">
+            {{ form_row(registrationForm.agreeTerms) }}
+        </div>
+
+        <button type="submit" class="btn btn-primary">Soumettre</button>
+        {{ form_end(registrationForm) }}
+    </main>
 {% endblock %}
