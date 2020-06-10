@@ -28,6 +28,7 @@ $font-text: 'Open Sans Light', sans-serif;
 $font-title: 'Open Sans Bold', sans-serif;
 
 $size-text: 16px;
+$size-footer-text: 10px;
 $size-intermediate :calc(2.5 * var($size-text));
 $size-title: calc(3 * var($size-text));
 
@@ -38,3 +39,9 @@ $padding-lg : calc(var($padding) *4);
 $margin: 20px;
 $margin-sm : calc(var($margin) *2);
 $margin-lg : calc(var($margin) *4);
+
+$theme-colors: (
+    "primary": $nav-bar,
+    "danger": #FF4136,
+    "info": $widget-color,
+);

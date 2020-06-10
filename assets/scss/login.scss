@@ -6,4 +6,10 @@ form {
         border: 1px solid $widget-color;
     }
 }
+
+footer{
+    position: absolute;
+    bottom: 0;
+}
 @import "~bootstrap/scss/bootstrap";
+
