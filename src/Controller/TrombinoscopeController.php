@@ -7,15 +7,15 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-class TrombiController extends AbstractController
+class TrombinoscopeController extends AbstractController
 {
     /**
-     * @Route("/trombi", name="trombi_index")
+     * @Route("/trombinoscope", name="trombinoscope_index")
      * @return Response
      *
      */
     public function index(): Response
     {
-        return $this->render('Trombinoscope/index.html.twig');
+        return $this->render('trombinoscope/index.html.twig');
     }
 }
