@@ -26,14 +26,16 @@
     <div class="container-fluid">
         <div class="row">
             {% for card in cards %}
-                <div class="card my-4 mr-4 ml-auto h-100 w-100" style="width: 18rem;">
-                    <img class="card-img-top" src="https://www.bmeia.gv.at/fileadmin/_processed_/c/b/csm_Linhart_2_59a15afc9d.jpg" alt="Photo Ambassadeur">
+                <div class="card my-4 mr-4 ml-auto" style="width: 18rem;">
+                    <img class="card-img-top"
+                         src="https://www.bmeia.gv.at/fileadmin/_processed_/c/b/csm_Linhart_2_59a15afc9d.jpg"
+                         alt="Photo Ambassadeur">
                     <div class="card-body">
                         <h6 class="card-title">Nom : {{ card.nom }}</h6>
                         <h6 class="card-title">Prénom : {{ card.prenom }}</h6>
                         <p class="card-title">Entreprise : {{ card.entreprise }}</p>
-                        <a href="#" class="btn btn-primary">Profil Complet</a>
                     </div>
+                        <a href="#" class="btn btn-primary mt-2">Profil de {{ card.prenom }} {{ card.nom }}</a>
                 </div>
             {% else %}
                 'Aucun Ambassadeur trouvé'
