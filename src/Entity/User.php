@@ -91,6 +91,11 @@ class User implements UserInterface
      */
     private $postalCode;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $employmentArea;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -297,6 +302,18 @@ class User implements UserInterface
     public function setPostalCode(string $postalCode): self
     {
         $this->postalCode = $postalCode;
+
+        return $this;
+    }
+
+    public function getEmploymentArea(): ?string
+    {
+        return $this->employmentArea;
+    }
+
+    public function setEmploymentArea(string $employmentArea): self
+    {
+        $this->employmentArea = $employmentArea;
 
         return $this;
     }
