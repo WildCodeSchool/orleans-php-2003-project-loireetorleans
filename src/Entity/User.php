@@ -24,7 +24,11 @@ class User implements UserInterface
     /**
      * @ORM\Column(type="string", length=180, unique=true)
      * @Assert\NotBlank(
-     *     message="Le mot de passe est obligtoire"
+     *     message="L'identifiant est obligtoire"
+     * )
+     * @Assert\Length(
+     *     max = 100,
+     *     maxMessage = "Le nom de l'identifiant ne doit pas faire plus de {{ limit }} caractères",
      * )
      */
     private $login;
@@ -40,6 +44,10 @@ class User implements UserInterface
      * @Assert\NotBlank(
      *     message="Le mot de passe est obligatoire"
      * )
+     * @Assert\Length(
+     *     max = 20,
+     *     maxMessage = "Le mot de passe ne doit pas faire plus de {{ limit }} caractères",
+     * )
      */
     private $password;
 
@@ -48,6 +56,10 @@ class User implements UserInterface
      * @Assert\NotBlank(
      *     message="Le nom de famille est obligatoire"
      * )
+     * @Assert\Length(
+     *     max = 100,
+     *     maxMessage = " Le nom de famille ne doit pas faire plus de {{ limit }} caractères",
+     * )
      */
     private $lastName;
 
@@ -55,6 +67,10 @@ class User implements UserInterface
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank(
      *     message="Le prénom est obligatoire"
+     * )
+     * @Assert\Length(
+     *     max = 100,
+     *     maxMessage =" Le prénom ne doit pas faire plus de {{ limit }} caractères",
      * )
      */
     private $firstname;
@@ -72,6 +88,10 @@ class User implements UserInterface
      * @Assert\NotBlank(
      *     message="La description est requise"
      * )
+     * @Assert\Length(
+     *     max = 255,
+     *     maxMessage = "La description ne doit pas faire plus de {{ limit }} caractères",
+     * )
      */
     private $description;
 
@@ -80,7 +100,10 @@ class User implements UserInterface
      * @Assert\NotBlank(
      *     message="Un numéro de téléphone est obligatoire"
      * )
-     *
+     * @Assert\Length(
+     *     max = 10,
+     *     maxMessage = "Le numéro de téléphone ne doit pas faire plus de {{ limit }} caractères",
+     * )
      */
     private $phoneNumber;
 
@@ -88,6 +111,10 @@ class User implements UserInterface
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank(
      *     message="Le nom de l'entreprise est obligatoire"
+     * )
+     * @Assert\Length(
+     *     max = 100,
+     *     maxMessage = "Le nom de l'entreprise ne doit pas faire plus de {{ limit }} caractères",
      * )
      */
     private $company;
@@ -113,6 +140,10 @@ class User implements UserInterface
      * @Assert\NotBlank(
      *     message="Le nom de la ville est obligatoire"
      * )
+     * @Assert\Length(
+     *     max = 100,
+     *     maxMessage = "Le nom de la ville ne doit pas faire plus de {{ limit }} caractères",
+     * )
      */
     private $city;
 
@@ -121,6 +152,10 @@ class User implements UserInterface
      * @Assert\NotBlank(
      *     message="Le nom de la rue est obligatoire"
      * )
+     * @Assert\Length(
+     *     max = 255
+     *     maxMessage = "Le nom de la rue ne doit pas faire plus de {{ limit }} caractères",
+     * )
      */
     private $street;
 
@@ -128,6 +163,10 @@ class User implements UserInterface
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank(
      *     message="le code postal est obligatoire"
+     * )
+     * @Assert\Length(
+     *     max = 5,
+     *     maxMessage = "Le code postal ne doit pas faire plus de {{ limit }} caractères",
      * )
      */
     private $postalCode;
