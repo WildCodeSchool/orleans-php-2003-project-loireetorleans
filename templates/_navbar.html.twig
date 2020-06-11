@@ -13,8 +13,34 @@
             <li class="nav-item">
                 <a class="nav-link" href="{{ path('trombinoscope_index') }}">Trombinoscope</a>
             </li>
+            {% if app.user and app.user.roles.0 is same as('ROLE_ADMINISTRATEUR') %}
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="#">Ambassadeur</a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                    <a class="dropdown-item" href="#">Mon Profil</a>
+                    <a class="dropdown-item" href="#">Mes échanges</a>
+                    <a class="dropdown-item" href="#">Documents à télécharger</a>
+                </div>
+            </li>
+            {% endif %}
+            {% if app.user and app.user.roles.0 is same as('ROLE_AMBASSADEUR') %}
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="#">Ambassadeur</a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <a class="dropdown-item" href="#">Gestion des documents</a>
+                        <a class="dropdown-item" href="#">Mes échanges</a>
+                        <a class="dropdown-item" href="#">Profils Ambassadeur</a>
+                        <a class="dropdown-item" href="#">Mon profil</a>
+                    </div>
+                </li>
+            {% endif %}
             <li class="nav-item">
-                <a class="nav-link" href="{{ path('app_login') }}">Connexion</a>
+                {% if app.user %}
+                    <a class="nav-link" href="{{ path('app_logout') }}"> Se déconnecter</a>
+                {% else %}
+                    <a class="nav-link" href="{{ path('app_login') }}">Connexion</a>
+                {% endif %}
+
             </li>
         </ul>
     </div>
