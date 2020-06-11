@@ -1,34 +1,37 @@
 @import "app";
 
 form {
-  & > div {
-    background-color: $light-color;
-    border: 1px solid $widget-color;
-  }
+    & > div {
+      background-color: $light-color;
+      border: 1px solid $widget-color;
+    }
 }
+
 section {
   height: 80vh;
-  & .form {
-    margin: 8% 0;
-  }
+
+    & .form {
+      margin: 8% 0;
+    }
 }
 
 label {
   font-family: $font-text;
 }
+
 @media screen and (max-width: 768px) {
   section {
-    & .form {
-      margin: 25% 0;
-    }
+      & .form {
+        margin: 25% 0;
+      }
   }
 }
 
 @media screen and (max-width: 375px) {
   section {
-    & .form {
-      margin: 5% 0 0;
-    }
+      & .form {
+        margin: 5% 0 0;
+      }
   }
 }
 @import "~bootstrap/scss/bootstrap";
