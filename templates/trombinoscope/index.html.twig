@@ -17,7 +17,7 @@
         <div class="row justify-content-center my-4">
             <form class=" form-inline my-2 my-lg-0">
                 <input class="form-control mr-sm-2" type="search" placeholder="Recherche" aria-label="Search">
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Rechercher</button>
+                <button class="btn btn-primary my-2 my-sm-0" type="submit">Rechercher Un Amabssadeur</button>
             </form>
         </div>
     </div>
@@ -26,7 +26,7 @@
     <div class="container">
         <div class="row">
             {% for card in cards %}
-                <div class="card my-4 mr-4" style="width: 18rem;">
+                <div class="card my-4 mr-4 ml-auto w-10" style="width: 18rem;">
                     <img class="card-img-top" src="https://www.bmeia.gv.at/fileadmin/_processed_/c/b/csm_Linhart_2_59a15afc9d.jpg" alt="Photo Ambassadeur">
                     <div class="card-body">
                         <h5 class="card-title">Nom : {{ card.nom }}</h5>
