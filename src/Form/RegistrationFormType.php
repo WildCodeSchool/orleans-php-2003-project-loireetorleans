@@ -21,13 +21,15 @@ class RegistrationFormType extends AbstractType
             ->add('login')
             ->add('firstname', TextType::class)
             ->add('lastName', TextType::class)
-            ->add('company')
-            ->add('activity') //FILIÈRE ÉCONOMIQUE
+            ->add('company', TextType::class)
+            ->add('activity') // FILIÈRE ÉCONOMIQUE constante checkbox
+            ->add('employmentArea') // BASSIN D EMPLOI constante checkbox
             ->add('email')
             ->add('phoneNumber')
             ->add('street')
             ->add('city')
             ->add('postalCode')
+            ->add('description')
             ->add('agreeTerms', CheckboxType::class, [
                 'mapped' => false,
                 'constraints' => [
