@@ -6,10 +6,34 @@ form {
         border: 1px solid $widget-color;
     }
 }
+img{
+    max-width:200px;
+}
 
-footer{
-    position: absolute;
-    bottom: 0;
+section {
+    height: 80vh;
+    & .form {
+        margin: 8% 0;
+    }
+}
+
+label {
+    font-family: $font-text;
+}
+@media screen and (max-width: 768px) {
+    section {
+        & .form {
+            margin: 25% 0;
+        }
+    }
+}
+
+@media screen and (max-width: 375px) {
+    section {
+        & .form {
+            margin: 18% 0 0;
+        }
+    }
 }
 @import "~bootstrap/scss/bootstrap";
 
