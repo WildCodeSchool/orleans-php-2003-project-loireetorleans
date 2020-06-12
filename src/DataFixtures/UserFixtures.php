@@ -22,7 +22,7 @@ class UserFixtures extends Fixture
         $faker = Faker\Factory::create('fr_FR');
         $subscriber = new User();
         $subscriber->setLogin('hadef');
-        $subscriber->setRoles(['ROLE_AMBASSADEUR']);
+        $subscriber->setRoles(['ROLE_ADMINISTRATEUR']);
         $subscriber->setFirstname($faker->firstName);
         $subscriber->setLastname($faker->lastName);
         $subscriber->setEmail($faker->email);

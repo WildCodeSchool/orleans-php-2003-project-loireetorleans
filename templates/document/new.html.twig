@@ -10,8 +10,10 @@
             <h1 class="my-4 text-center">Ajouter un document</h1>
 
             {{ include('document/_form.html.twig') }}
+            <div class="d-flex justify-content-center">
+                <a class="btn btn-primary my-4 " href="{{ path('document_index') }}">Retour aux documents</a>
+            </div>
 
-            <a href="{{ path('document_index') }}">back to list</a>
         </div>
 
     </section>
