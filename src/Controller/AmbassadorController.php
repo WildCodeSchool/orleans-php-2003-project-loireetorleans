@@ -2,7 +2,10 @@
 
 namespace App\Controller;
 
+use App\Entity\User;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
@@ -13,12 +16,18 @@ use Symfony\Component\Routing\Annotation\Route;
 class AmbassadorController extends AbstractController
 {
     /**
-     * @Route("/", name="index")
+     * @Route("/{login}", name="index")
      */
-    public function index()
+    public function show($login): Response
     {
-        return $this->render('ambassador/index.html.twig', [
+        $user = $this->getDoctrine()
+            ->getRepository(User::class)
+            ->findOneBy(['login' => $login]);
+
+
+        return $this->render('ambassador/profil.html.twig', [
             'controller_name' => 'AmbassadorController',
+            'user' => $user,
         ]);
     }
 }

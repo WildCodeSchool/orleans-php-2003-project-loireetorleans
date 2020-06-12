@@ -1,0 +1,54 @@
+{% extends '_layout.html.twig' %}
+
+{% block title %}
+    Mon Profil | Ambassadeur
+{% endblock %}
+
+    {% block stylesheets %}
+        {{ encore_entry_link_tags('profil') }}
+    {% endblock %}
+
+{% block body %}
+    <section>
+        <h1 class="text-center mt-5 mb-5"> Mon Profil Ambassadeur</h1>
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="card mb-3 col-8 size.card">
+                    <div class="row justify-content-around no-gutters">
+                        <div class="col-md-3">
+                            <img src="{{ asset('build/logo_user.png') }}" class="card-img" alt="Photo ambassadeur">
+                            <p class="text-center">Votre photo de Profil</p>
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body justify-content-center">
+                                <div>
+                                    <h3 class="card-subtitle mb-2 text-muted">Général</h3>
+                                    <p class="card-text">Nom : {{ user.lastName }}</p>
+                                    <p class="card-text">Prénom : {{ user.firstname }}</p>
+                                    <p class="card-text"><i class="fas fa-phone-alt"></i> : {{ user.phoneNumber }}</p>
+                                    <p class="card-text"><i class="fas fa-at"></i> : {{ user.email }}</p>
+
+                                    <h3 class="card-subtitle mb-2 text-muted mt-2">Professionel</h3>
+                                    <p class="card-text activity ">Entreprise : {{ user.company }}</p>
+                                    <p class="card-text activity ">Secteur d'activité : {{ user.activity }}</p>
+
+                                    <h3 class="card-subtitle mb-2 text-muted">Privée</h3>
+                                    <p class="card-text"> Rue : {{ user.street }}</p>
+                                    <p class="card-text">Code Postal: {{ user.postalCode }}</p>
+                                    <p class="card-text"><i class="fas fa-city"></i> :{{ user.city }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <button class="btn btn-primary">Modifier</button>
+            </div>
+        </div>
+    </section>
+{% endblock %}
+
+{% block javascripts %}
+    <script src="https://kit.fontawesome.com/38fc56fe7a.js" crossorigin="anonymous"></script>
+{% endblock %}
