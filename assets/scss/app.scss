@@ -44,17 +44,28 @@ body {
     min-height: 100%;
 }
 
-a {
-    color: $widget-color;
-}
-
 h1 {
     font-family: $font-title;
     font-size: $size-title;
 }
 
+
+
 .navbar {
     background-color: $nav-bar;
+
+    & .dropdown-menu {
+        background-color: $nav-bar;
+
+        & .dropdown-item {
+            color: $widget-color;
+
+            &:hover {
+                color: lighten($widget-color, 30%);
+                background-color: inherit;
+            }
+        }
+    }
 }
 
 @media screen and (max-width: 768px) {
