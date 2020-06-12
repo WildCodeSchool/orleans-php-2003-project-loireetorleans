@@ -1,4 +1,4 @@
-var Encore = require('@symfony/webpack-encore');
+const Encore = require('@symfony/webpack-encore');
 
 Encore
     // directory where compiled assets will be stored
@@ -6,7 +6,7 @@ Encore
     // public path used by the web server to access the output path
     .setPublicPath('/build')
     // only needed for CDN's or sub-directory deploy
-    //.setManifestKeyPrefix('build/')
+    // .setManifestKeyPrefix('build/')
 
     /*
      * ENTRY CONFIG
@@ -21,8 +21,9 @@ Encore
     .addEntry('login', './assets/js/login.js')
     .addEntry('home', './assets/js/home.js')
     .addStyleEntry('profil', './assets/scss/profil.scss')
+    .addStyleEntry('addDocument', './assets/scss/addDocument.scss')
 
-    //.addEntry('page2', './assets/js/page2.js')
+// .addEntry('page2', './assets/js/page2.js')
 
     // When enabled, Webpack "splits" your files into smaller pieces for greater optimization.
     .splitEntryChunks()
@@ -47,27 +48,24 @@ Encore
     // enables @babel/preset-env polyfills
     .configureBabel(() => {}, {
         useBuiltIns: 'usage',
-        corejs: 3
+        corejs: 3,
     })
 
     // enables Sass/SCSS support
     .enableSassLoader()
 
-    // uncomment if you use TypeScript
-    //.enableTypeScriptLoader()
+// uncomment if you use TypeScript
+// .enableTypeScriptLoader()
 
-    // uncomment to get integrity="..." attributes on your script & link tags
-    // requires WebpackEncoreBundle 1.4 or higher
-    //.enableIntegrityHashes()
+// uncomment to get integrity="..." attributes on your script & link tags
+// requires WebpackEncoreBundle 1.4 or higher
+// .enableIntegrityHashes()
 
-    // uncomment if you're having problems with a jQuery plugin
-    //.autoProvidejQuery()
+// uncomment if you're having problems with a jQuery plugin
+// .autoProvidejQuery()
 
     // uncomment if you use API Platform Admin (composer req api-admin)
-    //.enableReactPreset()
-    //.addEntry('admin', './assets/js/admin.js')
-    .copyFiles({
-        from: './assets/images'})
-;
-
+    // .enableReactPreset()
+    // .addEntry('admin', './assets/js/admin.js')
+    .copyFiles({ from: './assets/images' });
 module.exports = Encore.getWebpackConfig();
