@@ -7,10 +7,6 @@ form {
     }
 }
 
-img{
-    max-width:200px;
-}
-
 section {
     height: 80vh;
 
@@ -22,6 +18,7 @@ section {
 label {
     font-family: $font-text;
 }
+
 @media screen and (max-width: 768px) {
     section {
         & .form {
@@ -33,9 +30,10 @@ label {
 @media screen and (max-width: 375px) {
     section {
         & .form {
-            margin: 18% 0 0;
+            margin: 5% 0 0;
         }
     }
 }
+
 @import "~bootstrap/scss/bootstrap";
 
