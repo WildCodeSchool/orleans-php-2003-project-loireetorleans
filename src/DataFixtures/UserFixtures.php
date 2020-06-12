@@ -32,7 +32,6 @@ class UserFixtures extends Fixture
             $user->setDescription('golf');
             $user->setPhoneNumber($faker->e164PhoneNumber);
             $user->setActivity('industrie');
-            $user->setActivity('industrie');
             $user->setCity('Orleans');
             $user->setStreet('5 rue des champs');
             $user->setPostalCode('45000');
