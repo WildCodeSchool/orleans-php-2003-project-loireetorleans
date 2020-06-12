@@ -7,143 +7,82 @@
     <main class="container">
         <h1>Votre profil ambassadeur</h1>
 
-        {{ form_start(registrationForm) }}
+        {{ form_start(registrationForm, {'attr': {'novalidate': 'novalidate'}}) }}
 
-        <div class="form-group">
-            {{ form_label(registrationForm.firstname, 'Prénom') }}
-            {{ form_widget(registrationForm.firstname) }}
-            {% if registrationForm.firstname.vars.errors is not empty %}
-                <div class="alert alert-danger">
-                    {{ form_errors(registrationForm.firstname) }}
-                </div>
-            {% endif %}
-        </div>
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                {{ form_label(registrationForm.firstname, 'Prénom') }}
+                {{ form_widget(registrationForm.firstname) }}
+            </div>
 
-        <div class="form-group">
-            {{ form_label(registrationForm.lastName, 'Nom') }}
-            {{ form_widget(registrationForm.lastName) }}
-            {% if registrationForm.lastName.vars.errors is not empty %}
-                <div class="alert alert-danger">
-                    {{ form_errors(registrationForm.lastName) }}
-                </div>
-            {% endif %}
+            <div class="form-group col-md-6">
+                {{ form_label(registrationForm.lastName, 'Nom') }}
+                {{ form_widget(registrationForm.lastName) }}
+            </div>
         </div>
 
         <div class="form-group">
             {{ form_label(registrationForm.company, 'Entreprise') }}
             {{ form_widget(registrationForm.company) }}
-            {% if registrationForm.company.vars.errors is not empty %}
-                <div class="alert alert-danger">
-                    {{ form_errors(registrationForm.company) }}
-                </div>
-            {% endif %}
         </div>
 
         <div class="form-group">
             {{ form_label(registrationForm.activity, 'Activité') }}
             {{ form_widget(registrationForm.activity) }}
-            {% if registrationForm.activity.vars.errors is not empty %}
-                <div class="alert alert-danger">
-                    {{ form_errors(registrationForm.activity) }}
-                </div>
-            {% endif %}
         </div>
 
         <div class="form-group">
             {{ form_label(registrationForm.employmentArea, 'Bassin d\'emploi') }}
             {{ form_widget(registrationForm.employmentArea) }}
-            {% if registrationForm.employmentArea.vars.errors is not empty %}
-                <div class="alert alert-danger">
-                    {{ form_errors(registrationForm.employmentArea) }}
-                </div>
-            {% endif %}
         </div>
 
         <div class="form-group">
             {{ form_label(registrationForm.email, 'Email') }}
             {{ form_widget(registrationForm.email) }}
-            {% if registrationForm.email.vars.errors is not empty %}
-                <div class="alert alert-danger">
-                    {{ form_errors(registrationForm.email) }}
-                </div>
-            {% endif %}
         </div>
 
         <div class="form-group">
             {{ form_label(registrationForm.phoneNumber, 'Téléphone') }}
             {{ form_widget(registrationForm.phoneNumber) }}
-            {% if registrationForm.phoneNumber.vars.errors is not empty %}
-                <div class="alert alert-danger">
-                    {{ form_errors(registrationForm.phoneNumber) }}
-                </div>
-            {% endif %}
         </div>
 
         <div class="form-group">
             {{ form_label(registrationForm.street, 'Rue') }}
             {{ form_widget(registrationForm.street) }}
-            {% if registrationForm.street.vars.errors is not empty %}
-                <div class="alert alert-danger">
-                    {{ form_errors(registrationForm.street) }}
-                </div>
-            {% endif %}
         </div>
 
         <div class="form-group">
             {{ form_label(registrationForm.city, 'Ville') }}
             {{ form_widget(registrationForm.city) }}
-            {% if registrationForm.city.vars.errors is not empty %}
-                <div class="alert alert-danger">
-                    {{ form_errors(registrationForm.city) }}
-                </div>
-            {% endif %}
         </div>
 
         <div class="form-group">
             {{ form_label(registrationForm.postalCode, 'Code postal') }}
             {{ form_widget(registrationForm.postalCode) }}
-            {% if registrationForm.postalCode.vars.errors is not empty %}
-                <div class="alert alert-danger">
-                    {{ form_errors(registrationForm.postalCode) }}
-                </div>
-            {% endif %}
         </div>
 
         <div class="form-group">
             {{ form_label(registrationForm.description, 'Description') }}
             {{ form_widget(registrationForm.description) }}
-            {% if registrationForm.description.vars.errors is not empty %}
-                <div class="alert alert-danger">
-                    {{ form_errors(registrationForm.description) }}
-                </div>
-            {% endif %}
         </div>
 
         <div class="form-group">
             {{ form_label(registrationForm.login, 'Identifiant') }}
             {{ form_widget(registrationForm.login) }}
-            {% if registrationForm.login.vars.errors is not empty %}
-                <div class="alert alert-danger">
-                    {{ form_errors(registrationForm.login) }}
-                </div>
-            {% endif %}
         </div>
 
         <div class="form-group">
             {{ form_label(registrationForm.plainPassword, 'Mot de passe') }}
             {{ form_widget(registrationForm.plainPassword) }}
-            {% if registrationForm.plainPassword.vars.errors is not empty %}
-                <div class="alert alert-danger">
-                    {{ form_errors(registrationForm.plainPassword) }}
-                </div>
-            {% endif %}
         </div>
 
         <div class="form-group">
             {{ form_label(registrationForm.agreeTerms) }}
         </div>
 
-        <button type="submit" class="btn btn-primary">Soumettre</button>
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary">Soumettre</button>
+        </div>
         {{ form_end(registrationForm) }}
     </main>
 {% endblock %}
