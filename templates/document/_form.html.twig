@@ -4,7 +4,7 @@
         <div class="d-flex flex-column my-3">
             {{ form_label(form.name, 'Nom du document') }}
             {{ form_widget(form.name) }}
-            {% if form.name.vars.errors %}
+            {% if form.name.vars.errors is not empty %}
                 <div class="alert alert-danger">
                     {{ form_errors(form.name) }}
                 </div>
@@ -13,7 +13,7 @@
         <div class="d-flex flex-column my-3">
             {{ form_label(form.documentFile, 'Document à charger') }}
             {{ form_widget(form.documentFile) }}
-            {% if form.documentFile.vars.errors %}
+            {% if form.documentFile.vars.errors is not empty %}
             <div class="alert alert-danger">
                 {{ form_errors(form.documentFile) }}
             </div>
