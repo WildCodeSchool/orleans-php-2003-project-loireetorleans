@@ -153,7 +153,7 @@ class User implements UserInterface
      *     message="Le nom de la rue est obligatoire"
      * )
      * @Assert\Length(
-     *     max = 255
+     *     max = 255,
      *     maxMessage = "Le nom de la rue ne doit pas faire plus de {{ limit }} caractères",
      * )
      */
