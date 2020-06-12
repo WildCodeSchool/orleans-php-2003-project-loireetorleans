@@ -25,8 +25,14 @@
         "symfony/twig-bundle": "4.3.*",
         "symfony/validator": "4.3.*",
         "symfony/web-link": "4.3.*",
+<<<<<<< HEAD
         "symfony/webpack-encore-bundle": "^1.7",
         "symfony/yaml": "4.3.*"
+=======
+        "symfony/webpack-encore-bundle": "^1.5",
+        "symfony/yaml": "4.3.*",
+        "vich/uploader-bundle": "1.11"
+>>>>>>> dev
     },
     "require-dev": {
         "doctrine/doctrine-fixtures-bundle": "^3.3",
@@ -85,7 +91,7 @@
     },
     "extra": {
         "symfony": {
-            "allow-contrib": false,
+            "allow-contrib": true,
             "require": "4.4.*"
         }
     }
