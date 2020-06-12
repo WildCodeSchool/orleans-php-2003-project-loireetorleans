@@ -13,29 +13,29 @@
 {% block body %}
     <h1 class="text-center my-4">Trombinoscope</h1>
 
-    <div class="container">
-        <div class="row justify-content-center my-4">
-            <form class=" form-inline my-2 my-lg-0">
-                <input class="form-control mr-sm-2" type="search" placeholder="Recherche" aria-label="Search">
-                <button class="btn btn-primary my-2 my-sm-0" type="submit">Rechercher Un Amabssadeur</button>
+    <div class="container-fluid d-flex flex-column">
+        <div class="d-flex justify-content-center my-4">
+            <form class="my-2 my-lg-0 d-flex col-12 justify-content-center align-items-center flex-column flex-md-row">
+                <input class="form-control mr-sm-2 col-md-5 col-lg-4 col-10" type="search" placeholder="Recherche"
+                       aria-label="Search">
+                <button class="btn btn-primary my-sm-0 col-lg-3 col-md-5 col-10 mt-4" type="submit">Rechercher Un
+                    Ambassadeur
+                </button>
             </form>
         </div>
-    </div>
 
-
-    <div class="container-fluid">
-        <div class="row">
-            {% for card in cards %}
-                <div class="card my-4 mr-4 ml-auto" style="width: 18rem;">
+        <div class="row m-0 justify-content-center">
+            {% for user in users %}
+                <div class="card my-4 mx-5 col-md-4 col-10 p-0 col-lg-2">
                     <img class="card-img-top"
                          src="https://www.bmeia.gv.at/fileadmin/_processed_/c/b/csm_Linhart_2_59a15afc9d.jpg"
                          alt="Photo Ambassadeur">
                     <div class="card-body">
-                        <h6 class="card-title">Nom : {{ card.nom }}</h6>
-                        <h6 class="card-title">Prénom : {{ card.prenom }}</h6>
-                        <p class="card-title">Entreprise : {{ card.entreprise }}</p>
+                        <h6 class="card-title">Nom : {{ user.firstname }}</h6>
+                        <h6 class="card-title">Prénom : {{ user.lastname }}</h6>
+                        <p class="card-title">Entreprise : {{ user.company }}</p>
                     </div>
-                        <a href="#" class="btn btn-primary mt-2">Profil de {{ card.prenom }} {{ card.nom }}</a>
+                    <a href="#" class="btn btn-info mt-2">Profil de {{ user.firstname }} {{ user.lastname }}</a>
                 </div>
             {% else %}
                 'Aucun Ambassadeur trouvé'
