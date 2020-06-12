@@ -1,0 +1,18 @@
+{% extends '_layout.html.twig' %}
+
+{% block title %}Loire Et Orléans | Documents | Ajout{% endblock %}
+ {% block stylesheets %}
+     {{ encore_entry_link_tags('addDocument') }}
+ {% endblock %}
+{% block body %}
+    <section>
+        <div class="form">
+            <h1 class="my-4 text-center">Ajouter un document</h1>
+
+            {{ include('document/_form.html.twig') }}
+
+            <a href="{{ path('document_index') }}">back to list</a>
+        </div>
+
+    </section>
+{% endblock %}
