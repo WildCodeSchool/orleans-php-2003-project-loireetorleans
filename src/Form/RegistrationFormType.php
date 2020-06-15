@@ -55,7 +55,7 @@ class RegistrationFormType extends AbstractType
                         'activité3' => 'activite3',
                         'activité4' => 'activite4',
                     ],
-                    'expanded' => true,
+                    'expanded' => false,
                     'multiple' => false,
                 ]
             )
@@ -69,7 +69,7 @@ class RegistrationFormType extends AbstractType
                         'Montargis' => 'Montargis',
                         'Gien' => 'Gien',
                     ],
-                    'expanded' => true,
+                    'expanded' => false,
                     'multiple' => false,
                 ]
             )
@@ -106,15 +106,16 @@ class RegistrationFormType extends AbstractType
                     'required' => false,
                     'first_options' => [
                         'label' => 'Mot de passe',
+                        'attr' => ['class' => 'd-flex flex-column my-3 col-12 p-0']
                     ],
                     'second_options' => [
                         'label' => 'Confirmation du mot de passe',
+                        'attr' => ['class' => 'd-flex flex-column my-3 col-12 p-0']
                     ],
                     'mapped' => true,
                 ]
             );
     }
-
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
