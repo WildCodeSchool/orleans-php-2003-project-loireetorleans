@@ -3,13 +3,16 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
- * @ORM\Entity(repositoryClass=UserRepository::class)
+ * @ORM\Entity(repositoryClass="App\Repository\UserRepository", repositoryClass=UserRepository::class)
  * @UniqueEntity(fields={"login"}, message="There is already an account with this login")
  */
 class User implements UserInterface
@@ -136,6 +139,22 @@ class User implements UserInterface
     private $picture;
 
     /**
+     * @Vich\UploadableField(
+     *     mapping = "picture_file",
+     *     fileNameProperty = "picture",
+     * )
+     * @var File
+     * @Assert\NotBlank(
+     *     message = "Une photo est obligatoire"
+     * )
+     * @Assert\File(
+     *     mimeTypes = {"image/jpg", "image/jpeg", "image/png"},
+     *     mimeTypesMessage = "Veuillez insérer un fichier au format {{ types }} "
+     * )
+     */
+    private $pictureFile;
+
+    /**
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank(
      *     message="Le nom de la ville est obligatoire"
@@ -178,6 +197,11 @@ class User implements UserInterface
      * )
      */
     private $employmentArea;
+
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $updatedAt;
 
     public function getId(): ?int
     {
@@ -398,6 +422,39 @@ class User implements UserInterface
     {
         $this->employmentArea = $employmentArea;
 
+        return $this;
+    }
+
+    public function getUpdatedAt(): ?\DateTimeInterface
+    {
+        return $this->updatedAt;
+    }
+
+    public function setUpdatedAt(\DateTimeInterface $updatedAt): self
+    {
+        $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
+    /**
+     * @return File
+     */
+    public function getPictureFile(): ?File
+    {
+        return $this->pictureFile;
+    }
+
+    /**
+     * @param File $pictureFile
+     * @return User
+     */
+    public function setPictureFile(File $pictureFile): User
+    {
+        $this->pictureFile = $pictureFile;
+        if (!empty($this)) {
+            $this->updatedAt = new DateTime('now');
+        }
         return $this;
     }
 }
