@@ -23,7 +23,6 @@ class AmbassadorController extends AbstractController
             ->getRepository(User::class)
             ->findOneBy(['login' => $login]);
 
-
         return $this->render('ambassador/profil.html.twig', [
             'controller_name' => 'AmbassadorController',
             'user' => $user,
