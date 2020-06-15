@@ -1,12 +1,9 @@
 @import "vars";
 
-html {
-    height: 100%;
-}
-
 .footer {
     font-family: $font-text;
     background-color: $widget-color;
+    display: table-row;
 
     & h5 {
         font-size: $size-footer-text;
@@ -31,17 +28,17 @@ html {
             color: lighten($nav-bar, 30%);
     }
   }
-
-    & a > img {
-        margin-left: 43%;
-    }
+}
+html , body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
 }
 
 body {
     background-color: $light-color;
-    display: flex;
-    flex-direction: column;
-    min-height: 100%;
+    display: table;
+    width: 100%;
 }
 
 h1 {

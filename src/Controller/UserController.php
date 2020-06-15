@@ -10,7 +10,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class UserController extends AbstractController
 {
     /**
-     * @Route("/trombinoscope", name="ambassador_card")
+     * @Route("/trombinoscope", name="user_index")
      * @return Response
      */
     public function index(): Response
