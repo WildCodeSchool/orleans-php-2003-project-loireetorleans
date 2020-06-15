@@ -1,14 +1,14 @@
 {% extends '_layout.html.twig' %}
-{% block title %} Loire et Orleans {% endblock %}
+{% block title %} Loire&Orléans {% endblock %}
   {% block stylesheets %}
       {{ encore_entry_link_tags('home') }}
   {% endblock %}
 {% block body %}
     <section>
         <h1 class="text-center my-5">Loire&Orléans</h1>
-        <div class="row d-flex align-items-center justify-content-center mx-0 ">
+        <div class="row d-flex align-items-top justify-content-center mx-0 ">
             <figure class=" col-10 col-lg-4 text-center">
-                <img class="col-12" src="{{ asset('build/work.jpg') }}" alt="work">
+                <img class="col-12 rounded p-0" src="{{ asset('build/work.jpg') }}" alt="work">
             </figure>
             <div class="col-10 col-lg-4">
                 <p>Cette démarche a pour objectif de constituer une communauté d’acteurs économiques loirétains prêts à revendiquer les valeurs de LOIRE&ORLEANS, à participer au rayonnement du territoire sur les plans national et international et à co-construire, avec les élus locaux, les stratégies futures de développement économique.</p>
@@ -19,7 +19,7 @@
             </div>
         </div>
         <h2 class="text-center my-5">Qui sont les ambassadeurs ?</h2>
-        <div class="row align-items-center d-flex justify-content-center mx-0">
+        <div class="row align-items-top d-flex justify-content-center mx-0">
             <div class="col-10 col-lg-4">
                 <p>Un Ambassadeur Loire&Orléans est une personne physique, le plus souvent cadre ou chefs d’entreprise, fier de son territoire. Il revendique, comme tous les Loirétains, cet esprit pionner qui a forgé l’histoire économique du Loiret au fil des siècles.<br>
                     Particulièrement tourné vers l’énergie et l’industrie au XXème siècle, Le Loiret a démontré sa résilience exceptionnelle face aux crises, la performance de ses entreprises et l’environnement inspirant de plusieurs filières d’excellence comme la pharmacologie, la cosmétique, l’agroalimentaire…</p>
@@ -30,8 +30,8 @@
                     Vivre bien, vivre beau, vivre bon, telle est la « profession de foi » de l’Ambassadeur Loire&Orléans sur laquelle il s’engage dès son arrivée..</p>
             </div>
             <figure class="col-10 col-lg-4 text-center">
-                <img class="col-12" src="{{ asset('build/ambassadeur.jpeg') }}" alt="Description">
-                <a class="btn btn-primary mt-3" href="{{ path('ambassador_card') }}">
+                <img class="col-12 rounded p-0" src="{{ asset('build/ambassadeur.jpeg') }}" alt="Description">
+                <a class="btn btn-primary mt-3" href="{{ path('trombinoscope_index') }}">
                     En savoir +
                 </a>
             </figure>
