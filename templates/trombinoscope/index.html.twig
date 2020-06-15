@@ -1,6 +1,6 @@
-{% extends 'base.html.twig' %}
+{% extends '_layout.html.twig' %}
 {% block stylesheets %}
-    {{ encore_entry_link_tags('login') }}
+    {{ encore_entry_link_tags('app') }}
 {% endblock %}
 
 
@@ -11,5 +11,36 @@
 
 
 {% block body %}
-    <h1 class="text-center">Trombinoscope</h1>
+    <h1 class="text-center my-4">Trombinoscope</h1>
+
+    <div class="container-fluid d-flex flex-column">
+        <div class="d-flex justify-content-center my-4">
+            <form class="my-2 my-lg-0 d-flex col-12 justify-content-center align-items-center flex-column flex-md-row">
+                <input class="form-control mr-sm-2 col-md-5 col-lg-4 col-10" type="search" placeholder="Recherche"
+                       aria-label="Search">
+                <button class="btn btn-primary my-sm-0 col-lg-3 col-md-5 col-10 mt-4" type="submit">Rechercher Un
+                    Ambassadeur
+                </button>
+            </form>
+        </div>
+
+        <div class="row m-0 justify-content-center">
+            {% for user in users %}
+                <div class="card my-4 mx-5 col-md-4 col-10 p-0 col-lg-2">
+                    <img class="card-img-top"
+                         src="https://www.bmeia.gv.at/fileadmin/_processed_/c/b/csm_Linhart_2_59a15afc9d.jpg"
+                         alt="Photo Ambassadeur">
+                    <div class="card-body">
+                        <h6 class="card-title">Nom : {{ user.firstname }}</h6>
+                        <h6 class="card-title">Prénom : {{ user.lastname }}</h6>
+                        <p class="card-title">Entreprise : {{ user.company }}</p>
+                    </div>
+                    <a href="#" class="btn btn-info mt-2">Profil de {{ user.firstname }} {{ user.lastname }}</a>
+                </div>
+            {% else %}
+                'Aucun Ambassadeur trouvé'
+            {% endfor %}
+        </div>
+    </div>
+
 {% endblock %}
