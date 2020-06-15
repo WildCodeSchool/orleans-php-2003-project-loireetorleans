@@ -98,7 +98,7 @@ class RegistrationFormType extends AbstractType
                 TextareaType::class
             )
             ->add(
-                'plainPassword',
+                'password',
                 RepeatedType::class,
                 [
                     'type' => PasswordType::class,
@@ -110,7 +110,7 @@ class RegistrationFormType extends AbstractType
                     'second_options' => [
                         'label' => 'Confirmation du mot de passe',
                     ],
-                    'mapped' => false,
+                    'mapped' => true,
                 ]
             );
     }
