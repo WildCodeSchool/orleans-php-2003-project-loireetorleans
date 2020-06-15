@@ -5,7 +5,7 @@ html {
 }
 
 .footer {
-    font-family: $font-title;
+    font-family: $font-text;
     background-color: $widget-color;
 
     & h5 {
@@ -53,16 +53,21 @@ h1 {
 
 .navbar {
     background-color: $nav-bar;
+    font-family: $font-title;
 
-    & .dropdown-menu {
-        background-color: $nav-bar;
+    & a{
+        font-size: $size-navbar-text;
 
-        & .dropdown-item {
-            color: $widget-color;
+        & .dropdown-menu {
+            background-color: $nav-bar;
 
-            &:hover {
-                color: lighten($widget-color, 30%);
-                background-color: inherit;
+            & .dropdown-item {
+                color: $widget-color;
+
+                &:hover {
+                    color: lighten($widget-color, 30%);
+                    background-color: inherit;
+                }
             }
         }
     }
