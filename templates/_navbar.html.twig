@@ -11,9 +11,8 @@
                 <a class="nav-link " href="{{ path('home') }}">Accueil</a>
             </li>
 
-            <li class="nav-item mx-4">
-                <a class="nav-link " href="{{ path('trombinoscope_index') }}">Trombinoscope</a>
-
+            <li class="nav-item">
+                <a class="nav-link" href="{{ path('user_index') }}">Trombinoscope</a>
             </li>
             {% if app.user and app.user.roles.0 is same as('ROLE_ADMINISTRATEUR') %}
             <li class="nav-item dropdown">

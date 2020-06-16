@@ -10,7 +10,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class UserController extends AbstractController
 {
     /**
-     * @Route("/trombinoscope", name="ambassador_card")
+     * @Route("/trombinoscope", name="user_index")
      * @return Response
      */
     public function index(): Response
@@ -21,6 +21,20 @@ class UserController extends AbstractController
 
         return $this->render('trombinoscope/index.html.twig', [
             'users' => $users,
+        ]);
+    }
+
+    /**
+     * @Route("/{login}", name="user_show")
+     */
+    public function show($login): Response
+    {
+        $user = $this->getDoctrine()
+            ->getRepository(User::class)
+            ->findOneBy(['login' => $login]);
+
+        return $this->render('ambassador/show.html.twig', [
+            'user' => $user,
         ]);
     }
 }
