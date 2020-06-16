@@ -26,8 +26,8 @@
             text-decoration: none;
             outline: none;
             color: lighten($nav-bar, 30%);
+        }
     }
-  }
 }
 
 html , body {
@@ -47,37 +47,27 @@ h1 {
     font-size: $size-title;
 }
 
-
-
 .navbar {
     background-color: $nav-bar;
     font-family: $font-title;
 
-    & a{
+    & a {
         font-size: $size-navbar-text;
 
-        & .dropdown-menu {
-            background-color: $nav-bar;
+    }
+    & .dropdown-menu {
+        background-color: $nav-bar;
 
-            & .dropdown-item {
-                color: $widget-color;
-
-                &:hover {
-                    color: lighten($widget-color, 30%);
-                    background-color: inherit;
-                }
+        & .dropdown-item {
+            color: darken($link-light, 30%);
+            &:hover {
+                color: $link-light;
+                background-color: inherit;
             }
         }
     }
+
 }
 
-@media screen and (max-width: 768px) {
-    .footer {
-        & a > img {
-            margin-left: 0;
-            margin-top: 2%;
-      }
-    }
-}
 
 @import "~bootstrap/scss/bootstrap";
