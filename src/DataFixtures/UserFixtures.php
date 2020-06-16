@@ -46,7 +46,6 @@ class UserFixtures extends Fixture
         $user->setFirstname($faker->firstName);
         $user->setLastName($faker->lastName);
         $user->setCompany($faker->company);
-        $user->setLogin('wilderx');
         $user->setEmail($faker->email);
         $user->setDescription('golf');
         $user->setPhoneNumber($faker->e164PhoneNumber);
