@@ -55,6 +55,7 @@ h1 {
         font-size: $size-navbar-text;
 
     }
+
     & .dropdown-menu {
 
         background-color: $nav-bar;
@@ -62,6 +63,7 @@ h1 {
         & .dropdown-item {
 
             color: darken($link-light, 30%);
+
             &:hover {
                 color: $link-light;
                 background-color: inherit;
