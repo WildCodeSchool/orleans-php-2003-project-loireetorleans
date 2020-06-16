@@ -56,9 +56,11 @@ h1 {
 
     }
     & .dropdown-menu {
+
         background-color: $nav-bar;
 
         & .dropdown-item {
+
             color: darken($link-light, 30%);
             &:hover {
                 color: $link-light;
