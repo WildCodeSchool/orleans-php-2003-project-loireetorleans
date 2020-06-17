@@ -59,7 +59,7 @@ class SecurityController extends AbstractController
                     $form->get('password')->getData()
                 )
             );
-
+            $user->setStatus('En attente');
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($user);
             $entityManager->flush();

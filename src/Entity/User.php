@@ -201,6 +201,12 @@ class User implements UserInterface
      */
     private $updatedAt;
 
+    /**
+     * @ORM\Column(type="string", length=50)
+     * @Assert\Choice({"En attente", "Validé"})
+     */
+    private $status;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -453,6 +459,18 @@ class User implements UserInterface
         if (!empty($this)) {
             $this->updatedAt = new DateTime('now');
         }
+        return $this;
+    }
+
+    public function getStatus(): ?string
+    {
+        return $this->status;
+    }
+
+    public function setStatus(string $status): self
+    {
+        $this->status = $status;
+
         return $this;
     }
 }
