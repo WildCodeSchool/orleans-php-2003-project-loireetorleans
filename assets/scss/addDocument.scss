@@ -7,31 +7,13 @@ form {
     }
 }
 
-section {
-    height: 80vh;
-
-    & .form {
-        margin: 8% 0;
-    }
-}
-
 label {
     font-family: $font-text;
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (min-width: 768px){
     section {
-        & .form {
-            margin: 25% 0;
-        }
-    }
-}
-
-@media screen and (max-width: 375px) {
-    section {
-        & .form {
-            margin: 5% 0 0;
-        }
+        height: 80vh;
     }
 }
 

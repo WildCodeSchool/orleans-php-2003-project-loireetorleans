@@ -32,7 +32,6 @@ class DocumentController extends AbstractController
      * @Route("/ajout", name="document_new", methods={"GET","POST"})
      * @param Request $request
      * @return Response
-     * @IsGranted("ROLE_ADMINISTRATEUR")
      */
     public function new(Request $request): Response
     {

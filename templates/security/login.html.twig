@@ -1,14 +1,14 @@
 {% extends '_layout.html.twig' %}
 
-{% block title %}Loire Et Orléans | Connexion{% endblock %}
+{% block title %}Loire&Orléans | Connexion{% endblock %}
  {% block stylesheets %}
      {{ encore_entry_link_tags('login') }}
  {% endblock %}
 {% block body %}
-    <section>
-        <div class="form">
+    <section class="d-flex align-items-center mb-5">
+        <div class="form w-100">
             <h1 class="my-4 text-center">Connexion</h1>
-            <form method="post" class="col-12 d-flex flex-column align-items-center mb-5">
+            <form method="post" class="col-12 d-flex flex-column align-items-center">
                 {% if error %}
                     <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
                 {% endif %}
@@ -38,6 +38,10 @@
                     Connexion
                 </button>
             </form>
+            <div class="d-flex justify-content-center my-4">
+                <a href="{{ path('app_register') }}">Créer un compte Ambassadeur ?</a>
+            </div>
+
         </div>
 
     </section>

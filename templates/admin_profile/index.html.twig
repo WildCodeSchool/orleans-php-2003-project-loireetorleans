@@ -1,0 +1,61 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Loire&Orléans | Administrateur | Gestion de profils{% endblock %}
+ {% block stylesheets %}
+     {{ encore_entry_link_tags('adminProfil') }}
+ {% endblock %}
+{% block body %}
+    <section class="d-md-flex align-items-center mb-5">
+        <div class="form w-100">
+            <h1 class="my-4 text-center">Tous les Ambassadeurs</h1>
+            <h3 class="my-4 text-center">Profils en attente de validation</h3>
+            <table class="table table-hover col-10 p-0 mx-auto">
+                <thead class="bg-primary">
+                <tr class="text-center text-light">
+                    <th scope="col">Nom</th>
+                    <th scope="col">Prénom</th>
+                    <th scope="col">Entreprise</th>
+                    <th scope="col">Action</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for user in users %}
+                    {% if user.status is same as('En attente') %}
+                        <tr class="text-center">
+                            <td>{{ user.firstname }}</td>
+                            <td>{{ user.lastname }}</td>
+                            <td>{{ user.company }}</td>
+                            <td><a href="">Consulter</a></td>
+                        </tr>
+                    {% endif %}
+                {% endfor %}
+                </tbody>
+            </table>
+
+            <h3 class="my-4 text-center">Profils Validés</h3>
+            <table class="table table-hover col-10 p-0 mx-auto">
+                <thead class="bg-primary">
+                <tr class="text-center text-light">
+                    <th scope="col">Nom</th>
+                    <th scope="col">Prénom</th>
+                    <th scope="col">Entreprise</th>
+                    <th scope="col">Action</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for user in users %}
+                    {% if user.status is same as('Validé') %}
+                        <tr class="text-center">
+                            <td>{{ user.firstname }}</td>
+                            <td>{{ user.lastname }}</td>
+                            <td>{{ user.company }}</td>
+                            <td><a href="">Consulter</a></td>
+                        </tr>
+                    {% endif %}
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+    </section>
+{% endblock %}
