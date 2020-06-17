@@ -208,6 +208,11 @@ class User implements UserInterface
      */
     private $messages;
 
+    /** @ORM\Column(type="string", length=50)
+     * @Assert\Choice({"En attente", "Validé"})
+     */
+    private $status;
+
     public function __construct()
     {
         $this->messages = new ArrayCollection();
@@ -468,6 +473,7 @@ class User implements UserInterface
         return $this;
     }
 
+
     /**
      * @return Collection|Message[]
      */
@@ -492,6 +498,16 @@ class User implements UserInterface
             $this->messages->removeElement($message);
             $message->removeUser($this);
         }
+    }
+
+    public function getStatus(): ?string
+    {
+        return $this->status;
+    }
+
+    public function setStatus(string $status): self
+    {
+        $this->status = $status;
 
         return $this;
     }

@@ -90,11 +90,10 @@ class Document
         return $this;
     }
 
-    public function setDocumentFile(File $image): Document
+    public function setDocumentFile(File $image)
     {
         $this->documentFile = $image;
         $this->updatedAt = new DateTime('now');
-        return $this;
     }
 
     public function getDocumentFile(): ?File

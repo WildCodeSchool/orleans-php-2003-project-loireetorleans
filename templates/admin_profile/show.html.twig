@@ -1,0 +1,48 @@
+{% extends '_layoutAdmin.html.twig' %}
+
+{% block title %}
+    Loire&Orléans | Administrateur | Gestion de profils | {{ user.firstname ~ ' ' ~ user.lastname }}
+{% endblock %}
+
+    {% block stylesheets %}
+        {{ encore_entry_link_tags('profil') }}
+    {% endblock %}
+
+{% block body %}
+    <section class="d-flex align-items-center mb-5">
+        <div class="w-100">
+            <div class="d-flex align-items-center flex-column col-12">
+                <h1 class="my-4 text-center">Profil de {{ user.firstname ~ ' ' ~ user.lastname }}</h1>
+                <h2 class="my-3 text-center">Statut : {{ user.status }}</h2>
+                <div class=" profil d-flex flex-md-row flex-column col-md-10 my-3 p-4">
+                    <div class="col-md-3">
+                        <img src="{{ asset('build/logo_user.png') }}" class="card-img" alt="Photo ambassadeur">
+                    </div>
+                    <div class="d-flex flex-column flex-md-row col-md-9 justify-content-around">
+                        <div class="d-flex flex-column">
+                            <h3>Général</h3>
+                            <p>Nom : {{ user.lastName }}</p>
+                            <p>Prénom : {{ user.firstname }}</p>
+                            <p><i class="fas fa-phone-alt"></i> : {{ user.phoneNumber }}</p>
+                            <p><i class="fas fa-at"></i> : {{ user.email }}</p>
+                        </div>
+                        <div class="d-flex flex-column">
+                            <h3>Professionnel</h3>
+                            <p>Entreprise : {{ user.company }}</p>
+                            <p>Secteur d'activité : {{ user.activity }}</p>
+                            <p> Rue : {{ user.street }}</p>
+                            <p>Code postal : {{ user.postalCode }}</p>
+                            <p><i class="fas fa-city"></i> :{{ user.city }}</p></div>
+
+                    </div>
+                </div>
+            </div>
+            {{ include('admin_profile/_form.html.twig') }}
+        </div>
+
+    </section>
+{% endblock %}
+
+{% block javascripts %}
+    <script src="https://kit.fontawesome.com/38fc56fe7a.js" crossorigin="anonymous"></script>
+{% endblock %}

@@ -22,6 +22,7 @@ Encore
     .addEntry('home', './assets/js/home.js')
     .addStyleEntry('profil', './assets/scss/profil.scss')
     .addStyleEntry('addDocument', './assets/scss/addDocument.scss')
+    .addStyleEntry('adminProfil', './assets/scss/adminProfil.scss')
 
 // .addEntry('page2', './assets/js/page2.js')
 
