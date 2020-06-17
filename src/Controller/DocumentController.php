@@ -23,6 +23,7 @@ class DocumentController extends AbstractController
      */
     public function index(DocumentRepository $documentRepository): Response
     {
+
         return $this->render('document/index.html.twig', [
             'documents' => $documentRepository->findAll(),
         ]);
