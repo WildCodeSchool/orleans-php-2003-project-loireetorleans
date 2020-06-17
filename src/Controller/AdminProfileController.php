@@ -17,7 +17,6 @@ class AdminProfileController extends AbstractController
      * @Route("/", name="_index")
      * @param UserRepository $userRepository
      * @return Response
-     * @IsGranted("ROLE_ADMINISTRATEUR")
      */
     public function index(UserRepository $userRepository) : Response
     {

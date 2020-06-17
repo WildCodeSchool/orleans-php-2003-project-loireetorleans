@@ -15,7 +15,7 @@
             </li>
             {% if app.user and app.user.roles.0 is same as('ROLE_AMBASSADEUR') %}
             <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="#">Administrateur</a>
+                <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="#">Ambassadeur</a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                     <a class="dropdown-item" href="#">Mon profil</a>
                     <a class="dropdown-item" href="#">Mes échanges</a>
@@ -25,7 +25,7 @@
             {% endif %}
             {% if app.user and app.user.roles.0 is same as('ROLE_ADMINISTRATEUR') %}
                 <li class="nav-item dropdown bg-primary">
-                    <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="#">Ambassadeur</a>
+                    <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="#">Administrateur</a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                         <a class="dropdown-item" href="#">Gestion des documents</a>
                         <a class="dropdown-item" href="#">Mes échanges</a>
