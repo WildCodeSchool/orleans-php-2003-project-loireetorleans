@@ -73,5 +73,18 @@ h1 {
 
 }
 
+section .form-inline, .trombinoscope-search{
+    max-width: 800px;
+    width: 100%;
+}
+
+@media screen and (max-width: 900px) {
+    .pagination .page-item{
+        display: none;
+    }
+    .pagination .page-item:first-child, .pagination .page-item:last-child{
+        display: block;
+    }
+}
 
 @import "~bootstrap/scss/bootstrap";

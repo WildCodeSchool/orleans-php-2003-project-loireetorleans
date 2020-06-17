@@ -3,7 +3,10 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Repository\UserRepository;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -11,16 +14,19 @@ class UserController extends AbstractController
 {
     /**
      * @Route("/trombinoscope", name="user_index")
+     * @param PaginatorInterface $paginator
+     * @param UserRepository $userRepository
+     * @param Request $request
      * @return Response
      */
-    public function index(): Response
+    public function index(PaginatorInterface $paginator, UserRepository $userRepository, Request $request): Response
     {
-        $users = $this->getDoctrine()
-            ->getRepository(User::class)
-            ->findAll();
-
         return $this->render('trombinoscope/index.html.twig', [
-            'users' => $users,
+            'users' => $paginator->paginate(
+                $userRepository->findAll(),
+                $request->query->getInt('page', 5),
+                8
+            )
         ]);
     }
 
