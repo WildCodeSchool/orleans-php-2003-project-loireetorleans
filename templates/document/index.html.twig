@@ -15,7 +15,7 @@
                     <h6 class="card-title">Nom : {{ document.name }}</h6>
                     <p class="card-title">Date d'ajout du document : {{ document.updatedAt ? document.updatedAt|date('Y-m-d H:i:s') : '' }}</p>
                 </div>
-                <a href="#" class="btn btn-info mt-2">Télécharger</a>
+                <a href="{{ vich_uploader_asset(document, 'documentFile', 'App\\Entity\\Document') }}" class="btn btn-info mt-2">Télécharger</a>
                 <a href="#" class="btn btn-info mt-2">Envoyer un message</a>
             </div>
         {% else %}
