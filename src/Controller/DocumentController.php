@@ -50,6 +50,7 @@ class DocumentController extends AbstractController
         return $this->render('document/new.html.twig', [
             'document' => $document,
             'form' => $form->createView(),
+            'registrationForm' => $form->createView(),
         ]);
     }
 
