@@ -8,9 +8,6 @@
     <div class="row m-0 justify-content-center">
         {% for document in documents %}
             <div class="card my-4 mx-5 col-md-4 col-10 p-0 col-lg-2">
-                <!--<img class="card-img-top"
-                     src="https://www.bmeia.gv.at/fileadmin/_processed_/c/b/csm_Linhart_2_59a15afc9d.jpg"
-                     alt="Photo Ambassadeur"> -->
                 <div class="card-body">
                     <h6 class="card-title">Nom : {{ document.name }}</h6>
                     <p class="card-title">Date d'ajout du document : {{ document.updatedAt ? document.updatedAt|date('Y-m-d H:i:s') : '' }}</p>
