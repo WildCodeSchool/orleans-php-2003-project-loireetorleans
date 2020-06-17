@@ -1,91 +1,91 @@
 @import "vars";
 
 .footer {
-  font-family: $font-text;
-  background-color: $widget-color;
-  display: table-row;
-
-  & h5 {
-    font-size: $size-footer-text;
-  }
-
-  & p {
     font-family: $font-text;
-    font-size: $size-footer-text;
-  }
+    background-color: $widget-color;
+    display: table-row;
 
-  & > .row {
-    margin-top: auto;
-    bottom: 0;
-  }
-
-  & a, h6 {
-    color: $nav-bar;
-
-    &:hover {
-      text-decoration: none;
-      outline: none;
-      color: lighten($nav-bar, 30%);
+    & h5 {
+        font-size: $size-footer-text;
     }
-  }
+
+    & p {
+        font-family: $font-text;
+        font-size: $size-footer-text;
+    }
+
+    & > .row {
+        margin-top: auto;
+        bottom: 0;
+    }
+
+    & a, h6 {
+        color: $nav-bar;
+
+        &:hover {
+            text-decoration: none;
+            outline: none;
+            color: lighten($nav-bar, 30%);
+        }
+    }
 }
 
 html, body {
-  height: 100%;
-  margin: 0;
-  padding: 0;
+    height: 100%;
+    margin: 0;
+    padding: 0;
 }
 
 body {
-  background-color: $light-color;
-  display: table;
-  width: 100%;
+    background-color: $light-color;
+    display: table;
+    width: 100%;
 }
 
 h1 {
-  font-family: $font-title;
-  font-size: $size-title;
+    font-family: $font-title;
+    font-size: $size-title;
 }
 
 .navbar {
-  background-color: $nav-bar;
-  font-family: $font-title;
-
-  & a {
-    font-size: $size-navbar-text;
-
-  }
-
-  & .dropdown-menu {
-
     background-color: $nav-bar;
+    font-family: $font-title;
 
-    & .dropdown-item {
+    & a {
+        font-size: $size-navbar-text;
 
-      color: darken($link-light, 30%);
-
-      &:hover {
-        color: $link-light;
-        background-color: inherit;
-      }
     }
-  }
+
+    & .dropdown-menu {
+
+        background-color: $nav-bar;
+
+        & .dropdown-item {
+
+            color: darken($link-light, 30%);
+
+            &:hover {
+                color: $link-light;
+                background-color: inherit;
+            }
+        }
+    }
 
 }
 
 section .form-inline, .trombinoscope-search {
-  max-width: 800px;
-  width: 100%;
+    max-width: 800px;
+    width: 100%;
 }
 
 @media screen and (max-width: 900px) {
-  .pagination .page-item {
-    display: none;
-  }
+    .pagination .page-item {
+        display: none;
+    }
 
-  .pagination .page-item:first-child, .pagination .page-item:last-child {
-    display: block;
-  }
+    .pagination .page-item:first-child, .pagination .page-item:last-child {
+        display: block;
+    }
 }
 
 @import "~bootstrap/scss/bootstrap";
