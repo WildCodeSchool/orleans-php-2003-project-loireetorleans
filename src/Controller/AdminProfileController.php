@@ -31,6 +31,20 @@ class AdminProfileController extends AbstractController
     }
 
     /**
+     * @route("/{login}/acceuil", name="_home")
+     * @param User $user
+     * @return Response
+     * @IsGranted("ROLE_ADMINISTRATEUR")
+     */
+    public function home(User $user): Response
+    {
+
+        return $this->render('admin_profile/home.html.twig', [
+            'user' => $user
+        ]);
+    }
+
+    /**
      * @Route("/{login}", name="_show", methods={"GET","POST"})
      * @param User $user
      * @param Request $request
