@@ -1,8 +1,0 @@
-[18-Jun-2020 08:35:39 UTC] PHP Fatal error:  Uncaught Symfony\Component\Debug\Exception\ClassNotFoundException: Attempted to load class "KnpPaginatorBundle" from namespace "Knp\Bundle\PaginatorBundle".
-Did you forget a "use" statement for another namespace? in /home/wilder/projet_client/orleans-php-2003-project-loireetorleans/src/Kernel.php:23
-Stack trace:
-#0 /home/wilder/projet_client/orleans-php-2003-project-loireetorleans/vendor/symfony/http-kernel/Kernel.php(446): App\Kernel->registerBundles()
-#1 /home/wilder/projet_client/orleans-php-2003-project-loireetorleans/vendor/symfony/http-kernel/Kernel.php(133): Symfony\Component\HttpKernel\Kernel->initializeBundles()
-#2 /home/wilder/projet_client/orleans-php-2003-project-loireetorleans/vendor/symfony/framework-bundle/Console/Application.php(159): Symfony\Component\HttpKernel\Kernel->boot()
-#3 /home/wilder/projet_client/orleans-php-2003-project-loireetorleans/vendor/symfony/framework-bundle/Console/Application.php(65): Symfony\Bundle\FrameworkBundle\Console\Application->registerCommands()
-#4 /home/wilder/p in /home/wilder/projet_client/orleans-php-2003-project-loireetorleans/src/Kernel.php on line 23
