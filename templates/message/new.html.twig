@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Loire&Orléans | Mes échanges | Échanger sur le document{% endblock %}
+
+{% block body %}
+    <h1 class="text-center my-4">Échanger sur le document</h1>
+
+    {{ include('message/_form.html.twig') }}
+
+    <a href="{{ path('message_index') }}">back to list</a>
+{% endblock %}

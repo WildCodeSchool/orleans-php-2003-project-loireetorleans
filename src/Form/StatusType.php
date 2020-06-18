@@ -19,7 +19,7 @@ class StatusType extends AbstractType
                 ChoiceType::class,
                 [
                     'choices' => [
-                        'En Attente' => 'En Attente',
+                        'En attente' => 'En attente',
                         'Validé' => 'Validé',
 
                     ],
