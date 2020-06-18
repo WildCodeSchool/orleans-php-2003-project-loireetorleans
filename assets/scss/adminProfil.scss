@@ -1,9 +1,14 @@
 @import "vars";
 
-td {
+td , p {
     font-family: $font-text;
 }
 
 th {
     font-family: $font-title;
+}
+
+.profil
+{
+    border: 1px solid $widget-color;
 }
