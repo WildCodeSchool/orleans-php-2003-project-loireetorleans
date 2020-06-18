@@ -11,25 +11,23 @@
 
 
 {% block body %}
-    <section class="mb-5">
+    <section class="d-flex flex-column justify-content-center align-items-center">
+
         <h1 class="text-center my-4">Trombinoscope</h1>
 
-        <div class="container-fluid d-flex flex-column">
+        <div class="d-flex flex-column">
             <div class="d-flex justify-content-center my-4">
-                <form class="my-2 my-lg-0 d-flex col-12 justify-content-center align-items-center flex-column flex-md-row">
-                    <input class="form-control mr-sm-2 col-md-5 col-lg-4 col-10" type="search" placeholder="Recherche"
-                           aria-label="Search">
-                    <button class="btn btn-primary my-sm-0 col-lg-3 col-md-5 col-10 mt-4" type="submit">Rechercher Un
-                        Ambassadeur
-                    </button>
+                <form class="form-inline my-2 my-lg-0 justify-content-center">
+                    <input class="form-control mr-sm-2 col-md-7" type="search" placeholder="Henri Guerin" aria-label="Recherche">
+                    <button class="btn btn-primary my-2 my-sm-0 mt-4" type="submit">Rechercher</button>
                 </form>
             </div>
 
-            <div class="row m-0 justify-content-center">
+            <div class="row p-0 m-0 justify-content-center">
                 {% for user in users %}
-                    <div class="card my-4 mx-5 col-md-4 col-10 p-0 col-lg-2">
+                    <div class="card my-4 mx-5 col-md-3 col-lg-2 m-2 p-0">
                         <img class="card-img-top"
-                             src="https://www.bmeia.gv.at/fileadmin/_processed_/c/b/csm_Linhart_2_59a15afc9d.jpg"
+                             src="{{ vich_uploader_asset(user, 'pictureFile', 'App\\Entity\\User') }}"
                              alt="Photo Ambassadeur">
                         <div class="card-body">
                             <h6 class="card-title">Nom : {{ user.firstname }}</h6>
@@ -43,7 +41,11 @@
                 {% endfor %}
             </div>
         </div>
+        <div class="d-flex justify-content-center w-100 my-5">
+            {{ knp_pagination_render(users) }}
+        </div>
     </section>
+
 
 
 {% endblock %}
