@@ -34,9 +34,9 @@ class UserFixtures extends Fixture
             $user->setCity('Orleans');
             $user->setStreet('5 rue des champs');
             $user->setPostalCode('45000');
-            $user->setPicture('http://lorempixel.com/gray/800/400/cats/Faker/');
+            $user->setPicture('ambassadeur.jpg');
             $user->setEmploymentArea('Orleans');
-            $user->setRoles(['ROLE_USER']);
+            $user->setRoles(['ROLE_AMBASSADEUR']);
             $user->setUpdatedAt(new DateTime());
             $user->setStatus(self::STATUS[random_int(0, 1)]);
             $manager->persist($user);
@@ -53,7 +53,7 @@ class UserFixtures extends Fixture
         $user->setCity('Orleans');
         $user->setStreet('5 rue des champs');
         $user->setPostalCode('45000');
-        $user->setPicture('http://lorempixel.com/gray/800/400/cats/Faker/');
+        $user->setPicture('ambassadeur.jpg');
         $user->setEmploymentArea('Orleans');
         $user->setUpdatedAt(new DateTime());
         $user->setPassword($this->passwordEncoder->encodePassword(
