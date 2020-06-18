@@ -13,8 +13,7 @@ class MessageType extends AbstractType
     {
         $builder
             ->add('message')
-            ->add('user')
-            ->add('document')
+
         ;
     }
 

@@ -36,7 +36,7 @@ class UserFixtures extends Fixture
             $user->setPostalCode('45000');
             $user->setPicture('ambassadeur.jpg');
             $user->setEmploymentArea('Orleans');
-            $user->setRoles();
+            $user->setRoles(['ROLE_AMBASSADEUR']);
             $user->setUpdatedAt(new DateTime());
             $user->setStatus(self::STATUS[random_int(0, 1)]);
             $manager->persist($user);
