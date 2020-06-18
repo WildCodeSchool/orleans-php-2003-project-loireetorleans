@@ -43,9 +43,16 @@ class AdminProfileController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            if ($user->getStatus() === 'Validé') {
+                $user->setRoles(['ROLE_AMBASSADEUR']);
+            } else {
+                $user->setRoles(['ROLE_USER']);
+            }
+
+
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('admin_profile_show');
+            return $this->redirectToRoute('admin_profile_index');
         }
 
         return $this->render('admin_profile/show.html.twig', [
