@@ -17,10 +17,13 @@
 
         <div class="d-flex flex-column">
             <div class="d-flex justify-content-center my-4">
-                <form class="form-inline my-2 my-lg-0 justify-content-center">
-                    <input class="form-control mr-sm-2 col-md-7" type="search" placeholder="Henri Guerin" aria-label="Recherche">
-                    <button class="btn btn-primary my-2 my-sm-0 mt-4" type="submit">Rechercher</button>
-                </form>
+                <div class="form-group">
+                    {% form_theme form 'bootstrap_4_layout.html.twig' %}
+                    {{ form_start(form) }}
+                    {{ form_row(form.search, {'label': " ", 'attr': {'placeholder': 'mot clé...'}}) }}
+                    <button class="btn btn-primary">Rechercher</button>
+                    {{ form_end(form) }}
+                </div>
             </div>
 
             <div class="row p-0 m-0 justify-content-center">

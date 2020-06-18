@@ -3,7 +3,9 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Form\SearchingType;
 use App\Repository\UserRepository;
+use App\Service\Search;
 use Knp\Component\Pager\PaginatorInterface;
 use App\Form\RegistrationFormType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -20,36 +22,59 @@ class UserController extends AbstractController
      * @param Request $request
      * @return Response
      */
-    public function index(PaginatorInterface $paginator, UserRepository $userRepository, Request $request): Response
-    {
+    public function index(
+        PaginatorInterface $paginator,
+        UserRepository $userRepository,
+        Request $request
+    ): Response {
+//        $search = new Search('', '');
+
+        $form = $this->createForm(SearchingType::class);
+        $form->handleRequest($request);
+
+        $users = $paginator->paginate(
+            $userRepository->findAll(),
+            $request->query->getInt('page', 5),
+            8
+        );
+
+//        if ($form->isSubmitted() && $form->isValid()) {
+//            $searches = $form['search']->getData();
+//            $userRepository = $search->findBySearch($searches, ['firstname'], 'User');
+//            dump($userRepository);
+//            exit();
+//            $users = $paginator->paginate(
+//                $userRepository,
+//                $request->query->getInt('page', 1),
+//                10
+//            );
+//        }
+
         return $this->render('trombinoscope/index.html.twig', [
-            'users' => $paginator->paginate(
-                $userRepository->findAll(),
-                $request->query->getInt('page', 5),
-                8
-            )
+            'users' => $users,
+            'form' => $form->createView()
         ]);
     }
 
-    /**
-     * @Route("/{login}", name="user_show")
-     * @param User $user
-     * @return Response
-     */
+/**
+ * @Route("/{login}", name="user_show")
+ * @param User $user
+ * @return Response
+ */
     public function show(User $user): Response
     {
 
         return $this->render('ambassador/show.html.twig', [
-            'user' => $user,
+        'user' => $user,
         ]);
     }
 
-    /**
-     * @Route("/modification/{login}", name="user_edit")
-     * @param User $user
-     * @param Request $request
-     * @return Response
-     */
+/**
+ * @Route("/modification/{login}", name="user_edit")
+ * @param User $user
+ * @param Request $request
+ * @return Response
+ */
     public function edit(User $user, Request $request): Response
     {
 
@@ -63,9 +88,9 @@ class UserController extends AbstractController
         }
 
         return $this->render('ambassador/edit.html.twig', [
-            'user' => $user,
-            'form' => $form->createView(),
-            'registrationForm' => $form->createView(),
+        'user' => $user,
+        'form' => $form->createView(),
+        'registrationForm' => $form->createView(),
         ]);
     }
 }
