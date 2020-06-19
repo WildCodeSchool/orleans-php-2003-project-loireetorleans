@@ -12,10 +12,9 @@
     <section class="d-flex align-items-center mb-5">
         <div class="d-flex align-items-center flex-column">
             <h1 class="my-4 text-center"> Mon Profil Ambassadeur</h1>
-
             <div class=" profil d-flex col-md-10 my-3 p-4">
                 <div class="col-md-3">
-                    <img src="{{ asset('build/logo_user.png') }}" class="card-img" alt="Photo ambassadeur">
+                    <img src="{{ vich_uploader_asset(user, 'pictureFile', 'App\\Entity\\User') }}" class="card-img" alt="Photo ambassadeur">
                 </div>
 
                 <div class="d-flex col-md-9 justify-content-around">
