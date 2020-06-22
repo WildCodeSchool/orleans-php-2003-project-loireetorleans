@@ -1,11 +1,33 @@
-{% extends 'base.html.twig' %}
+{% extends '_layout.html.twig' %}
 
 {% block title %}Loire&Orléans | Mes échanges | Échanger sur le document{% endblock %}
 
 {% block body %}
+
     <h1 class="text-center my-4">Échanger sur le document</h1>
 
-    {{ include('message/_form.html.twig') }}
+    {{ form_start(messageForm, {'attr': {'class': 'col-12 d-flex flex-column align-items-center p-0'}}) }}
+    <div class="col-10 col-md-8 d-flex flex-column text-center">
+        <div class="d-flex flex-column col-md-10 p-0">
+            <div class="comment mt-4 mb-4">
+                {% if app.user %}
+                <div class="add-comment-episode">
+                    <h2>Ajouter un commentaire</h2>
+                    {% for user in users %}
+                        <p>{{ user.login }}</p>
+                    {% endfor %}
+                    <div class="form-group d-flex flex-column my-3 col-md-6">
+                        {{ form_label(messageForm.message) }}
+                        {{ form_widget(messageForm.message) }}
+                    </div>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-lg btn-primary mt-4 col-md-4">Soumettre</button>
+            {{ form_end(messageForm) }}
+        </div>
 
-    <a href="{{ path('message_index') }}">back to list</a>
+        {% endif %}
+
+        <a href="{{ path('message_index') }}">back to list</a>
+    </div>
 {% endblock %}

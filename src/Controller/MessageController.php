@@ -2,21 +2,28 @@
 
 namespace App\Controller;
 
+use App\Entity\Conversation;
+use App\Entity\Document;
 use App\Entity\Message;
+use App\Entity\User;
 use App\Form\MessageType;
+use App\Repository\DocumentRepository;
 use App\Repository\MessageRepository;
+use App\Repository\UserRepository;
+use DateTime;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
- * @Route("/message")
+ * @Route("/message", name="message")
  */
 class MessageController extends AbstractController
 {
     /**
-     * @Route("/", name="message_index", methods={"GET"})
+     * @Route("/", name="_index", methods={"GET"})
      */
     public function index(MessageRepository $messageRepository): Response
     {
@@ -26,17 +33,30 @@ class MessageController extends AbstractController
     }
 
     /**
-     * @Route("/new", name="message_new", methods={"GET","POST"})
+     * @Route("/{document}/nouveau", name="_new", methods={"GET","POST"})
      */
-    public function new(Request $request): Response
+    public function new(Request $request, Document $document, UserInterface $user, UserRepository $users): Response
     {
         $message = new Message();
+        $users = $users->findTwoForMessage($user->getUsername());
         $form = $this->createForm(MessageType::class, $message);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $conversation = new Conversation();
+            $conversation->setDocument($document);
+            $conversation->addMessage($message);
+            foreach ($users as $user) {
+                $conversation->addUser($user);
+            }
+
+            $data = $form->getData();
+            $data->setDate(new dateTime());
+            $data->setConversation($conversation);
             $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($message);
+            $data->setAuthor($this->getUser());
+            $entityManager->persist($data);
+            $entityManager->persist($conversation);
             $entityManager->flush();
 
             return $this->redirectToRoute('message_index');
@@ -44,7 +64,9 @@ class MessageController extends AbstractController
 
         return $this->render('message/new.html.twig', [
             'message' => $message,
-            'form' => $form->createView(),
+            'messageForm' => $form->createView(),
+            'document' => $document,
+            'users' => $users
         ]);
     }
 

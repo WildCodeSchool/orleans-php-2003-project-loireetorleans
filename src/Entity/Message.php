@@ -6,6 +6,7 @@ use App\Repository\MessageRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use App\Entity\Document;
 
 /**
  * @ORM\Entity(repositoryClass=MessageRepository::class)
@@ -25,19 +26,30 @@ class Message
     private $message;
 
     /**
+     * @ORM\Column(type="datetime")
+     */
+    private $date;
+
+    /**
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $author;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Conversation::class, inversedBy="messages")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $conversation;
+
+    /**
+     * @var ArrayCollection
      * @ORM\ManyToMany(targetEntity=User::class, inversedBy="messages")
      */
     private $user;
 
-    /**
-     * @ORM\ManyToMany(targetEntity=Document::class, inversedBy="messages")
-     */
-    private $document;
-
     public function __construct()
     {
         $this->user = new ArrayCollection();
-        $this->document = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -83,28 +95,38 @@ class Message
         return $this;
     }
 
-    /**
-     * @return Collection|Document[]
-     */
-    public function getDocument(): Collection
+    public function getDate(): ?\DateTimeInterface
     {
-        return $this->document;
+        return $this->date;
     }
 
-    public function addDocument(Document $document): self
+    public function setDate(\DateTimeInterface $date): self
     {
-        if (!$this->document->contains($document)) {
-            $this->document[] = $document;
-        }
+        $this->date = $date;
 
         return $this;
     }
 
-    public function removeDocument(Document $document): self
+    public function getAuthor(): ?User
     {
-        if ($this->document->contains($document)) {
-            $this->document->removeElement($document);
-        }
+        return $this->author;
+    }
+
+    public function setAuthor(?User $author): self
+    {
+        $this->author = $author;
+
+        return $this;
+    }
+
+    public function getConversation(): ?Conversation
+    {
+        return $this->conversation;
+    }
+
+    public function setConversation(?Conversation $conversation): self
+    {
+        $this->conversation = $conversation;
 
         return $this;
     }

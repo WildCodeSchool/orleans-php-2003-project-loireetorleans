@@ -204,7 +204,7 @@ class User implements UserInterface
     private $updatedAt;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Message::class, mappedBy="User")
+     * @ORM\OneToMany(targetEntity=Message::class, mappedBy="author")
      */
     private $messages;
 
@@ -213,9 +213,15 @@ class User implements UserInterface
      */
     private $status;
 
+    /**
+     * @ORM\ManyToMany(targetEntity=Conversation::class, mappedBy="users")
+     */
+    private $conversations;
+
     public function __construct()
     {
         $this->messages = new ArrayCollection();
+        $this->conversations = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -486,7 +492,7 @@ class User implements UserInterface
     {
         if (!$this->messages->contains($message)) {
             $this->messages[] = $message;
-            $message->addUser($this);
+            $message->setAuthor($this);
         }
 
         return $this;
@@ -496,8 +502,11 @@ class User implements UserInterface
     {
         if ($this->messages->contains($message)) {
             $this->messages->removeElement($message);
-            $message->removeUser($this);
+            if ($message->getAuthor() === $this) {
+                $message->setAuthor(null);
+            }
         }
+        return $this;
     }
 
     public function getStatus(): ?string
@@ -508,6 +517,45 @@ class User implements UserInterface
     public function setStatus(string $status): self
     {
         $this->status = $status;
+
+        return $this;
+    }
+
+    public function removeComment(Message $message): self
+    {
+        if ($this->messages->contains($message)) {
+            $this->messages->removeElement($message);
+            // set the owning side to null (unless already changed)
+            if ($message->getAuthor() === $this) {
+                $message->setAuthor(null);
+            }
+        }
+    }
+
+    /**
+     * @return Collection|Conversation[]
+     */
+    public function getConversations(): Collection
+    {
+        return $this->conversations;
+    }
+
+    public function addConversation(Conversation $conversation): self
+    {
+        if (!$this->conversations->contains($conversation)) {
+            $this->conversations[] = $conversation;
+            $conversation->addUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeConversation(Conversation $conversation): self
+    {
+        if ($this->conversations->contains($conversation)) {
+            $this->conversations->removeElement($conversation);
+            $conversation->removeUser($this);
+        }
 
         return $this;
     }

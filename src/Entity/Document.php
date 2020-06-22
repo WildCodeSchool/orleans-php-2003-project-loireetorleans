@@ -35,6 +35,7 @@ class Document
      * @ORM\Column(type="string", length=255)
      */
     private $document;
+
     /**
      * @Vich\UploadableField(mapping="document_file", fileNameProperty="document")
      * @var File
@@ -45,6 +46,7 @@ class Document
      * @Assert\NotBlank(message="Veuillez insérer un fichier")
      */
     private $documentFile;
+
     /**
      * @ORM\Column(type="datetime")
      * @var DateTime
@@ -52,13 +54,13 @@ class Document
     private $updatedAt;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Message::class, mappedBy="document")
+     * @ORM\OneToMany(targetEntity=Conversation::class, mappedBy="document", orphanRemoval=true)
      */
-    private $messages;
+    private $conversations;
 
     public function __construct()
     {
-        $this->messages = new ArrayCollection();
+        $this->conversations = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -112,28 +114,31 @@ class Document
     }
 
     /**
-     * @return Collection|Message[]
+     * @return Collection|Conversation[]
      */
-    public function getMessages(): Collection
+    public function getConversations(): Collection
     {
-        return $this->messages;
+        return $this->conversations;
     }
 
-    public function addMessage(Message $message): self
+    public function addConversation(Conversation $conversation): self
     {
-        if (!$this->messages->contains($message)) {
-            $this->messages[] = $message;
-            $message->addDocument($this);
+        if (!$this->conversations->contains($conversation)) {
+            $this->conversations[] = $conversation;
+            $conversation->setDocument($this);
         }
 
         return $this;
     }
 
-    public function removeMessage(Message $message): self
+    public function removeConversation(Conversation $conversation): self
     {
-        if ($this->messages->contains($message)) {
-            $this->messages->removeElement($message);
-            $message->removeDocument($this);
+        if ($this->conversations->contains($conversation)) {
+            $this->conversations->removeElement($conversation);
+            // set the owning side to null (unless already changed)
+            if ($conversation->getDocument() === $this) {
+                $conversation->setDocument(null);
+            }
         }
 
         return $this;

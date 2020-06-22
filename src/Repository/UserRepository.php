@@ -48,6 +48,19 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
             ->execute();
     }
 
+    public function findTwoForMessage(string $login)
+    {
+        return $this->createQueryBuilder('u')
+            ->Where('u.login LIKE :login')
+            ->orWhere('u.roles LIKE :role')
+            ->setParameter('role', '%ROLE_ADMINISTRATEUR%')
+            ->setParameter('login', $login)
+            ->getQuery()
+            ->execute();
+    }
+
+
+
 
     /*
     public function findOneBySomeField($value): ?User
