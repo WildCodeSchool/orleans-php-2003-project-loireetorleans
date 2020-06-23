@@ -37,10 +37,10 @@ class MessageController extends AbstractController
      * @Route("/{document}/nouveau", name="_new", methods={"GET","POST"})
      * @IsGranted("ROLE_AMBASSADEUR")
      */
-    public function new(Request $request, Document $document, UserInterface $user, UserRepository $users): Response
+    public function new(Request $request, Document $document, UserRepository $users): Response
     {
         $message = new Message();
-        $users = $users->findTwoForMessage($user->getUsername());
+        $users = $users->findTwoForMessage($this->getUser()->getLogin());
         $form = $this->createForm(MessageType::class, $message);
         $form->handleRequest($request);
 
