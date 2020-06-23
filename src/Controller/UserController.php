@@ -42,13 +42,15 @@ class UserController extends AbstractController
             $userRepository = $userRepository->findAll();
         }
 
+        $users = $paginator->paginate(
+            $userRepository,
+            $request->query->getInt('page', 1),
+            self::USERS_PER_PAGE
+        );
+
         return $this->render('trombinoscope/index.html.twig', [
             'form' => $form->createView(),
-            'users' => $users = $paginator->paginate(
-                $userRepository,
-                $request->query->getInt('page', 1),
-                self::USERS_PER_PAGE
-            )
+            'users' => $users
 
         ]);
     }
