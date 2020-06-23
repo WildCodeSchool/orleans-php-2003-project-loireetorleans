@@ -15,6 +15,9 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class UserController extends AbstractController
 {
+
+    const USERS_PER_PAGE = 8;
+
     /**
      * @Route("/trombinoscope", name="user_index")
      * @param PaginatorInterface $paginator
@@ -31,26 +34,22 @@ class UserController extends AbstractController
         $form = $this->createForm(SearchingType::class);
         $form->handleRequest($request);
 
-        $users = $paginator->paginate(
-            $userRepository->findAll(),
-            $request->query->getInt('page', 1),
-            8
-        );
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $searches = $form['search']->getData();
-            if ($searches !== null) {
-                $users = $paginator->paginate(
-                    $userRepository->findBySearch($searches),
-                    $request->query->getInt('page', 1),
-                    8
-                );
-            }
+            $data = $form->getData();
+            $userRepository = $userRepository->findBySearch($data['search']);
+        } else {
+            $userRepository = $userRepository->findAll();
         }
 
         return $this->render('trombinoscope/index.html.twig', [
-            'users' => $users,
-            'form' => $form->createView()
+            'form' => $form->createView(),
+            'users' => $users = $paginator->paginate(
+                $userRepository,
+                $request->query->getInt('page', 1),
+                self::USERS_PER_PAGE
+            )
+
         ]);
     }
 

@@ -51,10 +51,10 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
             ->andWhere('u.roles NOT LIKE :role')
             ->setParameter('role', '%ROLE_ADMINISTRATEUR%')
             ->getQuery()
-            ->execute();
+            ->getResult();
     }
 
-    public function findBySearch(string $search)
+    public function findBySearch(?string $search)
     {
         return $this->createQueryBuilder('u')
             ->Where('u.firstname LIKE :search')
@@ -65,7 +65,7 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
             ->orWhere('u.description LIKE :search')
             ->setParameter('search', '%' . $search . '%')
             ->getQuery()
-            ->execute();
+            ->getResult();
     }
 
     /*
