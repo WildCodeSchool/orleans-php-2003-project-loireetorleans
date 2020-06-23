@@ -1,7 +1,9 @@
 {% extends '_layout.html.twig' %}
 
 {% block title %}Loire&Orléans | Mes échanges | Ajouter un commentaire{% endblock %}
-
+ {% block stylesheets %}
+     {{ encore_entry_link_tags('addComment') }}
+ {% endblock %}
 {% block body %}
 
     <h1 class="text-center my-5">Ajouter un commentaire</h1>
@@ -10,21 +12,17 @@
         <div class="col-10 col-md-8 d-flex flex-column text-center">
             <div class="d-flex flex-column">
                 <div class="comment mt-4 mb-4">
-                        {% for user in users %}
-                            <p>{{ user.login }}</p>
-                        {% endfor %}
                         <div class="form-group d-flex flex-column my-1 text-left  font-weight">
                             {{ form_label(messageForm.message) }}
-                            {{ form_widget(messageForm.message, {'attr': {'rows':'8'}}) }}
+                            {{ form_widget(messageForm.message, {'attr': {'rows':'6'}}) }}
                         </div>
                 </div>
                 <button type="submit" class="btn btn-lg btn-primary m-2 col-md-4 align-self-center">Soumettre</button>
                 {{ form_end(messageForm) }}
             </div>
-
-            <div class="d-flex justify-content-center">
-                <a class="btn btn-primary my-4 " href="{{ path('message_index') }}">Retour aux documents</a>
-            </div>
         </div>
+    </div>
+    <div class="d-flex justify-content-center">
+        <a class="btn btn-primary my-4 " href="{{ path('document_index') }}">Retour aux documents</a>
     </div>
 {% endblock %}

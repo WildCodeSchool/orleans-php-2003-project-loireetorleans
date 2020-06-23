@@ -11,6 +11,7 @@ use App\Repository\DocumentRepository;
 use App\Repository\MessageRepository;
 use App\Repository\UserRepository;
 use DateTime;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -34,6 +35,7 @@ class MessageController extends AbstractController
 
     /**
      * @Route("/{document}/nouveau", name="_new", methods={"GET","POST"})
+     * @IsGranted("ROLE_AMBASSADEUR")
      */
     public function new(Request $request, Document $document, UserInterface $user, UserRepository $users): Response
     {
