@@ -4,6 +4,8 @@ namespace App\Entity;
 
 use App\Repository\UserRepository;
 use DateTime;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\HttpFoundation\File\File;
@@ -142,9 +144,6 @@ class User implements UserInterface
      *     fileNameProperty = "picture",
      * )
      * @var File
-     * @Assert\NotBlank(
-     *     message = "Une photo est obligatoire"
-     * )
      * @Assert\File(
      *     mimeTypes = {"image/jpg", "image/jpeg", "image/png"},
      *     mimeTypesMessage = "Veuillez insérer un fichier au format {{ types }} "
@@ -202,10 +201,19 @@ class User implements UserInterface
     private $updatedAt;
 
     /**
-     * @ORM\Column(type="string", length=50)
+     * @ORM\ManyToMany(targetEntity=Message::class, mappedBy="User")
+     */
+    private $messages;
+
+    /** @ORM\Column(type="string", length=50)
      * @Assert\Choice({"En attente", "Validé"})
      */
     private $status;
+
+    public function __construct()
+    {
+        $this->messages = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -460,6 +468,33 @@ class User implements UserInterface
             $this->updatedAt = new DateTime('now');
         }
         return $this;
+    }
+
+
+    /**
+     * @return Collection|Message[]
+     */
+    public function getMessages(): Collection
+    {
+        return $this->messages;
+    }
+
+    public function addMessage(Message $message): self
+    {
+        if (!$this->messages->contains($message)) {
+            $this->messages[] = $message;
+            $message->addUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeMessage(Message $message): self
+    {
+        if ($this->messages->contains($message)) {
+            $this->messages->removeElement($message);
+            $message->removeUser($this);
+        }
     }
 
     public function getStatus(): ?string

@@ -28,7 +28,7 @@ $link-light: rgba(255, 255, 255, 0.75);
 $font-text: 'Open Sans Light', sans-serif;
 $font-title: 'Open Sans Bold', sans-serif;
 
-$size-text: 16px;
+$size-text: calc(16px + (16 - 12) * ((100vw - 300px) / (1600 - 300)));
 $size-footer-text: 10px;
 $size-navbar-text: 18px;
 $size-intermediate :calc(2.5 * var($size-text));
@@ -47,3 +47,5 @@ $theme-colors: (
     "danger": #FF4136,
     "info": $widget-color,
 );
+
+

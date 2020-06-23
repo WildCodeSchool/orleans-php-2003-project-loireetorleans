@@ -1,0 +1,12 @@
+@import "app";
+
+form {
+    & > div {
+        background-color: $light-color;
+        border: 1px solid $widget-color;
+    }
+}
+
+label {
+    font-family: $font-text;
+}

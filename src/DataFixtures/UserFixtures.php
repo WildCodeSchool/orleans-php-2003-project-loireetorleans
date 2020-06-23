@@ -10,7 +10,6 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class UserFixtures extends Fixture
 {
-    const STATUS = ['En attente', 'Validé'];
     private $passwordEncoder;
     public function __construct(UserPasswordEncoderInterface $passwordEncoder)
     {
@@ -34,11 +33,11 @@ class UserFixtures extends Fixture
             $user->setCity('Orleans');
             $user->setStreet('5 rue des champs');
             $user->setPostalCode('45000');
-            $user->setPicture('http://lorempixel.com/gray/800/400/cats/Faker/');
+            $user->setPicture('ambassadeur.jpg');
             $user->setEmploymentArea('Orleans');
             $user->setRoles(['ROLE_USER']);
             $user->setUpdatedAt(new DateTime());
-            $user->setStatus(self::STATUS[random_int(0, 1)]);
+            $user->setStatus('En attente');
             $manager->persist($user);
         }
         $user->setLogin('hadef');
@@ -53,7 +52,7 @@ class UserFixtures extends Fixture
         $user->setCity('Orleans');
         $user->setStreet('5 rue des champs');
         $user->setPostalCode('45000');
-        $user->setPicture('http://lorempixel.com/gray/800/400/cats/Faker/');
+        $user->setPicture('ambassadeur.jpg');
         $user->setEmploymentArea('Orleans');
         $user->setUpdatedAt(new DateTime());
         $user->setPassword($this->passwordEncoder->encodePassword(

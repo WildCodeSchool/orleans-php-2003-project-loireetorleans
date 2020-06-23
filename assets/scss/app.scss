@@ -30,7 +30,7 @@
     }
 }
 
-html , body {
+html, body {
     height: 100%;
     margin: 0;
     padding: 0;
@@ -73,5 +73,14 @@ h1 {
 
 }
 
+@media screen and (max-width: 900px) {
+    .pagination .page-item {
+        display: none;
+    }
+
+    .pagination .page-item:first-child, .pagination .page-item:last-child {
+        display: block;
+    }
+}
 
 @import "~bootstrap/scss/bootstrap";

@@ -31,20 +31,6 @@ class AdminProfileController extends AbstractController
     }
 
     /**
-     * @route("/{login}/acceuil", name="_home")
-     * @param User $user
-     * @return Response
-     * @IsGranted("ROLE_ADMINISTRATEUR")
-     */
-    public function home(User $user): Response
-    {
-
-        return $this->render('admin_profile/home.html.twig', [
-            'user' => $user
-        ]);
-    }
-
-    /**
      * @Route("/{login}", name="_show", methods={"GET","POST"})
      * @param User $user
      * @param Request $request
@@ -57,9 +43,16 @@ class AdminProfileController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            if ($user->getStatus() === 'Validé') {
+                $user->setRoles(['ROLE_AMBASSADEUR']);
+            } else {
+                $user->setRoles(['ROLE_USER']);
+            }
+
+
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('admin_profile_show');
+            return $this->redirectToRoute('admin_profile_index');
         }
 
         return $this->render('admin_profile/show.html.twig', [
