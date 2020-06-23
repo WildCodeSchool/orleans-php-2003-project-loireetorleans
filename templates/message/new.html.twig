@@ -1,33 +1,30 @@
 {% extends '_layout.html.twig' %}
 
-{% block title %}Loire&Orléans | Mes échanges | Échanger sur le document{% endblock %}
+{% block title %}Loire&Orléans | Mes échanges | Ajouter un commentaire{% endblock %}
 
 {% block body %}
 
-    <h1 class="text-center my-4">Échanger sur le document</h1>
-
-    {{ form_start(messageForm, {'attr': {'class': 'col-12 d-flex flex-column align-items-center p-0'}}) }}
-    <div class="col-10 col-md-8 d-flex flex-column text-center">
-        <div class="d-flex flex-column col-md-10 p-0">
-            <div class="comment mt-4 mb-4">
-                {% if app.user %}
-                <div class="add-comment-episode">
-                    <h2>Ajouter un commentaire</h2>
-                    {% for user in users %}
-                        <p>{{ user.login }}</p>
-                    {% endfor %}
-                    <div class="form-group d-flex flex-column my-3 col-md-6">
-                        {{ form_label(messageForm.message) }}
-                        {{ form_widget(messageForm.message) }}
-                    </div>
+    <h1 class="text-center my-5">Ajouter un commentaire</h1>
+    <div class="container">
+        {{ form_start(messageForm, {'attr': {'class': 'col-12 d-flex flex-column align-items-center p-0'}}) }}
+        <div class="col-10 col-md-8 d-flex flex-column text-center">
+            <div class="d-flex flex-column">
+                <div class="comment mt-4 mb-4">
+                        {% for user in users %}
+                            <p>{{ user.login }}</p>
+                        {% endfor %}
+                        <div class="form-group d-flex flex-column my-1 text-left  font-weight">
+                            {{ form_label(messageForm.message) }}
+                            {{ form_widget(messageForm.message, {'attr': {'rows':'8'}}) }}
+                        </div>
                 </div>
+                <button type="submit" class="btn btn-lg btn-primary m-2 col-md-4 align-self-center">Soumettre</button>
+                {{ form_end(messageForm) }}
             </div>
-            <button type="submit" class="btn btn-lg btn-primary mt-4 col-md-4">Soumettre</button>
-            {{ form_end(messageForm) }}
+
+            <div class="d-flex justify-content-center">
+                <a class="btn btn-primary my-4 " href="{{ path('message_index') }}">Retour aux documents</a>
+            </div>
         </div>
-
-        {% endif %}
-
-        <a href="{{ path('message_index') }}">back to list</a>
     </div>
 {% endblock %}
