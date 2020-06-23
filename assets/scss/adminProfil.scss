@@ -1,4 +1,4 @@
-@import "vars";
+@import "app";
 
 td , p {
     font-family: $font-text;
@@ -6,8 +6,4 @@ td , p {
 
 th {
     font-family: $font-title;
-}
-
-.card {
-    border-color: $widget-color;
 }

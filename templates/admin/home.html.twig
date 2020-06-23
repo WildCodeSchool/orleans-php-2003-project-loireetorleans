@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
  {% block stylesheets %}
-     {{ encore_entry_link_tags('adminProfil') }}
+     {{ encore_entry_link_tags('login') }}
  {% endblock %}
 {% block body %}
     <section class="d-flex align-items-center mb-5">
@@ -15,7 +15,9 @@
                     <div class="card-body">
                         <h5 class="text-center card-title">Profil utilisateur</h5>
                         <p class="text-center card-text">Votre profil</p>
-                        <div class="text-center mt-2"><a href="{{ path('admin_profile_show', {login: user.login}) }}" class="btn btn-primary">Aller</a></div>
+                        <div class="text-center mt-2"><a
+                                    href="{{ path('admin_profile_show', {login: app.user.login}) }}"
+                                    class="btn btn-primary">Aller</a></div>
                     </div>
                 </div>
 
@@ -29,7 +31,7 @@
                 </div>
             </div>
             <div class="row mb-4 mb-4 justify-content-around mt-4">
-                <div class="card mt-4 mb-4 col-md-5">
+                <div class="card m-4 col-md-5">
                     <div class="card-body">
                         <h5 class="text-center card-title">Demandes d'informations</h5>
                         <p class="text-center card-text">Avoir accès aux différentes informations</p>
@@ -37,11 +39,12 @@
                         </div>
                     </div>
                 </div>
-                <div class="card mb-4 mt-4 col-md-5">
+                <div class="card m-4 col-md-5">
                     <div class="card-body ">
                         <h5 class="text-center card-title">Gestions des documents</h5>
                         <p class="text-center card-text">Gérer les documents</p>
-                        <div class="text-center mt-2"><a href="#" class="btn align-content-center btn-primary">Aller</a>
+                        <div class="text-center mt-2"><a href="{{ path('document_index') }}"
+                                                         class="btn align-content-center btn-primary">Aller</a>
                         </div>
                     </div>
                 </div>
