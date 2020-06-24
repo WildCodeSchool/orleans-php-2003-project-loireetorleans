@@ -149,9 +149,6 @@ class User implements UserInterface
      *     fileNameProperty = "picture",
      * )
      * @var File
-     * @Assert\NotBlank(
-     *     message = "Une photo est obligatoire"
-     * )
      * @Assert\File(
      *     mimeTypes = {"image/jpg", "image/jpeg", "image/png"},
      *     mimeTypesMessage = "Veuillez insérer un fichier au format {{ types }} "
