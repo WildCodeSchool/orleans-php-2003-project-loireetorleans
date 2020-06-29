@@ -25,6 +25,8 @@ class MessageController extends AbstractController
 {
     /**
      * @Route("/", name="_index", methods={"GET"})
+     * @param MessageRepository $messageRepository
+     * @return Response
      */
     public function index(MessageRepository $messageRepository): Response
     {
@@ -36,11 +38,17 @@ class MessageController extends AbstractController
     /**
      * @Route("/{document}/nouveau", name="_new", methods={"GET","POST"})
      * @IsGranted("ROLE_AMBASSADEUR")
+     * @param Request $request
+     * @param Document $document
+     * @param UserRepository $users
+     * @param UserInterface $user
+     * @return Response
      */
-    public function new(Request $request, Document $document, UserRepository $users): Response
+    public function new(Request $request, Document $document, UserRepository $users, UserInterface $user): Response
     {
         $message = new Message();
-        $users = $users->findTwoForMessage($this->getUser()->getLogin());
+        $login = $user->getUsername();
+        $persons = $users->findTwoForMessage($login);
         $form = $this->createForm(MessageType::class, $message);
         $form->handleRequest($request);
 
@@ -48,8 +56,8 @@ class MessageController extends AbstractController
             $conversation = new Conversation();
             $conversation->setDocument($document);
             $conversation->addMessage($message);
-            foreach ($users as $user) {
-                $conversation->addUser($user);
+            foreach ($persons as $person) {
+                $conversation->addUser($person);
             }
 
             $data = $form->getData();
@@ -74,6 +82,8 @@ class MessageController extends AbstractController
 
     /**
      * @Route("/{id}", name="message_show", methods={"GET"})
+     * @param Message $message
+     * @return Response
      */
     public function show(Message $message): Response
     {
