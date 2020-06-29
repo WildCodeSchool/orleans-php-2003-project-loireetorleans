@@ -98,14 +98,14 @@ class ResetPasswordController extends AbstractController
 
         $token = $this->getTokenFromSession();
         if (null === $token) {
-            throw $this->createNotFoundException('No reset password token found in the URL or in the session.');
+            throw $this->createNotFoundException('Le lien a expiré merci de renouveller votre demande');
         }
 
         try {
             $user = $this->resetPasswordHelper->validateTokenAndFetchUser($token);
         } catch (ResetPasswordExceptionInterface $e) {
             $this->addFlash('reset_password_error', sprintf(
-                'There was a problem validating your reset request - %s',
+                'Il y\' a un probleme de validation de votre demande, renouveller la - %s',
                 $e->getReason()
             ));
 
@@ -158,7 +158,7 @@ class ResetPasswordController extends AbstractController
             $resetToken = $this->resetPasswordHelper->generateResetToken($user);
         } catch (ResetPasswordExceptionInterface $e) {
             $this->addFlash('reset_password_error', sprintf(
-                'There was a problem handling your password reset request - %s',
+                'Il y\'a un problème avec votre demande de réinitialisation de mot de passe - %s',
                 $e->getReason()
             ));
 
@@ -167,8 +167,8 @@ class ResetPasswordController extends AbstractController
 
         $email = (new TemplatedEmail())
             ->from(new Address('mailer@your-domain.com', 'Admin'))
-            ->to('d4eef59582-9188f8@inbox.mailtrap.io')
-            ->subject('Your password reset request')
+            ->to($emailFormData)
+            ->subject('Réinitialisation de mot de passe')
             ->htmlTemplate('reset_password/email.html.twig')
             ->context([
                 'resetToken' => $resetToken,
