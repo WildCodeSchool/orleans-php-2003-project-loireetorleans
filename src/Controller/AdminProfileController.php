@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Form\SearchingType;
 use App\Form\StatusType;
 use App\Repository\UserRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
@@ -19,14 +20,25 @@ class AdminProfileController extends AbstractController
     /**
      * @Route("/", name="_index")
      * @param UserRepository $userRepository
+     * @param Request $request
      * @return Response
      * @IsGranted("ROLE_ADMINISTRATEUR")
      */
-    public function index(UserRepository $userRepository) : Response
+    public function index(UserRepository $userRepository, Request $request) : Response
     {
+        $form = $this->createForm(SearchingType::class);
+        $form->handleRequest($request);
+
         $users = $userRepository->findAllWhithoutAdmin();
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $data = $form->getData();
+            $users = $userRepository->findBySearchWhithoutAdmin($data['search']);
+        }
+
         return $this->render('admin_profile/index.html.twig', [
             'users' => $users,
+            'form' => $form->createView()
         ]);
     }
 
