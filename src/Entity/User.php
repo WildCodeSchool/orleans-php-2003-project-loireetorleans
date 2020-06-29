@@ -87,7 +87,7 @@ class User implements UserInterface
     private $firstname;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, unique=true)
      * @Assert\NotBlank(
      *     message="L'adresse email est obligatoire"
      * )
