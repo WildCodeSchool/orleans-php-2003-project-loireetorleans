@@ -50,10 +50,6 @@ class User implements UserInterface
      * @Assert\NotBlank(
      *     message="Le mot de passe est obligatoire"
      * )
-     * @Assert\Length(
-     *     max = 20,
-     *     maxMessage = "Le mot de passe ne doit pas faire plus de {{ limit }} caractères",
-     * )
      */
     private $password;
 
