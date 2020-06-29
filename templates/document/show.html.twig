@@ -7,6 +7,15 @@
 
     <table class="table">
         <tbody>
+        {% if messages %}
+        {%  for message in messages %}
+        <tr>
+            <td>{{ message.message }}</td>
+            <td>{{ message.author.login }}</td>
+            <td>{{ message.date.format('d-m-Y') }}</td>
+        </tr>
+        {% endfor %}
+        {% endif %}
             <tr>
                 <th>Id</th>
                 <td>{{ document.id }}</td>

@@ -18,10 +18,6 @@
             <tr>
                 <td>{{ message.id }}</td>
                 <td>{{ message.message }}</td>
-                <td>
-                    <a href="{{ path('message_show', {'id': message.id}) }}">show</a>
-                    <a href="{{ path('message_edit', {'id': message.id}) }}">edit</a>
-                </td>
             </tr>
         {% else %}
             <tr>
@@ -31,5 +27,4 @@
         </tbody>
     </table>
 
-    <a href="{{ path('message_new') }}">Create new</a>
 {% endblock %}

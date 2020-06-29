@@ -25,7 +25,10 @@ class UserFixtures extends Fixture
             $user->setLastName($faker->lastName);
             $user->setCompany($faker->company);
             $user->setLogin('wilder' . $i);
-            $user->setPassword($faker->password);
+            $user->setPassword($this->passwordEncoder->encodePassword(
+                $user,
+                'loireetorleans'
+            ));
             $user->setEmail($faker->email);
             $user->setDescription('golf');
             $user->setPhoneNumber($faker->e164PhoneNumber);
