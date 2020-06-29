@@ -98,14 +98,14 @@ class ResetPasswordController extends AbstractController
 
         $token = $this->getTokenFromSession();
         if (null === $token) {
-            throw $this->createNotFoundException('Le lien a expiré merci de renouveller votre demande');
+            throw $this->createNotFoundException('Le lien a expiré merci de renouveler votre demande');
         }
 
         try {
             $user = $this->resetPasswordHelper->validateTokenAndFetchUser($token);
         } catch (ResetPasswordExceptionInterface $e) {
             $this->addFlash('reset_password_error', sprintf(
-                'Il y\' a un probleme de validation de votre demande, renouveller la - %s',
+                'Il y\' a un problème de validation de votre demande, renouvelez-la - %s',
                 $e->getReason()
             ));
 
