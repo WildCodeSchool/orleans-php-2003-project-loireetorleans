@@ -64,7 +64,6 @@ class MessageController extends AbstractController
             $data->setDate(new dateTime());
             $data->setConversation($conversation);
             $entityManager = $this->getDoctrine()->getManager();
-            $data->setAuthor($this->getUser());
             $entityManager->persist($data);
             $entityManager->persist($conversation);
             $entityManager->flush();
