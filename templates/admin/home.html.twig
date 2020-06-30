@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+{% extends '_layoutAdmin.html.twig' %}
  {% block stylesheets %}
      {{ encore_entry_link_tags('login') }}
  {% endblock %}
@@ -16,7 +16,7 @@
                         <h5 class="text-center card-title">Profil utilisateur</h5>
                         <p class="text-center card-text">Votre profil</p>
                         <div class="text-center mt-2"><a
-                                    href="{{ path('admin_profile_show', {login: app.user.login}) }}"
+                                    href="{{ path('user_show', {login: app.user.login}) }}"
                                     class="btn btn-primary">Aller</a></div>
                     </div>
                 </div>
