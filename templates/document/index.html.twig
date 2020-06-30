@@ -1,9 +1,14 @@
 {% extends '_layout.html.twig' %}
 
-{% block title %}Loire&Orléans | Partage de documents{% endblock %}
+{% block title %}Loire&Orléans | Documents à télécharger{% endblock %}
 
 {% block body %}
-    <h1 class="text-center my-4">Partage de documents</h1>
+    {% if app.user and app.user.roles.0 is same as('ROLE_ADMINISTRATEUR') %}
+        <h1 class="text-center my-4">Gestion des documents</h1>
+    {% endif %}
+    {% if app.user and app.user.roles.0 is same as('ROLE_AMBASSADEUR') %}
+        <h1 class="text-center my-4">Documents à télécharger</h1>
+    {% endif %}
 
     <div class="row m-0 justify-content-center">
         {% for document in documents %}

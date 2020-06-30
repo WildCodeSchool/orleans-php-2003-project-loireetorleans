@@ -58,6 +58,9 @@ class MessageController extends AbstractController
             $conversation->addMessage($message);
             foreach ($persons as $person) {
                 $conversation->addUser($person);
+                if ($person->getLogin() === $login) {
+                    $message->setUser($person);
+                }
             }
 
             $data = $form->getData();
