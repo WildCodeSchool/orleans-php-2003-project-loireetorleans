@@ -12,6 +12,7 @@
                     <h6 class="card-title">Nom : {{ document.name }}</h6>
                     <p class="card-title">Date d'ajout du document : {{ document.updatedAt ? document.updatedAt|date('Y-m-d H:i:s') : '' }}</p>
                 </div>
+                <a href="{{ path('document_show', {'id':document.id}) }}" class="btn btn-info mt-2">Consulter</a>
                 <a href="{{ vich_uploader_asset(document, 'documentFile', 'App\\Entity\\Document') }}" class="btn btn-info mt-2">Télécharger</a>
                 <a href="{{ path('message_new', {'document':document.id}) }}" class="btn btn-info mt-2">Envoyer un message</a>
                 {% if app.user and app.user.roles.0 is same as('ROLE_ADMINISTRATEUR') %}{{ include('document/_delete_form.html.twig') }}{% endif %}
