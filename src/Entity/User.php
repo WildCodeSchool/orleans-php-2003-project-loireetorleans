@@ -286,9 +286,9 @@ class User implements UserInterface
     /**
      * @see UserInterface
      */
-    public function getSalt()
+    public function getSalt(): ?int
     {
-        // not needed when using the "bcrypt" algorithm in security.yaml
+        return $this->id;
     }
 
     /**
