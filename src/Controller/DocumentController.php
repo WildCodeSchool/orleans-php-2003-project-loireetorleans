@@ -5,10 +5,14 @@ namespace App\Controller;
 use App\Entity\Document;
 use App\Form\DocumentType;
 use App\Repository\DocumentRepository;
+use App\Repository\UserRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
+use Symfony\Component\Mailer\MailerInterface;
+use Symfony\Component\Mime\Email;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
@@ -32,9 +36,12 @@ class DocumentController extends AbstractController
     /**
      * @Route("/ajout", name="document_new", methods={"GET","POST"})
      * @param Request $request
+     * @param MailerInterface $mailer
+     * @param UserRepository $userRepository
      * @return Response
+     * @throws TransportExceptionInterface
      */
-    public function new(Request $request): Response
+    public function new(Request $request, MailerInterface $mailer, UserRepository $userRepository): Response
     {
         $document = new Document();
         $form = $this->createForm(DocumentType::class, $document);
@@ -45,8 +52,24 @@ class DocumentController extends AbstractController
             $entityManager->persist($document);
             $entityManager->flush();
 
+            $users = $userRepository->findAllWhithoutAdmin();
+
+            $email = (new Email())
+                ->from('noreply@loire&orleans.fr');
+            foreach ($users as $user) {
+                $email = $email->addBcc($user->getEmail());
+            }
+                $email = $email->subject('Nouveau Document Disponible | Loire&Orleans')
+                ->html($this->renderView('notification/nouveauDocument.html.twig', [
+                    'document' => $document,
+                    ]), 'utf8');
+
+            $mailer->send($email);
+
             return $this->redirectToRoute('document_index');
         }
+
+
 
         return $this->render('document/new.html.twig', [
             'document' => $document,
