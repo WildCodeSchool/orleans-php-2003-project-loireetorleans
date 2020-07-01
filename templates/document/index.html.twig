@@ -26,5 +26,13 @@
             'Aucun document trouvé'
         {% endfor %}
     </div>
-
+    {% if app.user and app.user.roles.0 is same as('ROLE_ADMINISTRATEUR') %}
+        <div class="d-flex align-items-center my-4 flex-column">
+            <a class="btn btn-lg btn-primary mt-3" href="{{ path('admin_index') }}">Retour gestion</a>
+        </div>
+    {% else %}
+        <div class="d-flex align-items-center my-4 flex-column">
+            <a class="btn btn-lg btn-primary mt-3" href="{{ path('home') }}">Retour à l'accueil</a>
+        </div>
+    {% endif %}
 {% endblock %}
