@@ -12,7 +12,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class AdminController extends AbstractController
 {
     /**
-     * @route("/admin", name="index")
+     * @route("/admin", name="admin_index")
      * @return Response
      * @IsGranted("ROLE_ADMINISTRATEUR")
      */
