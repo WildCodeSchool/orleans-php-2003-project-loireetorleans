@@ -4,6 +4,8 @@ namespace App\Repository;
 
 use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\OptimisticLockException;
+use Doctrine\ORM\ORMException;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
 use Symfony\Component\Security\Core\User\PasswordUpgraderInterface;
@@ -24,6 +26,10 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
 
     /**
      * Used to upgrade (rehash) the user's password automatically over time.
+     * @param UserInterface $user
+     * @param string $newEncodedPassword
+     * @throws ORMException
+     * @throws OptimisticLockException
      */
     public function upgradePassword(UserInterface $user, string $newEncodedPassword): void
     {
@@ -45,9 +51,53 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
             ->andWhere('u.roles NOT LIKE :role')
             ->setParameter('role', '%ROLE_ADMINISTRATEUR%')
             ->getQuery()
+            ->getResult();
+    }
+
+
+    public function findTwoForMessage(string $login)
+    {
+        return $this->createQueryBuilder('u')
+            ->Where('u.login LIKE :login')
+            ->orWhere('u.roles LIKE :role')
+            ->setParameter('role', '%ROLE_ADMINISTRATEUR%')
+            ->setParameter('login', $login)
+            ->getQuery()
             ->execute();
     }
 
+
+
+
+    public function findBySearch(?string $search)
+    {
+        return $this->createQueryBuilder('u')
+            ->Where('u.firstname LIKE :search')
+            ->orWhere('u.lastName LIKE :search')
+            ->orWhere('u.company LIKE :search')
+            ->orWhere('u.employmentArea LIKE :search')
+            ->orWhere('u.activity LIKE :search')
+            ->orWhere('u.description LIKE :search')
+            ->setParameter('search', '%' . $search . '%')
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function findBySearchWhithoutAdmin(?string $search)
+    {
+        return $this->createQueryBuilder('u')
+            ->Where('u.firstname LIKE :search')
+            ->orWhere('u.lastName LIKE :search')
+            ->orWhere('u.company LIKE :search')
+            ->orWhere('u.employmentArea LIKE :search')
+            ->orWhere('u.activity LIKE :search')
+            ->orWhere('u.description LIKE :search')
+            ->setParameter('search', '%' . $search . '%')
+            ->andWhere('u.roles NOT LIKE :role')
+            ->setParameter('role', '%ROLE_ADMINISTRATEUR%')
+            ->getQuery()
+            ->getResult();
+    }
 
     /*
     public function findOneBySomeField($value): ?User

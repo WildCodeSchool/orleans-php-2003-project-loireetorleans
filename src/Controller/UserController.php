@@ -3,7 +3,9 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Form\SearchingType;
 use App\Repository\UserRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\PaginatorInterface;
 use App\Form\RegistrationFormType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -13,6 +15,9 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class UserController extends AbstractController
 {
+
+    const USERS_PER_PAGE = 8;
+
     /**
      * @Route("/trombinoscope", name="user_index")
      * @param PaginatorInterface $paginator
@@ -20,14 +25,33 @@ class UserController extends AbstractController
      * @param Request $request
      * @return Response
      */
-    public function index(PaginatorInterface $paginator, UserRepository $userRepository, Request $request): Response
-    {
+    public function index(
+        PaginatorInterface $paginator,
+        UserRepository $userRepository,
+        Request $request
+    ): Response {
+
+        $form = $this->createForm(SearchingType::class);
+        $form->handleRequest($request);
+
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $data = $form->getData();
+            $userRepository = $userRepository->findBySearch($data['search']);
+        } else {
+            $userRepository = $userRepository->findAll();
+        }
+
+        $users = $paginator->paginate(
+            $userRepository,
+            $request->query->getInt('page', 1),
+            self::USERS_PER_PAGE
+        );
+
         return $this->render('trombinoscope/index.html.twig', [
-            'users' => $paginator->paginate(
-                $userRepository->findAll(),
-                $request->query->getInt('page', 5),
-                8
-            )
+            'form' => $form->createView(),
+            'users' => $users
+
         ]);
     }
 

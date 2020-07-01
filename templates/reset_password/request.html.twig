@@ -1,0 +1,34 @@
+{% extends '_layout.html.twig' %}
+
+{% block title %}Loire&Orléans | Réinitialisation mot de passe{% endblock %}
+ {% block stylesheets %}
+     {{ encore_entry_link_tags('login') }}
+ {% endblock %}
+{% block body %}
+    <section class="d-flex align-items-center mb-5">
+        <div class="form w-100">
+            <h1 class="my-4 text-center">Réinitialiser votre mot de passe</h1>
+            {% for flashError in app.flashes('reset_password_error') %}
+                <div class="alert alert-danger my-4" role="alert">{{ flashError }}</div>
+            {% endfor %}
+            {{ form_start(requestForm, {'attr': {'class': 'col-12 d-flex flex-column align-items-center'}}) }}
+            <div class="col-10 col-md-8 d-flex flex-column p-4 align-items-center">
+                <div class="form-group col-md-8 col-11">
+                    {{ form_label(requestForm.email) }}
+                    {{ form_widget(requestForm.email, {'attr': {'class': 'col-12'}}) }}
+                </div>
+                <div class="form-group col-md-8 col-11">
+                    <small>
+                        Entrez votre adresse email et nous vous enverrons un lien pour que vous puissiez
+                        réinitialiser votre mot de passe.
+                    </small>
+                </div>
+                <button class="btn btn-lg btn-primary mt-3">Envoyer l'email</button>
+                {{ form_end(requestForm) }}
+            </div>
+        </div>
+    </section>
+
+
+{% endblock %}
+

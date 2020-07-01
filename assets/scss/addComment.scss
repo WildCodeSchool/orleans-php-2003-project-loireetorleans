@@ -4,20 +4,7 @@ form {
     & > div {
         background-color: $light-color;
         border: 1px solid $widget-color;
-    }
-}
-
-.reset_pwd {
-    background-color: $light-color;
-    border: 1px solid $widget-color;
-}
-
-img{
-    max-width:200px;
-}
-@media screen and (min-width: 768px){
-    section {
-        height: 80vh;
+        margin-bottom: 15px;
     }
 }
 
@@ -25,11 +12,9 @@ label {
     font-family: $font-text;
 }
 
-.card {
-    border-color: $widget-color;
-
-    & p {
-        font-family: $font-text;
+@media screen and (min-width: 768px){
+    section {
+        height: 80vh;
     }
 }
 

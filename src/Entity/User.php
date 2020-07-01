@@ -17,7 +17,12 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository", repositoryClass=UserRepository::class)
  * @UniqueEntity(fields={"login"}, message="There is already an account with this login")
  * @Vich\Uploadable
+ * @SuppressWarnings(PHPMD.TooManyFields)
+ * @SuppressWarnings(PHPMD.TooManyMethods)
+ * @SuppressWarnings(PHPMD.ExcessiveClassComplexity)
+ * @SuppressWarnings(PHPMD.ExcessivePublicCount)
  */
+
 class User implements UserInterface
 {
     /**
@@ -50,10 +55,6 @@ class User implements UserInterface
      * @Assert\NotBlank(
      *     message="Le mot de passe est obligatoire"
      * )
-     * @Assert\Length(
-     *     max = 20,
-     *     maxMessage = "Le mot de passe ne doit pas faire plus de {{ limit }} caractères",
-     * )
      */
     private $password;
 
@@ -82,7 +83,7 @@ class User implements UserInterface
     private $firstname;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, unique=true)
      * @Assert\NotBlank(
      *     message="L'adresse email est obligatoire"
      * )
@@ -200,18 +201,24 @@ class User implements UserInterface
      */
     private $updatedAt;
 
-    /**
-     * @ORM\ManyToMany(targetEntity=Message::class, mappedBy="User")
-     */
-    private $messages;
-
     /** @ORM\Column(type="string", length=50)
      * @Assert\Choice({"En attente", "Validé"})
      */
     private $status;
 
+    /**
+     * @ORM\ManyToMany(targetEntity=Conversation::class, mappedBy="users")
+     */
+    private $conversations;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Message::class, mappedBy="user", orphanRemoval=true)
+     */
+    private $messages;
+
     public function __construct()
     {
+        $this->conversations = new ArrayCollection();
         $this->messages = new ArrayCollection();
     }
 
@@ -471,6 +478,49 @@ class User implements UserInterface
     }
 
 
+
+
+    public function getStatus(): ?string
+    {
+        return $this->status;
+    }
+
+    public function setStatus(string $status): self
+    {
+        $this->status = $status;
+
+        return $this;
+    }
+
+
+    /**
+     * @return Collection|Conversation[]
+     */
+    public function getConversations(): Collection
+    {
+        return $this->conversations;
+    }
+
+    public function addConversation(Conversation $conversation): self
+    {
+        if (!$this->conversations->contains($conversation)) {
+            $this->conversations[] = $conversation;
+            $conversation->addUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeConversation(Conversation $conversation): self
+    {
+        if ($this->conversations->contains($conversation)) {
+            $this->conversations->removeElement($conversation);
+            $conversation->removeUser($this);
+        }
+
+        return $this;
+    }
+
     /**
      * @return Collection|Message[]
      */
@@ -483,7 +533,7 @@ class User implements UserInterface
     {
         if (!$this->messages->contains($message)) {
             $this->messages[] = $message;
-            $message->addUser($this);
+            $message->setUser($this);
         }
 
         return $this;
@@ -493,18 +543,11 @@ class User implements UserInterface
     {
         if ($this->messages->contains($message)) {
             $this->messages->removeElement($message);
-            $message->removeUser($this);
+            // set the owning side to null (unless already changed)
+            if ($message->getUser() === $this) {
+                $message->setUser(null);
+            }
         }
-    }
-
-    public function getStatus(): ?string
-    {
-        return $this->status;
-    }
-
-    public function setStatus(string $status): self
-    {
-        $this->status = $status;
 
         return $this;
     }

@@ -6,6 +6,7 @@ use App\Repository\MessageRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use App\Entity\Document;
 
 /**
  * @ORM\Entity(repositoryClass=MessageRepository::class)
@@ -25,20 +26,22 @@ class Message
     private $message;
 
     /**
-     * @ORM\ManyToMany(targetEntity=User::class, inversedBy="messages")
+     * @ORM\Column(type="datetime")
+     */
+    private $date;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Conversation::class, inversedBy="messages")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $conversation;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="messages")
+     * @ORM\JoinColumn(nullable=false)
      */
     private $user;
 
-    /**
-     * @ORM\ManyToMany(targetEntity=Document::class, inversedBy="messages")
-     */
-    private $document;
-
-    public function __construct()
-    {
-        $this->user = new ArrayCollection();
-        $this->document = new ArrayCollection();
-    }
 
     public function getId(): ?int
     {
@@ -57,54 +60,39 @@ class Message
         return $this;
     }
 
-    /**
-     * @return Collection|User[]
-     */
-    public function getUser(): Collection
+
+    public function getDate(): ?\DateTimeInterface
+    {
+        return $this->date;
+    }
+
+    public function setDate(\DateTimeInterface $date): self
+    {
+        $this->date = $date;
+
+        return $this;
+    }
+
+    public function getConversation(): ?Conversation
+    {
+        return $this->conversation;
+    }
+
+    public function setConversation(?Conversation $conversation): self
+    {
+        $this->conversation = $conversation;
+
+        return $this;
+    }
+
+    public function getUser(): ?User
     {
         return $this->user;
     }
 
-    public function addUser(User $user): self
+    public function setUser(?User $user): self
     {
-        if (!$this->user->contains($user)) {
-            $this->user[] = $user;
-        }
-
-        return $this;
-    }
-
-    public function removeUser(User $user): self
-    {
-        if ($this->user->contains($user)) {
-            $this->user->removeElement($user);
-        }
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|Document[]
-     */
-    public function getDocument(): Collection
-    {
-        return $this->document;
-    }
-
-    public function addDocument(Document $document): self
-    {
-        if (!$this->document->contains($document)) {
-            $this->document[] = $document;
-        }
-
-        return $this;
-    }
-
-    public function removeDocument(Document $document): self
-    {
-        if ($this->document->contains($document)) {
-            $this->document->removeElement($document);
-        }
+        $this->user = $user;
 
         return $this;
     }

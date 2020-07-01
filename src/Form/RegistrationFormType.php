@@ -57,6 +57,7 @@ class RegistrationFormType extends AbstractType
                     ],
                     'expanded' => false,
                     'multiple' => false,
+                    'label_attr' => ['class' => 'mb-0'],
                 ]
             )
             ->add(
@@ -71,6 +72,7 @@ class RegistrationFormType extends AbstractType
                     ],
                     'expanded' => false,
                     'multiple' => false,
+                    'label_attr' => ['class' => 'mb-0'],
                 ]
             )
             ->add(
