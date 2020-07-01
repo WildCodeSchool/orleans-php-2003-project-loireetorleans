@@ -8,20 +8,19 @@
     <table class="table">
         <thead>
             <tr>
-                <th>Id</th>
-                <th>Message</th>
-                <th>actions</th>
+                <th>Expéditeurs</th>
+                <th>Messages</th>
             </tr>
         </thead>
         <tbody>
         {% for message in messages %}
             <tr>
-                <td>{{ message.id }}</td>
+                <td>{{ app.user.login }}</td>
                 <td>{{ message.message }}</td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="3">no records found</td>
+                <td colspan="3">Aucun message</td>
             </tr>
         {% endfor %}
         </tbody>

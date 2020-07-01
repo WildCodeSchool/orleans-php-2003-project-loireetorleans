@@ -30,8 +30,9 @@ class MessageController extends AbstractController
      */
     public function index(MessageRepository $messageRepository): Response
     {
+
         return $this->render('message/index.html.twig', [
-            'messages' => $messageRepository->findAll(),
+            'messages' => $messageRepository->findAll()
         ]);
     }
 
@@ -83,14 +84,24 @@ class MessageController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="message_show", methods={"GET"})
-     * @param Message $message
+     * @Route("/{id}", name="_detail", methods={"GET"})
+     * @param MessageRepository $messageRepository
+     * @param UserRepository $users
+     * @param UserInterface $user
      * @return Response
      */
-    public function show(Message $message): Response
+    public function show(MessageRepository $messageRepository, UserRepository $users, UserInterface $user): Response
     {
+        $login = $user->getUsername();
+        $user = $users
+            ->findBy(
+                ['login' => $login],
+                ['updatedAt' => 'ASC']
+            );
+
+
         return $this->render('message/show.html.twig', [
-            'message' => $message,
+            'messages' => $messageRepository->findAll()
         ]);
     }
 
