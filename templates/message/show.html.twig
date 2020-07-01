@@ -15,7 +15,7 @@
         <tbody>
         {% for message in messages %}
             <tr>
-                <td>{{ app.user.login }}</td>
+                <td>{{ app.user.firstname }} {{ app.user.lastName }} </td>
                 <td>{{ message.message }}</td>
             </tr>
         {% else %}
