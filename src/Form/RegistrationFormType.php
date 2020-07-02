@@ -20,6 +20,28 @@ use Vich\UploaderBundle\Form\Type\VichFileType;
 
 class RegistrationFormType extends AbstractType
 {
+    const ACTIVITIES = [
+        'Aéronautique - défense' => 'Aéronautique - défense',
+        'Agroalimentaire' => 'Agroalimentaire',
+        'Equipementiers automobile' => 'Equipementiers automobile',
+        'Centre d\'appels - Relation clients' => 'Centre d\'appels - Relation clients',
+        'Energies nouvelles renouvelables' => 'Energies nouvelles renouvelables',
+        'Nucléaire' => 'Nucléaire',
+        'Logistique - Transports' => 'Logistique - Transports',
+        'Equipementiers machinisme agricoles' => 'Equipementiers machinisme agricoles',
+        'Mécanique - Travaux des métaux' => 'Mécanique - Travaux des métaux',
+        'Matériaux composites' =>  'Matériaux composites',
+        'Banque assurance et mutuelle' =>  'Banque assurance et mutuelle',
+        'Objets connectés - IA - Electronique' => 'Objets connectés - IA - Electronique',
+        'ESN' => 'ESN',
+        'Industrie graphique' => 'Industrie graphique',
+        'Parfumerie cosmétique' => 'Parfumerie cosmétique',
+        'Santé - Pharmacie' => 'Santé - Pharmacie',
+        'Transformation du bois' => 'Transformation du bois',
+        'Economie scoiale et solidaire' => 'Economie scoiale et solidaire',
+        'Autre' => 'Autre',
+    ];
+
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
@@ -50,10 +72,7 @@ class RegistrationFormType extends AbstractType
                 ChoiceType::class,
                 [
                     'choices' => [
-                        'activité1' => 'activite1',
-                        'activité2' => 'activite2',
-                        'activité3' => 'activite3',
-                        'activité4' => 'activite4',
+                        'activities' => self::ACTIVITIES
                     ],
                     'expanded' => false,
                     'multiple' => false,
