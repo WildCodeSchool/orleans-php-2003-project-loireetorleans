@@ -25,7 +25,7 @@ class DocumentController extends AbstractController
     {
 
         return $this->render('document/index.html.twig', [
-            'documents' => $documentRepository->findAll(),
+            'documents' => $documentRepository->documentByDate(),
         ]);
     }
 
