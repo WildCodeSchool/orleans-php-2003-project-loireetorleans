@@ -70,7 +70,6 @@ class MessageController extends AbstractController
                 $conversation = new Conversation();
                 $conversation->setDocument($document);
             }
-            $message->setReading(false);
             $conversation->addMessage($message);
             foreach ($persons as $person) {
                 $conversation->addUser($person);
