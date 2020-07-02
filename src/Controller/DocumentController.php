@@ -55,12 +55,12 @@ class DocumentController extends AbstractController
             $users = $userRepository->findAllWhithoutAdmin();
 
             $email = (new Email())
-                ->from('noreply@loire&orleans.fr');
+                ->from('noreply@loireetorleans.fr');
             foreach ($users as $user) {
                 $email = $email->addBcc($user->getEmail());
             }
                 $email = $email->subject('Nouveau Document Disponible | Loire&Orleans')
-                ->html($this->renderView('notification/nouveauDocument.html.twig', [
+                ->html($this->renderView('notification/newDocument.html.twig', [
                     'document' => $document,
                     ]), 'utf8');
 
