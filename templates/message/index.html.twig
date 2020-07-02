@@ -7,21 +7,22 @@
 
     <table class="table">
         <thead>
-            <tr>
-                <th>Id</th>
-                <th>Message</th>
-                <th>actions</th>
-            </tr>
+        <tr>
+            <th>Expéditeur</th>
+            <th>Message</th>
+            <th>Détails</th>
+        </tr>
         </thead>
         <tbody>
         {% for message in messages %}
             <tr>
-                <td>{{ message.id }}</td>
+                <td>{{ app.user.login }}</td>
                 <td>{{ message.message }}</td>
+                <td><a class="btn btn-info" href="{{ 'message_show' }}">Consulter</a></td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="3">no records found</td>
+                <td colspan="3">Aucun message</td>
             </tr>
         {% endfor %}
         </tbody>

@@ -3,28 +3,47 @@
 {% block title %}Loire&Orléans | Documents à télécharger{% endblock %}
 
 {% block body %}
-    {% if app.user and app.user.roles.0 is same as('ROLE_ADMINISTRATEUR') %}
-        <h1 class="text-center my-4">Gestion des documents</h1>
-    {% endif %}
-    {% if app.user and app.user.roles.0 is same as('ROLE_AMBASSADEUR') %}
-        <h1 class="text-center my-4">Documents à télécharger</h1>
-    {% endif %}
-
-    <div class="row m-0 justify-content-center">
-        {% for document in documents %}
-            <div class="card my-4 mx-5 col-md-4 col-10 p-0 col-lg-2">
-                <div class="card-body">
-                    <h6 class="card-title">Nom : {{ document.name }}</h6>
-                    <p class="card-title">Date d'ajout du document : {{ document.updatedAt ? document.updatedAt|date('Y-m-d H:i:s') : '' }}</p>
-                </div>
-                <a href="{{ path('document_show', {'id':document.id}) }}" class="btn btn-info mt-2">Consulter</a>
-                <a href="{{ vich_uploader_asset(document, 'documentFile', 'App\\Entity\\Document') }}" class="btn btn-info mt-2">Télécharger</a>
-                <a href="{{ path('message_new', {'document':document.id}) }}" class="btn btn-info mt-2">Envoyer un message</a>
-                {% if app.user and app.user.roles.0 is same as('ROLE_ADMINISTRATEUR') %}{{ include('document/_delete_form.html.twig') }}{% endif %}
+    <section class="d-flex align-items-center mb-5" >
+        <div class="w-100">
+            {% if app.user and app.user.roles.0 is same as('ROLE_ADMINISTRATEUR') %}
+                <h1 class="text-center my-4">Gestion des documents</h1>
+            {% endif %}
+            {% if app.user and app.user.roles.0 is same as('ROLE_AMBASSADEUR') %}
+                <h1 class="text-center my-4">Documents à télécharger</h1>
+            {% endif %}
+            {% if app.user and app.user.roles.0 is same as('ROLE_ADMINISTRATEUR') %}
+            <div class="d-flex align-items-center my-4 flex-column">
+                <a class="btn btn-lg btn-primary mt-3" href="{{ path('document_new') }}">Ajouter un document</a>
             </div>
-        {% else %}
-            'Aucun document trouvé'
-        {% endfor %}
-    </div>
+            {% endif %}
+            <div class="row m-0 justify-content-center">
+                {% for document in documents %}
+                    <div class="card my-4 mx-5 col-md-4 col-10 p-0 col-lg-2">
+                        <div class="card-body">
+                            <h6 class="card-title">Nom : {{ document.name }}</h6>
+                            <p class="card-title">Date d'ajout du document : {{ document.updatedAt ? document.updatedAt|date('Y-m-d H:i:s') : '' }}</p>
+                        </div>
+                        <a href="{{ path('document_show', {'id':document.id}) }}" class="btn btn-info mt-2">Consulter</a>
+                        <a href="{{ vich_uploader_asset(document, 'documentFile', 'App\\Entity\\Document') }}" class="btn btn-info mt-2">Télécharger</a>
+                        <a href="{{ path('message_new', {'document':document.id}) }}" class="btn btn-info mt-2">Envoyer un message</a>
+                        {% if app.user and app.user.roles.0 is same as('ROLE_ADMINISTRATEUR') %}{{ include('document/_delete_form.html.twig') }}{% endif %}
+                    </div>
+                {% else %}
+                    'Aucun document trouvé'
+                {% endfor %}
+            </div>
+    {% if app.user and app.user.roles.0 is same as('ROLE_ADMINISTRATEUR') %}
+        <div class="d-flex align-items-center my-4 flex-column">
+            <a class="btn btn-lg btn-primary mt-3" href="{{ path('admin_index') }}">Retour gestion</a>
+        </div>
+    {% else %}
+        <div class="d-flex align-items-center my-4 flex-column">
+            <a class="btn btn-lg btn-primary mt-3" href="{{ path('home') }}">Retour à l'accueil</a>
+        </div>
+    {% endif %}
 
+
+        </div>
+
+    </section>
 {% endblock %}

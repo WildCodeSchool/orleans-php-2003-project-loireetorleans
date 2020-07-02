@@ -7,9 +7,11 @@ use App\Entity\Document;
 use App\Entity\Message;
 use App\Entity\User;
 use App\Form\MessageType;
+use App\Repository\ConversationRepository;
 use App\Repository\DocumentRepository;
 use App\Repository\MessageRepository;
 use App\Repository\UserRepository;
+use App\service\ConversationManager;
 use DateTime;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -30,8 +32,9 @@ class MessageController extends AbstractController
      */
     public function index(MessageRepository $messageRepository): Response
     {
+
         return $this->render('message/index.html.twig', [
-            'messages' => $messageRepository->findAll(),
+            'messages' => $messageRepository->findAll()
         ]);
     }
 
@@ -42,10 +45,18 @@ class MessageController extends AbstractController
      * @param Document $document
      * @param UserRepository $users
      * @param UserInterface $user
+     * @param ConversationManager $conversationManager
+     * @param ConversationRepository $conversationRepo
      * @return Response
      */
-    public function new(Request $request, Document $document, UserRepository $users, UserInterface $user): Response
-    {
+    public function new(
+        Request $request,
+        Document $document,
+        UserRepository $users,
+        UserInterface $user,
+        ConversationManager $conversationManager,
+        ConversationRepository $conversationRepo
+    ): Response {
         $message = new Message();
         $login = $user->getUsername();
         $persons = $users->findTwoForMessage($login);
@@ -53,8 +64,13 @@ class MessageController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $conversation = new Conversation();
-            $conversation->setDocument($document);
+            if ($conversationManager->conversationExist($document->getId(), $user->getSalt()) === true) {
+                $conversation = $conversationRepo->findOneByConversation($document->getId(), $user->getSalt());
+            } else {
+                $conversation = new Conversation();
+                $conversation->setDocument($document);
+            }
+            $message->setReading(false);
             $conversation->addMessage($message);
             foreach ($persons as $person) {
                 $conversation->addUser($person);
@@ -83,14 +99,24 @@ class MessageController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="message_show", methods={"GET"})
-     * @param Message $message
+     * @Route("/{id}", name="_detail", methods={"GET"})
+     * @param MessageRepository $messageRepository
+     * @param UserRepository $users
+     * @param UserInterface $user
      * @return Response
      */
-    public function show(Message $message): Response
+    public function show(MessageRepository $messageRepository, UserRepository $users, UserInterface $user): Response
     {
+        $login = $user->getUsername();
+        $user = $users
+            ->findBy(
+                ['login' => $login],
+                ['updatedAt' => 'ASC']
+            );
+
+
         return $this->render('message/show.html.twig', [
-            'message' => $message,
+            'messages' => $messageRepository->findAll()
         ]);
     }
 

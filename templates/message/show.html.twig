@@ -1,26 +1,32 @@
-{% extends 'base.html.twig' %}
+{% extends '_layout.html.twig' %}
 
-{% block title %}Message{% endblock %}
+{% block title %}Loire&Orléans | Détails de l'échange {% endblock %}
 
 {% block body %}
-    <h1>Message</h1>
+    <h1 class="text-center my-4">Détails de l'échange</h1>
 
     <table class="table">
+        <thead>
+        <tr>
+            <th>Expéditeurs</th>
+            <th>Messages</th>
+        </tr>
+        </thead>
         <tbody>
+        {% for message in messages %}
             <tr>
-                <th>Id</th>
-                <td>{{ message.id }}</td>
-            </tr>
-            <tr>
-                <th>Message</th>
+                <td>{{ app.user.firstname }} {{ app.user.lastName }} </td>
                 <td>{{ message.message }}</td>
             </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">Aucun échange/td>
+            </tr>
+        {% endfor %}
         </tbody>
     </table>
+    <div class="d-flex align-items-center my-4 justify-content-center w-100 flex-md-row flex-column">
+        <a class="btn btn-lg btn-primary mx-3 col-lg-2 col-md-4 col-8 my-2" href="{{ path('message_index') }}">Retour aux échanges</a>
+    </div>
 
-    <a href="{{ path('message_index') }}">back to list</a>
-
-    <a href="{{ path('message_edit', {'id': message.id}) }}">edit</a>
-
-    {{ include('message/_delete_form.html.twig') }}
 {% endblock %}
