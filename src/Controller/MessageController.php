@@ -7,9 +7,11 @@ use App\Entity\Document;
 use App\Entity\Message;
 use App\Entity\User;
 use App\Form\MessageType;
+use App\Repository\ConversationRepository;
 use App\Repository\DocumentRepository;
 use App\Repository\MessageRepository;
 use App\Repository\UserRepository;
+use App\service\ConversationManager;
 use DateTime;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -25,14 +27,13 @@ class MessageController extends AbstractController
 {
     /**
      * @Route("/", name="_index", methods={"GET"})
-     * @param MessageRepository $messageRepository
+     * @param ConversationRepository $conversationRepo
      * @return Response
      */
-    public function index(MessageRepository $messageRepository): Response
+    public function index(ConversationRepository $conversationRepo): Response
     {
-
         return $this->render('message/index.html.twig', [
-            'messages' => $messageRepository->findAll()
+        'conversations'=> $conversationRepo->findAll()
         ]);
     }
 
@@ -43,10 +44,18 @@ class MessageController extends AbstractController
      * @param Document $document
      * @param UserRepository $users
      * @param UserInterface $user
+     * @param ConversationManager $conversationManager
+     * @param ConversationRepository $conversationRepo
      * @return Response
      */
-    public function new(Request $request, Document $document, UserRepository $users, UserInterface $user): Response
-    {
+    public function new(
+        Request $request,
+        Document $document,
+        UserRepository $users,
+        UserInterface $user,
+        ConversationManager $conversationManager,
+        ConversationRepository $conversationRepo
+    ): Response {
         $message = new Message();
         $login = $user->getUsername();
         $persons = $users->findTwoForMessage($login);
@@ -54,8 +63,12 @@ class MessageController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $conversation = new Conversation();
-            $conversation->setDocument($document);
+            if ($conversationManager->conversationExist($document->getId(), $user->getSalt()) === true) {
+                $conversation = $conversationRepo->findOneByConversation($document->getId(), $user->getSalt());
+            } else {
+                $conversation = new Conversation();
+                $conversation->setDocument($document);
+            }
             $conversation->addMessage($message);
             foreach ($persons as $person) {
                 $conversation->addUser($person);
