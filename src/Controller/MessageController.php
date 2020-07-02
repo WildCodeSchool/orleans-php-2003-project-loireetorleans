@@ -27,14 +27,13 @@ class MessageController extends AbstractController
 {
     /**
      * @Route("/", name="_index", methods={"GET"})
-     * @param MessageRepository $messageRepository
+     * @param ConversationRepository $conversationRepo
      * @return Response
      */
-    public function index(MessageRepository $messageRepository): Response
+    public function index(ConversationRepository $conversationRepo): Response
     {
-
         return $this->render('message/index.html.twig', [
-            'messages' => $messageRepository->findAll()
+        'conversations'=> $conversationRepo->findAll()
         ]);
     }
 
