@@ -42,7 +42,6 @@ class Message
      */
     private $user;
 
-
     public function getId(): ?int
     {
         return $this->id;
