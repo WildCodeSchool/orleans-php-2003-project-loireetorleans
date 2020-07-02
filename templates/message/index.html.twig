@@ -6,18 +6,20 @@
     <h1 class="text-center my-4">Mes échanges</h1>
 
     <table class="table">
-        <thead>
-        <tr>
-            <th>Expéditeur</th>
+        <thead class="bg-primary">
+        <tr class="text-center text-light">
+            <th>Document</th>
             <th>Message</th>
+            <th>Date d'envoi du dernier message</th>
             <th>Détails</th>
         </tr>
         </thead>
         <tbody>
-        {% for message in messages %}
+        {% for conversation in conversations %}
             <tr>
-                <td>{{ app.user.login }}</td>
-                <td>{{ message.message }}</td>
+                <td>{{ conversation.document.name }}</td>
+               <td>{{ conversation.messages|last.message }}</td>
+                <td>{{ conversation.messages|last.date|date("d/m/Y à H:i") }}</td>
                 <td><a class="btn btn-info" href="{{ 'message_show' }}">Consulter</a></td>
             </tr>
         {% else %}

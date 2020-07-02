@@ -42,11 +42,6 @@ class Message
      */
     private $user;
 
-    /**
-     * @ORM\Column(type="boolean")
-     */
-    private $reading;
-
 
     public function getId(): ?int
     {
@@ -98,18 +93,6 @@ class Message
     public function setUser(?User $user): self
     {
         $this->user = $user;
-
-        return $this;
-    }
-
-    public function getReading(): ?bool
-    {
-        return $this->reading;
-    }
-
-    public function setReading(bool $reading): self
-    {
-        $this->reading = $reading;
 
         return $this;
     }
