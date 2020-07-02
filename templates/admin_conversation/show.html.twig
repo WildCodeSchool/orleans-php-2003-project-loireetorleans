@@ -1,13 +1,13 @@
 {% extends '_layoutAdmin.html.twig' %}
 
-{% block title %}Loire&Orléans | Administrateur | Demandes d'information de {% for user in conversation.users %}{% if user.roles[0] is same as('ROLE_AMBASSADEUR') %}{{ user.firstname ~ ' ' ~ user.lastName ~ ' / ' ~ user.company }}{% endif %}{% endfor %}{% endblock %}
+{% block title %}Loire&Orléans | Administrateur | Demande d'information de {% for user in conversation.users %}{% if user.roles[0] is same as('ROLE_AMBASSADEUR') %}{{ user.firstname ~ ' ' ~ user.lastName ~ ' / ' ~ user.company }}{% endif %}{% endfor %}{% endblock %}
  {% block stylesheets %}
      {{ encore_entry_link_tags('adminProfil') }}
  {% endblock %}
 {% block body %}
     <section class="d-md-flex align-items-center mb-5">
         <div class="w-100 d-flex justify-content-center flex-column">
-            <h1 class="my-4 text-center">Demandes d'informations sur {{ conversation.document.name }} de {% for user in conversation.users %}{% if user.roles[0] is same as('ROLE_AMBASSADEUR') %}{{ user.firstname ~ ' ' ~ user.lastName ~ ' / ' ~ user.company }}{% endif %}{% endfor %}</h1>
+            <h1 class="my-4 text-center">Demande d'information sur {{ conversation.document.name }} de {% for user in conversation.users %}{% if user.roles[0] is same as('ROLE_AMBASSADEUR') %}{{ user.firstname ~ ' ' ~ user.lastName ~ ' / ' ~ user.company }}{% endif %}{% endfor %}</h1>
             <div class="d-flex align-items-center flex-column my-4">
                 <h3 class="my-4 text-center">Message(s)</h3>
                 <div class="col-md-8 p-4 border rounded bg-info">
@@ -33,7 +33,7 @@
                     {% endfor %}
                 </div>
             </div>
-            <div class="container col-8 p-0 ">
+            <div class="container col-md-8 p-0 col-11 ">
                 {{ form_start(messageForm, {'attr': {'class': 'col-12 d-flex flex-column align-items-center p-0'}}) }}
                 <div class="col-12 d-flex flex-column text-center m-0 bg-info">
                     <div class="d-flex flex-column">
