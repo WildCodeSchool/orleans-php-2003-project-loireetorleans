@@ -1,32 +1,36 @@
 {% extends '_layout.html.twig' %}
-
 {% block title %}Loire&Orléans | Détails de l'échange {% endblock %}
-
 {% block body %}
-    <h1 class="text-center my-4">Détails de l'échange</h1>
-
-    <table class="table">
-        <thead>
-        <tr>
-            <th>Expéditeurs</th>
-            <th>Messages</th>
-        </tr>
-        </thead>
-        <tbody>
-        {% for message in messages %}
-            <tr>
-                <td>{{ app.user.firstname }} {{ app.user.lastName }} </td>
-                <td>{{ message.message }}</td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="3">Aucun échange/td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+    <section class="d-md-flex align-items-center mb-5">
+        <div class="w-100">
+            <h1 class="text-center my-4">Détails de l'échange</h1>
+            <div class="d-flex justify-content-center my-4">
+                <table class="table table-hover col-10 p-0 mx-auto">
+                    <thead class="bg-primary">
+                    <tr class="text-center text-light">
+                        <th>Expéditeurs</th>
+                        <th>Messages</th>
+                        <th>Date</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for message in conversation.messages %}
+                        <tr class="text-center">
+                            <td>{{ message.user.firstname }} {{ message.user.lastName }}</td>
+                            <td>{{ message.message }}</td>
+                            <td>{{ message.date|date("d/m/Y à H:i") }}</td>
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td colspan="3">Aucun échange/td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
     <div class="d-flex align-items-center my-4 justify-content-center w-100 flex-md-row flex-column">
         <a class="btn btn-lg btn-primary mx-3 col-lg-2 col-md-4 col-8 my-2" href="{{ path('message_index') }}">Retour aux échanges</a>
     </div>
-
 {% endblock %}

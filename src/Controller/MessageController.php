@@ -98,24 +98,14 @@ class MessageController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="_detail", methods={"GET"})
-     * @param MessageRepository $messageRepository
-     * @param UserRepository $users
-     * @param UserInterface $user
+     * @Route("/{id}", name="_show", methods={"GET"})
+     * @param Conversation $conversation
      * @return Response
      */
-    public function show(MessageRepository $messageRepository, UserRepository $users, UserInterface $user): Response
+    public function show(Conversation $conversation): Response
     {
-        $login = $user->getUsername();
-        $user = $users
-            ->findBy(
-                ['login' => $login],
-                ['updatedAt' => 'ASC']
-            );
-
-
         return $this->render('message/show.html.twig', [
-            'messages' => $messageRepository->findAll()
+            'conversation' => $conversation,
         ]);
     }
 

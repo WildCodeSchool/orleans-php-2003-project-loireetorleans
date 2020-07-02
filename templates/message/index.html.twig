@@ -18,7 +18,7 @@
             <tr>
                 <td>{{ app.user.login }}</td>
                 <td>{{ message.message }}</td>
-                <td><a class="btn btn-info" href="{{ 'message_show' }}">Consulter</a></td>
+                <td><a class="btn btn-info" href="{{ path('message_show', {'id':conversation.id}) }}">Consulter</a></td>
             </tr>
         {% else %}
             <tr>
