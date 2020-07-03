@@ -28,7 +28,7 @@
                     <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="#">Administrateur</a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                         <a class="dropdown-item" href="{{ path('document_index') }}">Gestion des documents</a>
-                        <a class="dropdown-item" href="#">Mes échanges</a>
+                        <a class="dropdown-item" href="{{ path('admin_conversation_index') }}">Mes échanges</a>
                         <a class="dropdown-item" href="{{ path('admin_profile_index') }}">Profils Ambassadeur</a>
                         <a class="dropdown-item" href="{{ path('user_show', {login: app.user.login}) }}">Mon profil</a>
                     </div>
