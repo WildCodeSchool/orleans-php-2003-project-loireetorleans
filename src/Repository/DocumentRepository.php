@@ -23,6 +23,7 @@ class DocumentRepository extends ServiceEntityRepository
     {
         return $this->createQueryBuilder("d")
             ->addOrderBy("d.updatedAt", 'DESC')
-            ->getQuery();
+            ->getQuery()
+            ->getResult();
     }
 }
