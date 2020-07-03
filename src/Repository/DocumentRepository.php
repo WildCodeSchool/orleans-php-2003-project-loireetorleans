@@ -21,10 +21,8 @@ class DocumentRepository extends ServiceEntityRepository
 
     public function documentByDate()
     {
-        $qb = $this->createQueryBuilder("d")
+        return $this->createQueryBuilder("d")
             ->addOrderBy("d.updatedAt", 'DESC')
             ->getQuery();
-
-        return $qb->execute();
     }
 }
