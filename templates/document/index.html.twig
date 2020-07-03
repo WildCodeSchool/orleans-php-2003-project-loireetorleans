@@ -3,6 +3,9 @@
 {% block title %}Loire&Orléans | Documents à télécharger{% endblock %}
 
 {% block body %}
+
+    <h1 class="text-center my-4">Mes Documents</h1>
+
     <section class="d-flex align-items-center mb-5" >
         <div class="w-100">
             {% if app.user and app.user.roles.0 is same as('ROLE_ADMINISTRATEUR') %}

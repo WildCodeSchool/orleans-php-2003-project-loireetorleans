@@ -7,3 +7,15 @@ td , p {
 th {
     font-family: $font-title;
 }
+
+form {
+    & > div {
+        background-color: $light-color;
+        border: 1px solid $widget-color;
+        margin-bottom: 15px;
+    }
+}
+
+label {
+    font-family: $font-text;
+}

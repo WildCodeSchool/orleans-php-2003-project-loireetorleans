@@ -25,6 +25,7 @@ Encore
     .addStyleEntry('adminProfil', './assets/scss/adminProfil.scss')
     .addStyleEntry('register', './assets/scss/register.scss')
     .addStyleEntry('addComment', './assets/scss/addComment.scss')
+    .addStyleEntry('document', './assets/scss/document.scss')
 
 // .addEntry('page2', './assets/js/page2.js')
 
