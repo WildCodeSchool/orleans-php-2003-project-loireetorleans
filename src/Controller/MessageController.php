@@ -33,7 +33,7 @@ class MessageController extends AbstractController
     public function index(ConversationRepository $conversationRepo): Response
     {
         return $this->render('message/index.html.twig', [
-        'conversations'=> $conversationRepo->findAll()
+            'conversations'=> $conversationRepo->findAll()
         ]);
     }
 
@@ -97,24 +97,43 @@ class MessageController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="_detail", methods={"GET"})
-     * @param MessageRepository $messageRepository
-     * @param UserRepository $users
+     * @Route("/{id}", name="_show", methods={"GET"})
+     * @param Conversation $conversation
+     * @param Request $request
      * @param UserInterface $user
+     * @param UserRepository $userRepository
      * @return Response
      */
-    public function show(MessageRepository $messageRepository, UserRepository $users, UserInterface $user): Response
-    {
+    public function show(
+        Conversation $conversation,
+        Request $request,
+        UserInterface $user,
+        UserRepository $userRepository
+    ): Response {
+        $message = new Message();
         $login = $user->getUsername();
-        $user = $users
-            ->findBy(
-                ['login' => $login],
-                ['updatedAt' => 'ASC']
-            );
+        $author = $userRepository->findOneBy(['login'=> $login]);
+        $form = $this->createForm(MessageType::class, $message);
+        $form->handleRequest($request);
 
+        if ($form->isSubmitted() && $form->isValid()) {
+            $conversation->addMessage($message);
+            $message->setUser($author);
 
+            $data = $form->getData();
+            $data->setDate(new dateTime());
+            $data->setConversation($conversation);
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($data);
+            $entityManager->persist($conversation);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('admin_conversation_index');
+        }
         return $this->render('message/show.html.twig', [
-            'messages' => $messageRepository->findAll()
+            'conversation' => $conversation,
+            'message' => $message,
+            'messageForm' => $form->createView(),
         ]);
     }
 
