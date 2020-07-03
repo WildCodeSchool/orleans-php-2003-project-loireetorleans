@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+{% extends '_layoutAdmin.html.twig' %}
 
 {% block title %}Loire&Orléans | Administrateur | Demandes d'information{% endblock %}
  {% block stylesheets %}
@@ -30,7 +30,7 @@
                                         <td>{{ user.firstname ~ ' ' ~ user.lastName ~ ' / ' ~ user.company}}</td>
                                     {% endif %}
                                 {% endfor %}
-                                <td><a class="btn btn-info" href="">Consulter</a></td>
+                                <td><a class="btn btn-info" href="{{ path('admin_conversation_show', {'id': conversation.id}) }}">Consulter</a></td>
                             </tr>
                         {% endif %}
                     {% endfor %}
@@ -59,7 +59,7 @@
                                         <td>{{ user.firstname ~ ' ' ~ user.lastName ~ ' / ' ~ user.company}}</td>
                                     {% endif %}
                                 {% endfor %}
-                                <td><a class="btn btn-info" href="">Consulter</a></td>
+                                <td><a class="btn btn-info" href="{{ path('admin_conversation_show', {'id': conversation.id}) }}">Consulter</a></td>
                             </tr>
                         {% endif %}
                     {% endfor %}
@@ -67,7 +67,7 @@
                 </table>
             </div>
             <div class="d-flex align-items-center my-4 flex-column">
-                <a class="btn btn-lg btn-primary mt-3" href="">Retour gestion</a>
+                <a class="btn btn-lg btn-primary mt-3" href="{{ path('admin_index') }}">Retour Gestion</a>
             </div>
         </div>
 
