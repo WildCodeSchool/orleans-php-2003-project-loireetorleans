@@ -3,30 +3,52 @@
 {% block title %}Loire&Orléans | Détails de l'échange {% endblock %}
 
 {% block body %}
-    <h1 class="text-center my-4">Détails de l'échange</h1>
 
-    <table class="table">
-        <thead>
-        <tr>
-            <th>Expéditeurs</th>
-            <th>Messages</th>
-        </tr>
-        </thead>
-        <tbody>
-        {% for message in messages %}
-            <tr>
-                <td>{{ app.user.firstname }} {{ app.user.lastName }} </td>
-                <td>{{ message.message }}</td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="3">Aucun échange/td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-    <div class="d-flex align-items-center my-4 justify-content-center w-100 flex-md-row flex-column">
-        <a class="btn btn-lg btn-primary mx-3 col-lg-2 col-md-4 col-8 my-2" href="{{ path('message_index') }}">Retour aux échanges</a>
-    </div>
+    <section class="d-md-flex align-items-center mb-5">
+        <div class="w-100 d-flex justify-content-center flex-column">
+            <h1 class="text-center my-4">Détails de l'échange</h1>
+            <div class="d-flex align-items-center flex-column my-4">
+                <h3 class="my-4 text-center">Message(s)</h3>
+                <div class="col-md-8 p-4 border rounded bg-info">
+                    {% for message in conversation.messages %}
+                        {% if message.user.roles[0] is same as('ROLE_ADMINISTRATEUR') %}
+                            <div class="col-12 ">
+                                <div class="col-11 col-md-8 text-break p-1 my-3 bg-primary mr-auto">
+                                    <p class="p-3 m-0 bg-light">{{ message.message }}</p>
+                                    <p class="p-1 m-0 bg-primary text-light text-right">{{ message.user.firstname ~ ' ' ~ message.user.lastname ~ ' Le ' ~ message.date|date("d/m/Y à H:i") }}</p>
+                                </div>
+                            </div>
+                        {% else %}
+                            <div class="col-12 ">
+                                <div class="col-11 col-md-8 bg-primary text-break p-1 my-3 ml-auto">
+                                    <p class="p-3 m-0 bg-light">{{ message.message }}</p>
+                                    <p class="p-1 m-0 bg-primary text-light text-right">{{ 'Vous  le ' ~ message.date|date("d/m/Y à H:i") }}</p>
+                                </div>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="container col-md-8 p-0 col-11 ">
+                {{ form_start(messageForm, {'attr': {'class': 'col-12 d-flex flex-column align-items-center p-0'}}) }}
+                <div class="col-12 d-flex flex-column text-center m-0 bg-info">
+                    <div class="d-flex flex-column">
+                        <div class="comment my-3">
+                            <div class="form-group d-flex flex-column text-left  font-weight">
+                                {{ form_label(messageForm.message) }}
+                                {{ form_widget(messageForm.message, {'attr': {'rows':'6'}}) }}
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-lg btn-primary my-4 col-md-4 align-self-center">Répondre</button>
+                        {{ form_end(messageForm) }}
+                    </div>
+                </div>
+            </div>
+            <div class="d-flex align-items-center my-4 justify-content-center w-100 flex-md-row flex-column">
+                <a class="btn btn-lg btn-primary mx-3 col-lg-2 col-md-4 col-8 my-2" href="{{ path('message_index') }}">Retour aux échanges</a>
+            </div>
+        </div>
+    </section>
+
 
 {% endblock %}
