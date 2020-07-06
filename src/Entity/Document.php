@@ -86,7 +86,7 @@ class Document
         return $this;
     }
 
-    public function getDocument(): ?string
+    public function getDocument(): string
     {
         return $this->document;
     }
