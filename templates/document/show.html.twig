@@ -13,18 +13,70 @@
 
             <h1 class="text-center my-4">{{ document.name }}</h1>
 
-            <object id="preview" data="{{ vich_uploader_asset(document, 'documentFile', 'App\\Entity\\Document') }}"
-                    type="application/pdf" class="h-75 col-md-6 col-12">
-            </object>
-
-
-            <div class="my-5">
-                {{ document.name }} |
-                Ajouté le : {{ document.updatedAt ? document.updatedAt|date('d-m-Y') : '' }}
+            <div class="mt-4 d-flex col-6 flex-column p-0 align-items-center">
+                <img class="w-25 h-25" src="{{ asset('build/logo_' ~ document.ext ~ '.png' ) }}"
+                     alt="logo_{{ document.ext }}">
+                <div class="text-center mt-4">
+                    {{ document.name }} |
+                    Ajouté le : {{ document.updatedAt ? document.updatedAt|date('d-m-Y') : '' }}
+                </div>
             </div>
-
-            <div class="d-flex flex-md-row flex-column">
-                <a class="btn btn-lg btn-primary m-3 col-md-6" href="{{ path('document_edit', {'id': document.id}) }}">Éditer</a>
+            {% if app.user.roles[0] is same as ('ROLE_AMBASSADEUR') %}
+                <div class="d-flex align-items-center p-0 col-12 flex-column my-4">
+                    <div class="text-left col-md-8 p-0">
+                        <h3 class="my-4">Commentaire(s) : </h3>
+                    </div>
+                    {% if conversation is not empty %}
+                        <div class="col-md-8 p-4 border rounded bg-info">
+                            {% for message in conversation.messages %}
+                                {% if message.user.roles[0] is same as('ROLE_ADMINISTRATEUR') %}
+                                    <div class="col-12 ">
+                                        <div class="col-11 col-md-8 text-break p-1 my-3 bg-primary mr-auto">
+                                            <p class="p-3 m-0 bg-light">{{ message.message }}</p>
+                                            <p class="p-1 m-0 bg-primary text-light text-right">{{ message.user.firstname ~ ' ' ~ message.user.lastname ~ ' Le ' ~ message.date|date("d/m/Y à H:i") }}</p>
+                                        </div>
+                                    </div>
+                                {% else %}
+                                    <div class="col-12 ">
+                                        <div class="col-11 col-md-8 bg-primary text-break p-1 my-3 ml-auto">
+                                            <p class="p-3 m-0 bg-light">{{ message.message }}</p>
+                                            <p class="p-1 m-0 bg-primary text-light text-right">{{ 'Vous  le ' ~ message.date|date("d/m/Y à H:i") }}</p>
+                                        </div>
+                                    </div>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                </div>
+                <div class="container col-md-8 p-0 col-11 ">
+                    {{ form_start(messageForm, {'attr': {'class': 'col-12 d-flex flex-column align-items-center p-0'}}) }}
+                    <div class="col-12 d-flex flex-column text-center m-0 bg-info">
+                        <div class="d-flex flex-column">
+                            <div class="comment my-3">
+                                <div class="form-group d-flex flex-column text-left  font-weight">
+                                    {{ form_label(messageForm.message) }}
+                                    {{ form_widget(messageForm.message, {'attr': {'rows':'6'}}) }}
+                                </div>
+                            </div>
+                            {% if conversation %}
+                            <button type="submit" class="btn btn-lg btn-primary my-4 col-md-4 align-self-center">
+                                Répondre
+                            </button>
+                            {% else %}
+                            <button type="submit" class="btn btn-lg btn-primary my-4 col-md-4 align-self-center">
+                                Envoyer
+                            </button>
+                            {%  endif %}
+                            {{ form_end(messageForm) }}
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+            <div class="d-flex flex-md-row flex-column col-10 col-md-4 p-0 justify-content-center align-items-center">
+                {% if app.user.roles[0] is same as ('ROLE_ADMINISTRATEUR') %}
+                    <a class="btn btn-lg btn-primary m-3 col-md-6"
+                       href="{{ path('document_edit', {'id': document.id}) }}">Éditer</a>
+                {% endif %}
                 <a class="btn btn-lg btn-primary m-3 col-md-6" href="{{ path('document_index') }}">Retour</a>
             </div>
 

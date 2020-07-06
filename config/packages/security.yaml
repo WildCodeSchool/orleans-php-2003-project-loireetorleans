@@ -44,3 +44,6 @@ security:
     access_control:
         # - { path: ^/admin, roles: ROLE_ADMIN }
         # - { path: ^/profile, roles: ROLE_USER }
+    role_hierarchy:
+        ROLE_AMBASSADEUR: ROLE_USER
+        ROLE_ADMINISTRATEUR: ROLE_AMBASSADEUR

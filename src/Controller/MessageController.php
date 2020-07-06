@@ -29,6 +29,7 @@ class MessageController extends AbstractController
      * @Route("/", name="_index", methods={"GET"})
      * @param ConversationRepository $conversationRepo
      * @return Response
+     * @IsGranted("ROLE_AMBASSADEUR")
      */
     public function index(ConversationRepository $conversationRepo): Response
     {
@@ -38,107 +39,11 @@ class MessageController extends AbstractController
     }
 
     /**
-     * @Route("/{document}/nouveau", name="_new", methods={"GET","POST"})
+     * @Route("/{id}/edit", name="message_edit", methods={"GET","POST"})
      * @IsGranted("ROLE_AMBASSADEUR")
      * @param Request $request
-     * @param Document $document
-     * @param UserRepository $users
-     * @param UserInterface $user
-     * @param ConversationManager $conversationManager
-     * @param ConversationRepository $conversationRepo
+     * @param Message $message
      * @return Response
-     */
-    public function new(
-        Request $request,
-        Document $document,
-        UserRepository $users,
-        UserInterface $user,
-        ConversationManager $conversationManager,
-        ConversationRepository $conversationRepo
-    ): Response {
-        $message = new Message();
-        $login = $user->getUsername();
-        $persons = $users->findTwoForMessage($login);
-        $form = $this->createForm(MessageType::class, $message);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            if ($conversationManager->conversationExist($document->getId(), $user->getSalt()) === true) {
-                $conversation = $conversationRepo->findOneByConversation($document->getId(), $user->getSalt());
-            } else {
-                $conversation = new Conversation();
-                $conversation->setDocument($document);
-            }
-            $conversation->addMessage($message);
-            foreach ($persons as $person) {
-                $conversation->addUser($person);
-                if ($person->getLogin() === $login) {
-                    $message->setUser($person);
-                }
-            }
-
-            $data = $form->getData();
-            $data->setDate(new dateTime());
-            $data->setConversation($conversation);
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($data);
-            $entityManager->persist($conversation);
-            $entityManager->flush();
-
-            return $this->redirectToRoute('message_index');
-        }
-
-        return $this->render('message/new.html.twig', [
-            'message' => $message,
-            'messageForm' => $form->createView(),
-            'document' => $document,
-            'users' => $users
-        ]);
-    }
-
-    /**
-     * @Route("/{id}", name="_show", methods={"GET"})
-     * @param Conversation $conversation
-     * @param Request $request
-     * @param UserInterface $user
-     * @param UserRepository $userRepository
-     * @return Response
-     */
-    public function show(
-        Conversation $conversation,
-        Request $request,
-        UserInterface $user,
-        UserRepository $userRepository
-    ): Response {
-        $message = new Message();
-        $login = $user->getUsername();
-        $author = $userRepository->findOneBy(['login'=> $login]);
-        $form = $this->createForm(MessageType::class, $message);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $conversation->addMessage($message);
-            $message->setUser($author);
-
-            $data = $form->getData();
-            $data->setDate(new dateTime());
-            $data->setConversation($conversation);
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($data);
-            $entityManager->persist($conversation);
-            $entityManager->flush();
-
-            return $this->redirectToRoute('admin_conversation_index');
-        }
-        return $this->render('message/show.html.twig', [
-            'conversation' => $conversation,
-            'message' => $message,
-            'messageForm' => $form->createView(),
-        ]);
-    }
-
-    /**
-     * @Route("/{id}/edit", name="message_edit", methods={"GET","POST"})
      */
     public function edit(Request $request, Message $message): Response
     {
@@ -159,6 +64,10 @@ class MessageController extends AbstractController
 
     /**
      * @Route("/{id}", name="message_delete", methods={"DELETE"})
+     * @IsGranted("ROLE_AMBASSADEUR")
+     * @param Request $request
+     * @param Message $message
+     * @return Response
      */
     public function delete(Request $request, Message $message): Response
     {
