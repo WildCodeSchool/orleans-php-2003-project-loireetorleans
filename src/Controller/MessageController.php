@@ -84,10 +84,10 @@ class MessageController extends AbstractController
                 );
             }
         }
-        if ($message !== null) {
-            $idMessage = $message->getConversation()->getId();
-            $idDocument = $message->getConversation()->getDocument()->getId();
-        }
+
+        $idMessage = $message->getConversation()->getId();
+        $idDocument = $message->getConversation()->getDocument()->getId();
+
 
 
         if (in_array('ROLE_ADMINISTRATEUR', $user->getRoles())) {
