@@ -58,9 +58,15 @@
                                     {{ form_widget(messageForm.message, {'attr': {'rows':'6'}}) }}
                                 </div>
                             </div>
+                            {% if conversation %}
                             <button type="submit" class="btn btn-lg btn-primary my-4 col-md-4 align-self-center">
                                 Répondre
                             </button>
+                            {% else %}
+                            <button type="submit" class="btn btn-lg btn-primary my-4 col-md-4 align-self-center">
+                                Envoyer
+                            </button>
+                            {%  endif %}
                             {{ form_end(messageForm) }}
                         </div>
                     </div>

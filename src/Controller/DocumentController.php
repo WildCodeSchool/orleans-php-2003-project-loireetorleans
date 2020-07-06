@@ -10,6 +10,7 @@ use App\Form\MessageType;
 use App\Repository\ConversationRepository;
 use App\Repository\DocumentRepository;
 use App\Repository\UserRepository;
+use App\service\ConversationManager;
 use DateTime;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -29,6 +30,7 @@ class DocumentController extends AbstractController
     /**
      * @Route("/", name="document_index", methods={"GET"})
      * @param DocumentRepository $documentRepository
+     * @IsGranted("ROLE_AMBASSADEUR")
      * @return Response
      */
     public function index(DocumentRepository $documentRepository): Response
@@ -46,6 +48,7 @@ class DocumentController extends AbstractController
      * @param UserRepository $userRepository
      * @return Response
      * @throws TransportExceptionInterface
+     * @IsGranted("ROLE_ADMINISTRATEUR")
      */
     public function new(Request $request, MailerInterface $mailer, UserRepository $userRepository): Response
     {
@@ -62,6 +65,7 @@ class DocumentController extends AbstractController
             } else {
                 $document->setExt($extension);
             }
+
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($document);
             $entityManager->flush();
@@ -99,29 +103,43 @@ class DocumentController extends AbstractController
      * @param Request $request
      * @param UserInterface $user
      * @param UserRepository $userRepository
+     * @param ConversationManager $conversationManager
      * @return Response
+     * @IsGranted("ROLE_AMBASSADEUR")
      */
     public function show(
         Document $document,
         ConversationRepository $conversationRepo,
         Request $request,
         UserInterface $user,
-        UserRepository $userRepository
+        UserRepository $userRepository,
+        ConversationManager $conversationManager
     ): Response {
         $message = new Message();
         $login = $user->getUsername();
+        $persons = $userRepository->findTwoForMessage($login);
         $author = $userRepository->findOneBy(['login' => $login]);
         $conversation = $conversationRepo->findOneByConversation($document->getId(), $author);
         $form = $this->createForm(MessageType::class, $message);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $conversation->addMessage($message);
-            $message->setUser($author);
-
             $data = $form->getData();
+            if ($conversationManager->conversationExist($document->getId(), $user->getSalt()) === false) {
+                $conversation = new Conversation();
+                $conversation->setDocument($document);
+                foreach ($persons as $person) {
+                    $conversation->addUser($person);
+                    if ($person->getLogin() === $login) {
+                        $data->setUser($person);
+                    }
+                }
+            } else {
+                $data->setUser($author);
+            }
             $data->setDate(new dateTime());
             $data->setConversation($conversation);
+            $conversation->addMessage($data);
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($data);
             $entityManager->persist($conversation);
@@ -144,6 +162,7 @@ class DocumentController extends AbstractController
      * @param Request $request
      * @param Document $document
      * @return Response
+     * @IsGranted("ROLE_ADMINISTRATEUR")
      */
     public function edit(Request $request, Document $document): Response
     {
@@ -167,6 +186,7 @@ class DocumentController extends AbstractController
      * @param Request $request
      * @param Document $document
      * @return Response
+     * @IsGranted("ROLE_ADMINISTRATEUR")
      */
     public function delete(Request $request, Document $document): Response
     {
