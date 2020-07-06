@@ -97,47 +97,6 @@ class MessageController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="_show", methods={"GET"})
-     * @param Conversation $conversation
-     * @param Request $request
-     * @param UserInterface $user
-     * @param UserRepository $userRepository
-     * @return Response
-     */
-    public function show(
-        Conversation $conversation,
-        Request $request,
-        UserInterface $user,
-        UserRepository $userRepository
-    ): Response {
-        $message = new Message();
-        $login = $user->getUsername();
-        $author = $userRepository->findOneBy(['login'=> $login]);
-        $form = $this->createForm(MessageType::class, $message);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $conversation->addMessage($message);
-            $message->setUser($author);
-
-            $data = $form->getData();
-            $data->setDate(new dateTime());
-            $data->setConversation($conversation);
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($data);
-            $entityManager->persist($conversation);
-            $entityManager->flush();
-
-            return $this->redirectToRoute('admin_conversation_index');
-        }
-        return $this->render('message/show.html.twig', [
-            'conversation' => $conversation,
-            'message' => $message,
-            'messageForm' => $form->createView(),
-        ]);
-    }
-
-    /**
      * @Route("/{id}/edit", name="message_edit", methods={"GET","POST"})
      */
     public function edit(Request $request, Message $message): Response
