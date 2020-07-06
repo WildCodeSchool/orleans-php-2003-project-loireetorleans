@@ -26,6 +26,7 @@ Encore
     .addStyleEntry('register', './assets/scss/register.scss')
     .addStyleEntry('addComment', './assets/scss/addComment.scss')
     .addStyleEntry('document', './assets/scss/document.scss')
+    .addStyleEntry('trombi', './assets/scss/trombinoscope.scss')
 
 // .addEntry('page2', './assets/js/page2.js')
 

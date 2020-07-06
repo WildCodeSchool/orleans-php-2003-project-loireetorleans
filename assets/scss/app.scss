@@ -91,6 +91,10 @@ h1 {
     white-space: nowrap; /* on interdit le retour à la ligne */
 }
 
+.blur {
+    box-shadow: 2px 3px 5px 1px $nav-bar;
+}
+
 @media screen and (max-width: 900px) {
     .pagination .page-item {
         display: none;

@@ -19,21 +19,28 @@
             {% endif %}
             <div class="row m-0 justify-content-center">
                 {% for document in documents %}
-                    <div class="card my-4 mx-5 col-md-4 col-10 p-0 col-lg-2">
+                    <div class="blur card my-4 mx-5 col-md-4 col-10 p-0 col-lg-2">
                         <div class="card-body">
+                            <div class="col-12 p-0 text-center mb-3">
+                                <img class="w-50" src="{{ asset('build/logo_' ~ document.ext ~ '.png' ) }}" alt="logo_{{ document.ext }}">
+                            </div>
                             <h6 class="card-title">Nom : {{ document.name }}</h6>
                             <p class="card-title">Date d'ajout du document
-                                : {{ document.updatedAt ? document.updatedAt|date('Y-m-d H:i:s') : '' }}</p>
+                                : {{ document.updatedAt ? document.updatedAt|date('d-m-Y H:i') : '' }}</p>
                         </div>
-                        <a href="{{ path('document_show', {'id':document.id}) }}"
-                           class="btn btn-info mt-2">Consulter</a>
-                        <a href="{{ vich_uploader_asset(document, 'documentFile', 'App\\Entity\\Document') }}"
-                           class="btn btn-info mt-2">Télécharger</a>
-                        {% if app.user.roles[0] is same as ('ROLE_AMBASSADEUR') %}
-                        <a href="{{ path('document_show', {'id':document.id}) }}" class="btn btn-info mt-2">Envoyer
-                            un message</a>
-                        {% endif %}
-                        {% if app.user and app.user.roles.0 is same as('ROLE_ADMINISTRATEUR') %}{{ include('document/_delete_form.html.twig') }}{% endif %}
+                        <div class="col-12 p-0 d-flex flex-column bg-primary">
+                            <a href="{{ path('document_show', {'id':document.id}) }}"
+                               class="btn btn-info rounded-0">Consulter</a>
+                            <a href="{{ vich_uploader_asset(document, 'documentFile', 'App\\Entity\\Document') }}"
+                               class="btn btn-info mt-1 rounded-0">Télécharger</a>
+                            {% if app.user.roles[0] is same as ('ROLE_AMBASSADEUR') %}
+                                <a href="{{ path('document_show', {'id':document.id}) }}" class="btn btn-info mt-1 rounded-0">Envoyer
+                                    un message</a>
+                            {% endif %}
+                            {% if app.user and app.user.roles.0 is same as('ROLE_ADMINISTRATEUR') %}
+                                {{ include('document/_delete_form.html.twig') }}
+                            {% endif %}
+                        </div>
                     </div>
                 {% else %}
                     'Aucun document trouvé'

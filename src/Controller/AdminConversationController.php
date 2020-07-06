@@ -39,7 +39,7 @@ class AdminConversationController extends AbstractController
      * @param Request $request
      * @param UserInterface $user
      * @param UserRepository $userRepository
-     * @IsGranted("ROLE_ADMINISTATEUR")
+     * @IsGranted("ROLE_ADMINISTRATEUR")
      * @return Response
      */
     public function show(
