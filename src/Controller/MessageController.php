@@ -113,7 +113,7 @@ class MessageController extends AbstractController
     {
         $users = $conversation->getUsers();
         foreach ($users as $person) {
-            if ($user->getSalt() == $person->getId()) {
+            if ($user->getSalt() === $person->getId()) {
                 if ($this->isCsrfTokenValid('delete' . $conversation->getId(), $request->request->get('_token'))) {
                     $entityManager = $this->getDoctrine()->getManager();
                     $entityManager->remove($conversation);
