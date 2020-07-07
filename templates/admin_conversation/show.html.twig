@@ -22,8 +22,7 @@
                             <div class="col-12 ">
                                 <div class="col-11 col-md-8 text-break p-1 my-3 bg-primary mr-auto">
                                     <p class="p-3 m-0 bg-light">{{ message.message }}</p>
-                                    <p class="p-1 m-0 bg-primary text-light text-right">{{ message.user.firstname ~ ' ' ~ message.user.lastname ~ ' Le ' ~ message.date|date("d/m/Y à H:i") }}</p>
-
+                                        <p class=" p-1 m-0 bg-primary text-right text-light m-0">{{ message.user.firstname ~ ' ' ~ message.user.lastname ~ ' Le ' ~ message.date|date("d/m/Y à H:i") }}</p>
                                 </div>
                             </div>
 
@@ -31,8 +30,10 @@
                             <div class="col-12 ">
                                 <div class="col-11 col-md-8 bg-primary text-break p-1 my-3 ml-auto">
                                     <p class="p-3 m-0 bg-light">{{ message.message }}</p>
-                                    <p class="p-1 m-0 bg-primary text-light text-right">{{ 'Vous  le ' ~ message.date|date("d/m/Y à H:i") }}</p>
-
+                                    <div class="align-items-center pt-1 m-0 bg-primary d-flex justify-content-between">
+                                        {{ include('message/_delete_form.html.twig') }}
+                                        <p class="text-light text-right m-0">{{ 'Vous  le ' ~ message.date|date("d/m/Y à H:i") }}</p>
+                                    </div>
                                 </div>
                             </div>
                         {% endif %}

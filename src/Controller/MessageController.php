@@ -63,20 +63,41 @@ class MessageController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="message_delete", methods={"DELETE"})
+     * @Route("/{id}", name="_delete", methods={"DELETE"})
      * @IsGranted("ROLE_AMBASSADEUR")
      * @param Request $request
      * @param Message $message
+     * @param UserInterface $user
      * @return Response
      */
-    public function delete(Request $request, Message $message): Response
+    public function delete(Request $request, Message $message, UserInterface $user): Response
     {
         if ($this->isCsrfTokenValid('delete'.$message->getId(), $request->request->get('_token'))) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->remove($message);
-            $entityManager->flush();
+            if ($user === $message->getUser()) {
+                $entityManager = $this->getDoctrine()->getManager();
+                $entityManager->remove($message);
+                $entityManager->flush();
+            } else {
+                $this->addFlash(
+                    'danger',
+                    'Vous n\'avez pas l\'autorisation pour supprimer les messages des autres utilisateurs'
+                );
+            }
         }
 
-        return $this->redirectToRoute('message_index');
+        $idMessage = $message->getConversation()->getId();
+        $idDocument = $message->getConversation()->getDocument()->getId();
+
+
+
+        if (in_array('ROLE_ADMINISTRATEUR', $user->getRoles())) {
+            return $this->redirectToRoute('admin_conversation_show', [
+                'id' => $idMessage,
+            ]);
+        }
+
+        return $this->redirectToRoute('document_show', [
+            'id' => $idDocument,
+        ]);
     }
 }

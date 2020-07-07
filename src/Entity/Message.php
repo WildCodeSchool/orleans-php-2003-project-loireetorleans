@@ -72,7 +72,7 @@ class Message
         return $this;
     }
 
-    public function getConversation(): ?Conversation
+    public function getConversation(): Conversation
     {
         return $this->conversation;
     }

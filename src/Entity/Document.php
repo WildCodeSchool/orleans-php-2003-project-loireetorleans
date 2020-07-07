@@ -69,7 +69,7 @@ class Document
         $this->conversations = new ArrayCollection();
     }
 
-    public function getId(): ?int
+    public function getId(): int
     {
         return $this->id;
     }
@@ -86,7 +86,7 @@ class Document
         return $this;
     }
 
-    public function getDocument(): ?string
+    public function getDocument(): string
     {
         return $this->document;
     }
