@@ -108,3 +108,19 @@ Stack trace:
 [29-Jun-2020 10:25:42 UTC] PHP  17. Composer\Autoload\ClassLoader->loadClass() /home/wilder/projet_client/orleans-php-2003-project-loireetorleans/vendor/symfony/debug/DebugClassLoader.php:167
 [29-Jun-2020 10:25:42 UTC] PHP  18. Composer\Autoload\includeFile() /home/wilder/projet_client/orleans-php-2003-project-loireetorleans/vendor/composer/ClassLoader.php:322
 [29-Jun-2020 10:25:42 UTC] PHP  19. include() /home/wilder/projet_client/orleans-php-2003-project-loireetorleans/vendor/composer/ClassLoader.php:444
+[07-Jul-2020 10:23:12 UTC] PHP Fatal error:  Uncaught Symfony\Component\Debug\Exception\FatalThrowableError: syntax error, unexpected '}' in /home/wilder/projet_client/orleans-php-2003-project-loireetorleans/src/Controller/MessageController.php:116
+Stack trace:
+#0 /home/wilder/projet_client/orleans-php-2003-project-loireetorleans/vendor/composer/ClassLoader.php(322): Composer\Autoload\includeFile('/home/wilder/pr...')
+#1 /home/wilder/projet_client/orleans-php-2003-project-loireetorleans/vendor/symfony/debug/DebugClassLoader.php(167): Composer\Autoload\ClassLoader->loadClass('App\\Controller\\...')
+#2 [internal function]: Symfony\Component\Debug\DebugClassLoader->loadClass('App\\Controller\\...')
+#3 [internal function]: spl_autoload_call('App\\Controller\\...')
+#4 /home/wilder/projet_client/orleans-php-2003-project-loireetorleans/vendor/symfony/config/Resource/ClassExistenceResource.php(84): class_exists('App\\Controller\\...')
+#5 /home/wilder/projet_client/orleans-php-2003-project-loireetorleans/vendor/symfony/dependency-injection/ContainerBuilder.php(3 in /home/wilder/projet_client/orleans-php-2003-project-loireetorleans/src/Controller/MessageController.php on line 116
+[07-Jul-2020 10:23:15 UTC] PHP Fatal error:  Uncaught Symfony\Component\Debug\Exception\FatalThrowableError: syntax error, unexpected '}' in /home/wilder/projet_client/orleans-php-2003-project-loireetorleans/src/Controller/MessageController.php:116
+Stack trace:
+#0 /home/wilder/projet_client/orleans-php-2003-project-loireetorleans/vendor/composer/ClassLoader.php(322): Composer\Autoload\includeFile('/home/wilder/pr...')
+#1 /home/wilder/projet_client/orleans-php-2003-project-loireetorleans/vendor/symfony/debug/DebugClassLoader.php(167): Composer\Autoload\ClassLoader->loadClass('App\\Controller\\...')
+#2 [internal function]: Symfony\Component\Debug\DebugClassLoader->loadClass('App\\Controller\\...')
+#3 [internal function]: spl_autoload_call('App\\Controller\\...')
+#4 /home/wilder/projet_client/orleans-php-2003-project-loireetorleans/vendor/symfony/config/Resource/ClassExistenceResource.php(84): class_exists('App\\Controller\\...')
+#5 /home/wilder/projet_client/orleans-php-2003-project-loireetorleans/vendor/symfony/dependency-injection/ContainerBuilder.php(3 in /home/wilder/projet_client/orleans-php-2003-project-loireetorleans/src/Controller/MessageController.php on line 116

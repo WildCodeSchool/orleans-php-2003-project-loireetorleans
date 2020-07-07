@@ -222,12 +222,12 @@ class User implements UserInterface
         $this->messages = new ArrayCollection();
     }
 
-    public function getId(): ?int
+    public function getId(): int
     {
         return $this->id;
     }
 
-    public function getLogin(): ?string
+    public function getLogin(): string
     {
         return $this->login;
     }
@@ -286,7 +286,7 @@ class User implements UserInterface
     /**
      * @see UserInterface
      */
-    public function getSalt(): ?int
+    public function getSalt(): ?string
     {
         return $this->id;
     }

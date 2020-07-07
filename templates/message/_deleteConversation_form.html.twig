@@ -1,0 +1,5 @@
+<form class="col-12 p-0 text-right" method="post" action="{{ path('message_conversation_delete', {'id': conversation.id}) }}" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cette conversation?');">
+    <input type="hidden" name="_method" value="DELETE">
+    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ conversation.id) }}">
+    <button class="btn btn-primary mt-1 rounded-0 col-2 col-md-1"><i class="text-light far fa-trash-alt"></i></button>
+</form>
