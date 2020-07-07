@@ -286,7 +286,7 @@ class User implements UserInterface
     /**
      * @see UserInterface
      */
-    public function getSalt(): int
+    public function getSalt(): ?string
     {
         return $this->id;
     }
