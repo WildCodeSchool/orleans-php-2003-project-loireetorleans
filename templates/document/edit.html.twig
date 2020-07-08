@@ -1,12 +1,23 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Edit Document{% endblock %}
-
+{% block title %}Loire&Orléans | Modifier le document{% endblock %}
+ {% block stylesheets %}
+     {{ encore_entry_link_tags('addDocument') }}
+ {% endblock %}
 {% block body %}
-    <h1 class="text-center my-4">Éditer {{ document.name }}</h1>
-    {{ include('document/_form.html.twig', {'button_label': 'Update'}) }}
+<section class="d-md-flex align-items-center mb-5">
+    <div class="form w-100">
+        <h1 class="text-center my-4">Modifier {{ document.name }}</h1>
+        {{ include('document/_form.html.twig', {'button_label': 'Modifier'}) }}
 
-    <a href="{{ path('document_index') }}">back to list</a>
+        <div class="d-flex justify-content-center">
+            <a class="btn btn-lg btn-primary my-4" href="{{ path('document_index') }}">Retour aux documents</a>
 
-    {{ include('document/_delete_form.html.twig') }}
+        </div>
+
+    </div>
+</section>
 {% endblock %}
+
+
+
