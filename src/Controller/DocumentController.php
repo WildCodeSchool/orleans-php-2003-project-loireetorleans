@@ -7,6 +7,7 @@ use App\Entity\Document;
 use App\Entity\Message;
 use App\Form\DocumentType;
 use App\Form\MessageType;
+use App\Form\SearchingType;
 use App\Repository\ConversationRepository;
 use App\Repository\DocumentRepository;
 use App\Repository\UserRepository;
@@ -27,17 +28,29 @@ use Symfony\Component\Security\Core\User\UserInterface;
  */
 class DocumentController extends AbstractController
 {
+
     /**
      * @Route("/", name="document_index", methods={"GET"})
      * @param DocumentRepository $documentRepository
-     * @IsGranted("ROLE_AMBASSADEUR")
      * @return Response
+     * @param Request $request
+     * @IsGranted("ROLE_AMBASSADEUR")
      */
-    public function index(DocumentRepository $documentRepository): Response
+
+    public function index(DocumentRepository $documentRepository, Request $request): Response
     {
+        $form = $this->createForm(SearchingType::class);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $data = $form->getData();
+            $documentRepository->findBySearch($data['search']);
+        }
+
 
         return $this->render('document/index.html.twig', [
-            'documents' => $documentRepository->documentByDate(),
+            'form' => $form->createView(),
+            'documents' => $documentRepository
         ]);
     }
 
