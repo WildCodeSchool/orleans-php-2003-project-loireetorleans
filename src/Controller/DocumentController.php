@@ -45,12 +45,14 @@ class DocumentController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $data = $form->getData();
             $documentRepository->findBySearch($data['search']);
+        } else {
+            $documentRepository->documentByDate();
         }
 
 
         return $this->render('document/index.html.twig', [
             'form' => $form->createView(),
-            'documents' => $documentRepository
+            'documents' => $documentRepository,
         ]);
     }
 
