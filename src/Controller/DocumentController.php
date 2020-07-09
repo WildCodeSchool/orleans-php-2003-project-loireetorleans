@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Conversation;
 use App\Entity\Document;
 use App\Entity\Message;
+use App\Entity\User;
 use App\Form\DocumentType;
 use App\Form\MessageType;
 use App\Repository\ConversationRepository;
@@ -114,7 +115,11 @@ class DocumentController extends AbstractController
         ConversationManager $conversationManager
     ): Response {
         $message = new Message();
-        $login = $this->getUser()->getUsername();
+        /**
+         * @var User
+         */
+        $user = $this->getUser();
+        $login = $user->getUsername();
         $persons = $userRepository->findTwoForMessage($login);
         $author = $userRepository->findOneBy(['login' => $login]);
         $conversation = $conversationRepo->findOneByConversation($document->getId(), $author);
@@ -123,7 +128,7 @@ class DocumentController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $data = $form->getData();
-            if ($conversationManager->conversationExist($document->getId(), $this->getUser()->getSalt()) === false) {
+            if ($conversationManager->conversationExist($document->getId(), $user) === false) {
                 $conversation = new Conversation();
                 $conversation->setDocument($document);
                 foreach ($persons as $person) {
