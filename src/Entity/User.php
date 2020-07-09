@@ -227,7 +227,7 @@ class User implements UserInterface
         return $this->id;
     }
 
-    public function getLogin(): string
+    public function getLogin(): ?string
     {
         return $this->login;
     }

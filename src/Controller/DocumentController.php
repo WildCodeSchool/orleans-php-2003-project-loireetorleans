@@ -101,7 +101,6 @@ class DocumentController extends AbstractController
      * @param Document $document
      * @param ConversationRepository $conversationRepo
      * @param Request $request
-     * @param UserInterface $user
      * @param UserRepository $userRepository
      * @param ConversationManager $conversationManager
      * @return Response
@@ -111,12 +110,11 @@ class DocumentController extends AbstractController
         Document $document,
         ConversationRepository $conversationRepo,
         Request $request,
-        UserInterface $user,
         UserRepository $userRepository,
         ConversationManager $conversationManager
     ): Response {
         $message = new Message();
-        $login = $user->getUsername();
+        $login = $this->getUser()->getUsername();
         $persons = $userRepository->findTwoForMessage($login);
         $author = $userRepository->findOneBy(['login' => $login]);
         $conversation = $conversationRepo->findOneByConversation($document->getId(), $author);
@@ -125,7 +123,7 @@ class DocumentController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $data = $form->getData();
-            if ($conversationManager->conversationExist($document->getId(), $user->getSalt()) === false) {
+            if ($conversationManager->conversationExist($document->getId(), $this->getUser()->getSalt()) === false) {
                 $conversation = new Conversation();
                 $conversation->setDocument($document);
                 foreach ($persons as $person) {
