@@ -26,4 +26,14 @@ class DocumentRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult();
     }
+
+    public function findBySearch(?string $search)
+    {
+        return $this->createQueryBuilder("d")
+            ->Where("d.name LIKE :search")
+            ->setParameter('search', '%' . $search . '%')
+            ->addOrderBy("d.updatedAt", 'DESC')
+            ->getQuery()
+            ->getResult();
+    }
 }
