@@ -99,7 +99,7 @@ class MessageController extends AbstractController
                     $entityManager->flush();
                     $this->addFlash(
                         'success',
-                        'La conversation a bien été supprimé !'
+                        'La conversation a bien été supprimée !'
                     );
                 }
             }
