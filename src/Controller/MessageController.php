@@ -39,30 +39,6 @@ class MessageController extends AbstractController
     }
 
     /**
-     * @Route("/{id}/edit", name="message_edit", methods={"GET","POST"})
-     * @IsGranted("ROLE_AMBASSADEUR")
-     * @param Request $request
-     * @param Message $message
-     * @return Response
-     */
-    public function edit(Request $request, Message $message): Response
-    {
-        $form = $this->createForm(MessageType::class, $message);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
-
-            return $this->redirectToRoute('message_index');
-        }
-
-        return $this->render('message/edit.html.twig', [
-            'message' => $message,
-            'form' => $form->createView(),
-        ]);
-    }
-
-    /**
      * @Route("/{id}", name="_delete", methods={"DELETE"})
      * @IsGranted("ROLE_AMBASSADEUR")
      * @param Request $request
@@ -77,6 +53,10 @@ class MessageController extends AbstractController
                 $entityManager = $this->getDoctrine()->getManager();
                 $entityManager->remove($message);
                 $entityManager->flush();
+                $this->addFlash(
+                    'success',
+                    'Le message a bien été supprimé!'
+                );
             } else {
                 $this->addFlash(
                     'danger',
@@ -117,6 +97,10 @@ class MessageController extends AbstractController
                     $entityManager = $this->getDoctrine()->getManager();
                     $entityManager->remove($conversation);
                     $entityManager->flush();
+                    $this->addFlash(
+                        'success',
+                        'La conversation a bien été supprimé!'
+                    );
                 }
             }
         }

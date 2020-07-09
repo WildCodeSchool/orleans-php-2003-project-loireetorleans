@@ -63,7 +63,10 @@ class AdminProfileController extends AbstractController
 
 
             $this->getDoctrine()->getManager()->flush();
-
+            $this->addFlash(
+                'success',
+                'Le profil de l\'Ambassadeur a bien été mis à jour'
+            );
             return $this->redirectToRoute('admin_profile_index');
         }
 
