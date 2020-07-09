@@ -81,7 +81,7 @@ class UserController extends AbstractController
         if ($this->getUser() !== $user) {
             $this->addFlash(
                 'danger',
-                'Il ne vous est pas possible de modifier le profil d\'un autre Ambassadeur'
+                'Il ne vous est pas possible de modifier le profil d\'un autre Ambassadeur !'
             );
         }
         $form = $this->createForm(RegistrationFormType::class, $user);
@@ -93,7 +93,7 @@ class UserController extends AbstractController
             $entityManager->flush();
             $this->addFlash(
                 'success',
-                'Votre profil Ambassadeur a bien été mis à jour!'
+                'Votre profil Ambassadeur a bien été mis à jour !'
             );
             return $this->redirectToRoute('user_show', ['login' => $user->getLogin()]);
         }

@@ -74,8 +74,8 @@ class SecurityController extends AbstractController
             // do anything else you need here, like send an email
             $this->addFlash(
                 'success',
-                'Votre profil Ambassadeur a bien été crée veuillez attendre la validation de la part de
-                 l\'administrateur!'
+                'Votre profil Ambassadeur a bien été créé veuillez attendre la validation de la part de
+                 l\'administrateur !'
             );
             return $this->redirectToRoute('home');
         }

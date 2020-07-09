@@ -67,7 +67,7 @@ class AdminConversationController extends AbstractController
             $entityManager->flush();
             $this->addFlash(
                 'success',
-                'Votre message a bien été envoyé!'
+                'Votre message a bien été envoyé !'
             );
             return $this->redirectToRoute('admin_conversation_index');
         }

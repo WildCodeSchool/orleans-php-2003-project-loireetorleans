@@ -60,7 +60,7 @@ class MessageController extends AbstractController
             } else {
                 $this->addFlash(
                     'danger',
-                    'Vous n\'avez pas l\'autorisation pour supprimer les messages des autres utilisateurs'
+                    'Vous n\'avez pas l\'autorisation pour supprimer les messages des autres utilisateurs !'
                 );
             }
         }
@@ -99,7 +99,7 @@ class MessageController extends AbstractController
                     $entityManager->flush();
                     $this->addFlash(
                         'success',
-                        'La conversation a bien été supprimé!'
+                        'La conversation a bien été supprimé !'
                     );
                 }
             }

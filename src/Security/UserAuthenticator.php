@@ -68,7 +68,7 @@ class UserAuthenticator extends AbstractFormLoginAuthenticator implements Passwo
     {
         $token = new CsrfToken('authenticate', $credentials['csrf_token']);
         if (!$this->csrfTokenManager->isTokenValid($token)) {
-            throw new InvalidCsrfTokenException('Identifiant invalide veuillez réessayer!');
+            throw new InvalidCsrfTokenException('Identifiant invalide, veuillez réessayer!');
         }
 
         $user = $this->entityManager->getRepository(User::class)->findOneBy(

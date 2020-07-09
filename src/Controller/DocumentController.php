@@ -101,7 +101,7 @@ class DocumentController extends AbstractController
             $mailer->send($email);
             $this->addFlash(
                 'success',
-                'Le document a bien été ajouté!'
+                'Le document a bien été ajouté !'
             );
             return $this->redirectToRoute('document_index');
         }
@@ -167,7 +167,7 @@ class DocumentController extends AbstractController
             $entityManager->flush();
             $this->addFlash(
                 'success',
-                'Votre message a bien été envoyé!'
+                'Votre message a bien été envoyé !'
             );
             return $this->redirectToRoute('document_show', [
                 'id' => $document->getId(),
@@ -197,7 +197,7 @@ class DocumentController extends AbstractController
             $this->getDoctrine()->getManager()->flush();
             $this->addFlash(
                 'success',
-                'Le document a bien été mis à jour!'
+                'Le document a bien été mis à jour !'
             );
             return $this->redirectToRoute('document_index');
         }
@@ -224,7 +224,7 @@ class DocumentController extends AbstractController
         }
         $this->addFlash(
             'success',
-            'Le document a bien été supprimé!'
+            'Le document a bien été supprimé !'
         );
         return $this->redirectToRoute('document_index');
     }
