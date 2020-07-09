@@ -286,9 +286,9 @@ class User implements UserInterface
     /**
      * @see UserInterface
      */
-    public function getSalt(): ?int
+    public function getSalt()
     {
-        return $this->id;
+        //unused
     }
 
     /**
@@ -471,7 +471,7 @@ class User implements UserInterface
     public function setPictureFile(File $pictureFile): User
     {
         $this->pictureFile = $pictureFile;
-        if (!empty($this)) {
+        if ($this !== null) {
             $this->updatedAt = new DateTime('now');
         }
         return $this;

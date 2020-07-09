@@ -1,5 +1,6 @@
 @import "vars";
 
+
 .footer {
     font-family: $font-text;
     background-color: $widget-color;
@@ -89,6 +90,10 @@ h1 {
     transform: translateX(-50%); /* on centre horizontalement */
     z-index: 1; /* pour s'afficher au dessus des éléments en position relative */
     white-space: nowrap; /* on interdit le retour à la ligne */
+}
+
+.blur {
+    box-shadow: 2px 3px 5px 1px $nav-bar;
 }
 
 @media screen and (max-width: 900px) {

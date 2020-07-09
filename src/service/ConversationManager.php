@@ -4,6 +4,7 @@
 namespace App\service;
 
 use App\Entity\Conversation;
+use App\Entity\User;
 use App\Repository\ConversationRepository;
 
 class ConversationManager
@@ -15,9 +16,9 @@ class ConversationManager
         $this->conversationRepo = $conversationRepo;
     }
 
-    public function conversationExist($docId, $userId) :bool
+    public function conversationExist($docId, User $user) :bool
     {
-        $conversation = $this->conversationRepo->findOneByConversation($docId, $userId);
+        $conversation = $this->conversationRepo->findOneByConversation($docId, $user);
         return $conversation instanceof Conversation;
     }
 }

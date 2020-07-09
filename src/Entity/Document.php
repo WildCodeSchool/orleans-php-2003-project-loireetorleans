@@ -40,7 +40,8 @@ class Document
      * @Vich\UploadableField(mapping="document_file", fileNameProperty="document")
      * @var File
      * @Assert\File(
-     *     mimeTypes={"application/pdf","application/msword","application/vnd.oasis.opendocument.text","text/plain"},
+     *     mimeTypes={"application/pdf","application/msword","application/vnd.oasis.opendocument.text","text/plain",
+     *     "application/vnd.openxmlformats-officedocument.wordprocessingml.document"},
      *     mimeTypesMessage="Veuillez insérer un fichier au format {{ types }}"
      * )
      * @Assert\NotBlank(message="Veuillez insérer un fichier")
@@ -58,12 +59,17 @@ class Document
      */
     private $conversations;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $ext;
+
     public function __construct()
     {
         $this->conversations = new ArrayCollection();
     }
 
-    public function getId(): ?int
+    public function getId(): int
     {
         return $this->id;
     }
@@ -140,6 +146,18 @@ class Document
                 $conversation->setDocument(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getExt(): ?string
+    {
+        return $this->ext;
+    }
+
+    public function setExt(string $ext): self
+    {
+        $this->ext = $ext;
 
         return $this;
     }

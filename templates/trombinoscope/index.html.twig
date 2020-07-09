@@ -1,6 +1,7 @@
 {% extends '_layout.html.twig' %}
 {% block stylesheets %}
     {{ encore_entry_link_tags('app') }}
+    {{ encore_entry_link_tags('trombi') }}
 {% endblock %}
 
 
@@ -32,7 +33,7 @@
 
             <div class="row p-0 m-0 justify-content-center w-100">
                 {% for user in users %}
-                    <div class="card my-4 mx-5 col-md-3 col-lg-2 m-2 p-0">
+                    <div class="trombi card my-4 mx-lg-5 col-md-5 col-lg-2 m-2 p-0">
                         <img class="card-img-top"
                              src="{{ vich_uploader_asset(user, 'pictureFile', 'App\\Entity\\User') }}"
                              alt="Photo Ambassadeur">
@@ -42,7 +43,7 @@
                             <p class="card-title ">{{ user.company }}
                             </p>
                         </div>
-                        <a href="{{ path('user_show', {'login': user.login}) }}" class="btn btn-info mt-2">En savoir
+                        <a href="{{ path('user_show', {'login': user.login}) }}" class="btn btn-info mt-2 rounded-0">En savoir
                             +</a>
                     </div>
                 {% else %}

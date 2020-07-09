@@ -7,17 +7,22 @@
 {% block body %}
     <section class="d-md-flex align-items-center mb-5">
         <div class="w-100 d-flex justify-content-center flex-column">
-            <h1 class="my-4 text-center">Demande d'information sur {{ conversation.document.name }} de {% for user in conversation.users %}{% if user.roles[0] is same as('ROLE_AMBASSADEUR') %}{{ user.firstname ~ ' ' ~ user.lastName ~ ' / ' ~ user.company }}{% endif %}{% endfor %}</h1>
+            <h1 class="my-4 text-center">Demande d'information sur {{ conversation.document.name }}
+                de {% for user in conversation.users %}{% if user.roles[0] is same as('ROLE_AMBASSADEUR') %}{{ user.firstname ~ ' ' ~ user.lastName ~ ' / ' ~ user.company }}{% endif %}{% endfor %}</h1>
             <div class="d-flex align-items-center flex-column my-4">
                 <h3 class="my-4 text-center">Message(s)</h3>
                 <div class="col-md-8 p-4 border rounded bg-info">
+                    <div class="text-right p-0 col-12">
+                        <a class="btn btn-primary"
+                           href="{{ vich_uploader_asset(conversation.document, 'documentFile', 'App\\Entity\\Document') }}">Télécharger le Document
+                        </a>
+                    </div>
                     {% for message in conversation.messages %}
                         {% if message.user.roles[0] is same as('ROLE_AMBASSADEUR') %}
                             <div class="col-12 ">
                                 <div class="col-11 col-md-8 text-break p-1 my-3 bg-primary mr-auto">
                                     <p class="p-3 m-0 bg-light">{{ message.message }}</p>
-                                    <p class="p-1 m-0 bg-primary text-light text-right">{{ message.user.firstname ~ ' ' ~ message.user.lastname ~ ' Le ' ~ message.date|date("d/m/Y à H:i") }}</p>
-
+                                        <p class=" p-1 m-0 bg-primary text-right text-light m-0">{{ message.user.firstname ~ ' ' ~ message.user.lastname ~ ' Le ' ~ message.date|date("d/m/Y à H:i") }}</p>
                                 </div>
                             </div>
 
@@ -25,8 +30,10 @@
                             <div class="col-12 ">
                                 <div class="col-11 col-md-8 bg-primary text-break p-1 my-3 ml-auto">
                                     <p class="p-3 m-0 bg-light">{{ message.message }}</p>
-                                    <p class="p-1 m-0 bg-primary text-light text-right">{{ 'Vous  le ' ~ message.date|date("d/m/Y à H:i") }}</p>
-
+                                    <div class="align-items-center pt-1 m-0 bg-primary d-flex justify-content-between">
+                                        {{ include('message/_delete_form.html.twig') }}
+                                        <p class="text-light text-right m-0">{{ 'Vous  le ' ~ message.date|date("d/m/Y à H:i") }}</p>
+                                    </div>
                                 </div>
                             </div>
                         {% endif %}
@@ -43,13 +50,15 @@
                                 {{ form_widget(messageForm.message, {'attr': {'rows':'6'}}) }}
                             </div>
                         </div>
-                        <button type="submit" class="btn btn-lg btn-primary my-4 col-md-4 align-self-center">Répondre</button>
+                        <button type="submit" class="btn btn-lg btn-primary my-4 col-md-4 align-self-center">Répondre
+                        </button>
                         {{ form_end(messageForm) }}
                     </div>
                 </div>
             </div>
             <div class="d-flex align-items-center my-4 flex-column">
-                <a class="btn btn-lg btn-primary mt-3" href="{{ path('admin_conversation_index') }}">Retour Conversation</a>
+                <a class="btn btn-lg btn-primary mt-3" href="{{ path('admin_conversation_index') }}">Retour
+                    Conversation</a>
             </div>
         </div>
     </section>

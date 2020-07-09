@@ -7,7 +7,8 @@
     <section class="d-md-flex align-items-center mb-5">
         <div class="w-100">
             <h1 class="text-center my-4">Mes échanges</h1>
-            <div class="d-flex justify-content-center my-4">
+            <div class="d-flex justify-content-center my-4 flex-column">
+                <h2 class="text-center my-4">Messages Reçus</h2>
                 <table class="table table-hover col-10 p-0 mx-auto">
                     <thead class="bg-primary">
                     <tr class="text-center text-light">
@@ -19,12 +20,43 @@
                     </thead>
                     <tbody>
                     {% for conversation in conversations %}
+                        {% if conversation.messages|last.user.roles[0] is same as('ROLE_ADMINISTRATEUR') %}
                         <tr class="text-center">
                             <td>{{ conversation.document.name }}</td>
                             <td>{{ conversation.messages|last.message }}</td>
                             <td>{{ conversation.messages|last.date|date("d/m/Y à H:i") }}</td>
-                            <td><a class="btn btn-info" href="{{ path('message_show', {'id':conversation.id}) }}">Consulter</a></td>
+                            <td><a class="btn btn-info" href="{{ path('document_show', {'id':conversation.document.id}) }}">Consulter</a></td>
                         </tr>
+                        {% endif %}
+                    {% else %}
+                        <tr>
+                            <td colspan="3">Aucun message</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            <div class="d-flex justify-content-center my-4 flex-column">
+                <h2 class="text-center my-4">Messages Envoyés</h2>
+                <table class="table table-hover col-10 p-0 mx-auto">
+                    <thead class="bg-primary">
+                    <tr class="text-center text-light">
+                        <th scope="col">Document</th>
+                        <th scope="col">Message</th>
+                        <th scope="col">Date d'envoi du dernier message</th>
+                        <th scope="col">Détails</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for conversation in conversations %}
+                        {% if conversation.messages|last.user.roles[0] is same as('ROLE_AMBASSADEUR') %}
+                            <tr class="text-center">
+                                <td>{{ conversation.document.name }}</td>
+                                <td>{{ conversation.messages|last.message }}</td>
+                                <td>{{ conversation.messages|last.date|date("d/m/Y à H:i") }}</td>
+                                <td><a class="btn btn-info" href="{{ path('document_show', {'id':conversation.document.id}) }}">Consulter</a></td>
+                            </tr>
+                        {% endif %}
                     {% else %}
                         <tr>
                             <td colspan="3">Aucun message</td>

@@ -41,12 +41,12 @@ class Conversation
         $this->messages = new ArrayCollection();
     }
 
-    public function getId(): ?int
+    public function getId(): int
     {
         return $this->id;
     }
 
-    public function getDocument(): ?Document
+    public function getDocument(): Document
     {
         return $this->document;
     }

@@ -72,10 +72,11 @@ class RegistrationFormType extends AbstractType
                 ChoiceType::class,
                 [
                     'choices' => [
-                        'activities' => self::ACTIVITIES
+                        'Activités' => self::ACTIVITIES
                     ],
                     'expanded' => false,
                     'multiple' => false,
+                    'placeholder' => 'Choisissez une activité',
                     'label_attr' => ['class' => 'mb-0'],
                 ]
             )
@@ -91,6 +92,7 @@ class RegistrationFormType extends AbstractType
                     ],
                     'expanded' => false,
                     'multiple' => false,
+                    'placeholder' => 'Choisissez un bassin d\'emploi',
                     'label_attr' => ['class' => 'mb-0'],
                 ]
             )
