@@ -7,10 +7,10 @@
     <section class="d-flex w-100 align-items-center mb-5">
 
             <div class="w-100">
-                {% if app.user and app.user.roles.0 is same as('ROLE_ADMINISTRATEUR') %}
+                {% if is_granted('ROLE_ADMINISTRATEUR') %}
                     <h1 class="text-center my-4">Gestion des documents</h1>
                 {% endif %}
-                {% if app.user and app.user.roles.0 is same as('ROLE_AMBASSADEUR') %}
+                {% if is_granted('ROLE_AMBASSADEUR') %}
                     <h1 class="text-center my-4">Documents à télécharger</h1>
                 {% endif %}
                 <div class="justify-content-center">
@@ -29,11 +29,11 @@
                                class="btn btn-info rounded-0">Consulter</a>
                             <a href="{{ vich_uploader_asset(document, 'documentFile', 'App\\Entity\\Document') }}"
                                class="btn btn-info mt-1 rounded-0">Télécharger</a>
-                            {% if app.user.roles[0] is same as ('ROLE_AMBASSADEUR') %}
+                            {% if is_granted('ROLE_AMBASSADEUR') %}
                                 <a href="{{ path('document_show', {'id':document.id}) }}" class="btn btn-info mt-1 rounded-0">Envoyer
                                     un message</a>
                             {% endif %}
-                            {% if app.user and app.user.roles.0 is same as('ROLE_ADMINISTRATEUR') %}
+                            {% if is_granted('ROLE_ADMINISTRATEUR') %}
                                 <a href="{{ path('document_edit', {'id':document.id}) }}" class="btn btn-info mt-1 rounded-0">Modifier</a>
                                 {{ include('document/_delete_form.html.twig') }}
                             {% endif %}
