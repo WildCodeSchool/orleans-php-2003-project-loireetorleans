@@ -8,6 +8,7 @@ use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\PaginatorInterface;
 use App\Form\RegistrationFormType;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -37,13 +38,13 @@ class UserController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $data = $form->getData();
-            $userRepository = $userRepository->findBySearch($data['search']);
+            $ambassadors = $userRepository->findBySearch($data['search']);
         } else {
-            $userRepository = $userRepository->findAll();
+            $ambassadors = $userRepository->findAll();
         }
 
         $users = $paginator->paginate(
-            $userRepository,
+            $ambassadors,
             $request->query->getInt('page', 1),
             self::USERS_PER_PAGE
         );
@@ -73,10 +74,16 @@ class UserController extends AbstractController
      * @param User $user
      * @param Request $request
      * @return Response
+     * @IsGranted("ROLE_AMBASSADEUR")
      */
     public function edit(User $user, Request $request): Response
     {
-
+        if ($this->getUser() !== $user) {
+            $this->addFlash(
+                'danger',
+                'Il ne vous est pas possible de modifier le profil d\'un autre Ambassadeur !'
+            );
+        }
         $form = $this->createForm(RegistrationFormType::class, $user);
         $form->handleRequest($request);
 
@@ -84,6 +91,11 @@ class UserController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($user);
             $entityManager->flush();
+            $this->addFlash(
+                'success',
+                'Votre profil Ambassadeur a bien été mis à jour !'
+            );
+            return $this->redirectToRoute('user_show', ['login' => $user->getLogin()]);
         }
 
         return $this->render('ambassador/edit.html.twig', [

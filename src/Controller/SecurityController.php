@@ -22,6 +22,10 @@ class SecurityController extends AbstractController
     public function login(AuthenticationUtils $authenticationUtils): Response
     {
         if ($this->getUser()) {
+            $this->addFlash(
+                'success',
+                'Bonjour cher Ambassadeur !'
+            );
              return $this->redirectToRoute('home');
         }
 
@@ -45,6 +49,9 @@ class SecurityController extends AbstractController
 
     /**
      * @Route("/creation_de_compte", name="app_register")
+     * @param Request $request
+     * @param UserPasswordEncoderInterface $passwordEncoder
+     * @return Response
      */
     public function register(Request $request, UserPasswordEncoderInterface $passwordEncoder): Response
     {
@@ -65,7 +72,11 @@ class SecurityController extends AbstractController
             $entityManager->flush();
 
             // do anything else you need here, like send an email
-
+            $this->addFlash(
+                'success',
+                'Votre profil Ambassadeur a bien été créé veuillez attendre la validation de la part de
+                 l\'administrateur !'
+            );
             return $this->redirectToRoute('home');
         }
 

@@ -65,7 +65,10 @@ class AdminConversationController extends AbstractController
             $entityManager->persist($data);
             $entityManager->persist($conversation);
             $entityManager->flush();
-
+            $this->addFlash(
+                'success',
+                'Votre message a bien été envoyé !'
+            );
             return $this->redirectToRoute('admin_conversation_index');
         }
         return $this->render('admin_conversation/show.html.twig', [

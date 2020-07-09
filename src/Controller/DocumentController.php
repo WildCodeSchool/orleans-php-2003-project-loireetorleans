@@ -99,7 +99,10 @@ class DocumentController extends AbstractController
                 ]), 'utf8');
 
             $mailer->send($email);
-
+            $this->addFlash(
+                'success',
+                'Le document a bien été ajouté !'
+            );
             return $this->redirectToRoute('document_index');
         }
 
@@ -162,7 +165,10 @@ class DocumentController extends AbstractController
             $entityManager->persist($data);
             $entityManager->persist($conversation);
             $entityManager->flush();
-
+            $this->addFlash(
+                'success',
+                'Votre message a bien été envoyé !'
+            );
             return $this->redirectToRoute('document_show', [
                 'id' => $document->getId(),
             ]);
@@ -189,7 +195,10 @@ class DocumentController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
-
+            $this->addFlash(
+                'success',
+                'Le document a bien été mis à jour !'
+            );
             return $this->redirectToRoute('document_index');
         }
 
@@ -213,7 +222,10 @@ class DocumentController extends AbstractController
             $entityManager->remove($document);
             $entityManager->flush();
         }
-
+        $this->addFlash(
+            'success',
+            'Le document a bien été supprimé !'
+        );
         return $this->redirectToRoute('document_index');
     }
 }

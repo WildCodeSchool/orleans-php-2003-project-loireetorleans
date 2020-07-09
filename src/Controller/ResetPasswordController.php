@@ -98,7 +98,7 @@ class ResetPasswordController extends AbstractController
 
         $token = $this->getTokenFromSession();
         if (null === $token) {
-            throw $this->createNotFoundException('Le lien a expiré merci de renouveler votre demande');
+            throw $this->createNotFoundException('Le lien a expiré merci de renouveler votre demande !');
         }
 
         try {
@@ -131,7 +131,10 @@ class ResetPasswordController extends AbstractController
 
             // The session is cleaned up after the password has been changed.
             $this->cleanSessionAfterReset();
-
+            $this->addFlash(
+                'success',
+                'Votre mot de passe a bien été modifié !'
+            );
             return $this->redirectToRoute('app_login');
         }
 
