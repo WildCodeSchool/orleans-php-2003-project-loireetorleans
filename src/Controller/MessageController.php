@@ -105,15 +105,14 @@ class MessageController extends AbstractController
      * @Route("/conversation/{id}", name="_conversation_delete", methods={"DELETE"})
      * @param Request $request
      * @param Conversation $conversation
-     * @param UserInterface $user
      * @return Response
      * @IsGranted("ROLE_AMBASSADEUR")
      */
-    public function deleteConversation(Request $request, Conversation $conversation, UserInterface $user): Response
+    public function deleteConversation(Request $request, Conversation $conversation): Response
     {
         $users = $conversation->getUsers();
         foreach ($users as $person) {
-            if ($user->getSalt() == $person->getId()) {
+            if ($this->getUser()  === $person) {
                 if ($this->isCsrfTokenValid('delete' . $conversation->getId(), $request->request->get('_token'))) {
                     $entityManager = $this->getDoctrine()->getManager();
                     $entityManager->remove($conversation);
