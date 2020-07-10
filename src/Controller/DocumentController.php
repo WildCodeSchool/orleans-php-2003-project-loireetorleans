@@ -30,16 +30,15 @@ use Symfony\Component\Security\Core\User\UserInterface;
  */
 class DocumentController extends AbstractController
 {
+    const DOCS_PER_PAGE = 8;
 
     /**
      * @Route("/", name="document_index", methods={"GET"})
      * @param DocumentRepository $documentRepository
      * @param Request $request
      * @param PaginatorInterface $paginator
-     * @return Response
      * @IsGranted("ROLE_AMBASSADEUR")
      */
-
     public function index(
         DocumentRepository $documentRepository,
         Request $request,
@@ -55,11 +54,11 @@ class DocumentController extends AbstractController
             $documents = $documentRepository->documentByDate();
         }
 
-            $docs = $paginator->paginate(
-                $documents,
-                $request->query->getInt('page', 1),
-                8
-            );
+        $docs = $paginator->paginate(
+            $documents,
+            $request->query->getInt('page', 1),
+            self::DOCS_PER_PAGE
+        );
 
         return $this->render('document/index.html.twig', [
             'form' => $form->createView(),
