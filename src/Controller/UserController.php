@@ -83,6 +83,7 @@ class UserController extends AbstractController
                 'danger',
                 'Il ne vous est pas possible de modifier le profil d\'un autre Ambassadeur !'
             );
+            return $this->redirectToRoute('user_show', ['login' => $user->getLogin()]);
         }
         $form = $this->createForm(RegistrationFormType::class, $user);
         $form->handleRequest($request);
