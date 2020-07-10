@@ -68,7 +68,7 @@ class UserAuthenticator extends AbstractFormLoginAuthenticator implements Passwo
     {
         $token = new CsrfToken('authenticate', $credentials['csrf_token']);
         if (!$this->csrfTokenManager->isTokenValid($token)) {
-            throw new InvalidCsrfTokenException();
+            throw new InvalidCsrfTokenException('Identifiant invalide, veuillez réessayer!');
         }
 
         $user = $this->entityManager->getRepository(User::class)->findOneBy(
@@ -77,7 +77,8 @@ class UserAuthenticator extends AbstractFormLoginAuthenticator implements Passwo
 
         if (!$user) {
             // fail authentication with a custom error
-            throw new CustomUserMessageAuthenticationException('login could not be found.');
+            throw new CustomUserMessageAuthenticationException('Compte Ambassadeur inconnu, veuillez
+             recommencer ou créer un compte Ambassadeur!');
         }
 
         return $user;
