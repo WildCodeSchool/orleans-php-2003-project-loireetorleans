@@ -1,6 +1,11 @@
 @import "app";
 
-#preview{
-    min-height: 80vh;
+.card-body {
+    height: 25%;
+
+    & img {
+        width: 50%;
+
+    }
 }
 

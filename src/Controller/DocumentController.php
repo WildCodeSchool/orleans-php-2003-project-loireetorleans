@@ -7,11 +7,13 @@ use App\Entity\Document;
 use App\Entity\Message;
 use App\Form\DocumentType;
 use App\Form\MessageType;
+use App\Form\SearchingType;
 use App\Repository\ConversationRepository;
 use App\Repository\DocumentRepository;
 use App\Repository\UserRepository;
 use App\service\ConversationManager;
 use DateTime;
+use Knp\Component\Pager\PaginatorInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -27,17 +29,39 @@ use Symfony\Component\Security\Core\User\UserInterface;
  */
 class DocumentController extends AbstractController
 {
+    const DOCS_PER_PAGE = 8;
+
     /**
      * @Route("/", name="document_index", methods={"GET"})
      * @param DocumentRepository $documentRepository
+     * @param Request $request
+     * @param PaginatorInterface $paginator
      * @IsGranted("ROLE_AMBASSADEUR")
-     * @return Response
      */
-    public function index(DocumentRepository $documentRepository): Response
-    {
+    public function index(
+        DocumentRepository $documentRepository,
+        Request $request,
+        PaginatorInterface $paginator
+    ): Response {
+        $form = $this->createForm(SearchingType::class);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $data = $form->getData();
+            $documents = $documentRepository->findBySearch($data['search']);
+        } else {
+            $documents = $documentRepository->documentByDate();
+        }
+
+        $docs = $paginator->paginate(
+            $documents,
+            $request->query->getInt('page', 1),
+            self::DOCS_PER_PAGE
+        );
 
         return $this->render('document/index.html.twig', [
-            'documents' => $documentRepository->documentByDate(),
+            'form' => $form->createView(),
+            'documents' => $docs,
         ]);
     }
 
