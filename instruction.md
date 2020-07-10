@@ -4,6 +4,10 @@ Loire et Orléans est un site qui s'adresse à des ambassadeurs qui sont issus d
 Le site a pour but de mettre en contact les ambassadeurs avec Loire et Orléans via des partages de documents que l'ambassadeur
 peut télécharger et un espace de commentaires ou l'on peut poser des questions au sujet d'un document.
 
+## Version
+php : 7.2
+Symfony : 4.4.10
+
 ## Démarrer un projet
 
 ### Pré-requis :
