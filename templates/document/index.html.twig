@@ -1,47 +1,62 @@
 {% extends '_layout.html.twig' %}
-
 {% block title %}Loire&Orléans | Documents à télécharger{% endblock %}
-
 {% block body %}
-
     <section class="d-flex w-100 align-items-center mb-5">
-
-            <div class="w-100">
+        <div class="w-100">
+            {% if is_granted('ROLE_ADMINISTRATEUR') %}
+                <h1 class="text-center my-4">Gestion des documents</h1>
+            {% else %}
+                <h1 class="text-center my-4">Documents à télécharger</h1>
+            {% endif %}
+            <div class="d-flex justify-content-center align-items-center flex-column my-4">
                 {% if is_granted('ROLE_ADMINISTRATEUR') %}
-                    <h1 class="text-center my-4">Gestion des documents</h1>
+                    <a class="btn btn-lg btn-primary mt-3" href="{{ path('document_new') }}">Ajouter un document</a>
                 {% endif %}
-                {% if is_granted('ROLE_AMBASSADEUR') %}
-                    <h1 class="text-center my-4">Documents à télécharger</h1>
-                {% endif %}
-                <div class="justify-content-center">
-                    <div class="form-group mt-5">
-                        <div class="d-flex justify-content-center my-4">
-                        <span class="infobulle"
-                              aria-label="Veuillez saisir un nom de document.">
-                            {{ form_start(form, {'attr': {'class': 'form-inline my-2 my-lg-0 justify-content-center'}}) }}
-                            {{ form_widget(form.search, {'attr': {'class': 'form-control mr-sm-2 col-md-7', 'placeholder': "Nom du document ..."}}) }}
-                            <button class="btn btn-primary my-2 my-sm-0 mt-4" type="submit">Rechercher</button>
-                        {{ form_end(form) }}
-                        </span>
-                        </div>
-                        <div class="col-12 p-0 d-flex flex-column bg-primary">
-                            <a href="{{ path('document_show', {'id':document.id}) }}"
-                               class="btn btn-info rounded-0">Consulter</a>
-                            <a href="{{ vich_uploader_asset(document, 'documentFile', 'App\\Entity\\Document') }}"
-                               class="btn btn-info mt-1 rounded-0">Télécharger</a>
-                            {% if is_granted('ROLE_AMBASSADEUR') %}
-                                <a href="{{ path('document_show', {'id':document.id}) }}" class="btn btn-info mt-1 rounded-0">Envoyer
-                                    un message</a>
-                            {% endif %}
-                            {% if is_granted('ROLE_ADMINISTRATEUR') %}
-                                <a href="{{ path('document_edit', {'id':document.id}) }}" class="btn btn-info mt-1 rounded-0">Modifier</a>
-                                {{ include('document/_delete_form.html.twig') }}
-                            {% endif %}
+                <div class="form-group mt-5">
+                    {{ form_start(form, {'attr': {'class': 'form-inline my-2 my-lg-0 justify-content-center'}}) }}
+                    {{ form_widget(form.search, {'attr': {'class': 'form-control mr-sm-2 col-md-7', 'placeholder': "Nom du document ..."}}) }}
+                    <button class="btn btn-primary my-2 my-sm-0 mt-4" type="submit">Rechercher</button>
+                    {{ form_end(form) }}
+                </div>
+                <div class="row m-0">
+                    {% for document in documents %}   
+                        <div class="blur card my-4 mx-5 col-md-4 col-10 p-0 col-lg-2">   
+                            <div class="card-body p-0">
+                                <div class="col-12 p-0 text-center mb-3">   
+                                    <img class="w-50"
+                                         src="{{ asset('build/logo_' ~ document.ext ~ '.png' ) }}"
+                                         alt="logo_{{ document.ext }}">   
+                                </div>
+                                <div class="d-flex col-12 flex-column">
+                                       <h6 class="card-title">Nom : {{ document.name }}</h6>   
+                                    <p class="card-title">Date d'ajout du
+                                        document   : {{ document.updatedAt ? document.updatedAt|date('d-m-Y H:i') : '' }}</p>
+                                </div>
+                                <div class="col-12 p-0 d-flex flex-column bg-primary">
+                                    <a href="{{ path('document_show', {'id':document.id}) }}"
+                                       class="btn btn-info rounded-0">Consulter</a>
+                                    <a href="{{ vich_uploader_asset(document, 'documentFile', 'App\\Entity\\Document') }}"
+                                       class="btn btn-info mt-1 rounded-0">Télécharger</a>
+                                    {% if is_granted('ROLE_ADMINISTRATEUR') %}
+                                        <a href="{{ path('document_edit', {'id':document.id}) }}"
+                                           class="btn btn-info mt-1 rounded-0">Modifier</a>
+                                        {{ include('document/_delete_form.html.twig') }}
+                                    {% else %}
+                                        <a href="{{ path('document_show', {'id':document.id}) }}"
+                                           class="btn btn-info mt-1 rounded-0">Envoyer
+                                            un message</a>
+                                    {% endif %}
+                                </div>
+                            </div>
                         </div>
                     {% else %}
                         'Aucun document trouvé'
                     {% endfor %}
+                    <div class="d-flex justify-content-center w-100 my-5">
+                        {{ knp_pagination_render(documents) }}
+                    </div>
                 </div>
+
                 {% if app.user and app.user.roles.0 is same as('ROLE_ADMINISTRATEUR') %}
                     <div class="d-flex align-items-center my-4 flex-column">
                         <a class="btn btn-lg btn-primary mt-3" href="{{ path('admin_index') }}">Retour gestion</a>
@@ -51,8 +66,6 @@
                         <a class="btn btn-lg btn-primary mt-3" href="{{ path('home') }}">Retour à l'accueil</a>
                     </div>
                 {% endif %}
-
-
             </div>
         </div>
     </section>
