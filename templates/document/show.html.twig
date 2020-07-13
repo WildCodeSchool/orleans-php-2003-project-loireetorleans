@@ -31,7 +31,7 @@
                             {% for message in conversation.messages %}
                                 {% if message.user.roles[0] is same as('ROLE_ADMINISTRATEUR') %}
                                     <div class="col-12 ">
-                                        <div class="col-11 col-md-8 text-break pt-1 my-3 bg-primary mr-auto">
+                                        <div class="col-11 col-md-8 text-break p-1 my-3 bg-primary mr-auto">
                                             <p class="p-3 m-0 bg-light">{{ message.message }}</p>
                                                 <p class=" p-1 m-0 bg-primary text-right text-light m-0">{{ message.user.firstname ~ ' ' ~ message.user.lastname ~ ' Le ' ~ message.date|date("d/m/Y à H:i") }}</p>
                                         </div>
@@ -83,8 +83,6 @@
                 {% endif %}
                 <a class="btn btn-lg btn-primary m-3 col-md-6" href="{{ path('document_index') }}">Retour</a>
             </div>
-
-
         </div>
     </section>
 {% endblock %}
