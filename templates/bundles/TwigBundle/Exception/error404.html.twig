@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Erreur 404{% endblock %}
+
+
+{% block body %}
+<section class="d-flex align-items-center mb-5 justify-content-center flex-column">
+    <h1>Page Introuvable</h1>
+<img class="mr-3 rounded" src="{{ asset('build/error.png') }}" width="104"
+                                                            height="55" alt="Logo ambassadeur">
+    <p>
+        <a href="{{ path('home') }}">retourner à la page d'accueil</a>.
+    </p>
+</section>
+{% endblock %}
