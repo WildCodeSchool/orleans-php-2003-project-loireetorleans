@@ -1,15 +1,14 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Erreur 404{% endblock %}
+{% block title %}Erreur 404 page non trouvée{% endblock %}
 
 
 {% block body %}
-<section class="d-flex align-items-center mb-5 justify-content-center flex-column">
-    <h1>Page Introuvable</h1>
-<img class="mr-3 rounded" src="{{ asset('build/error.png') }}" width="104"
-                                                            height="55" alt="Logo ambassadeur">
-    <p>
-        <a href="{{ path('home') }}">retourner à la page d'accueil</a>.
-    </p>
-</section>
+    <section class="d-flex align-items-center mb-5 justify-content-center flex-column">
+        <h1 class="mt-5">Page Introuvable</h1>
+        <img class="my-5 rounded" src="{{ asset('build/error.jpeg') }}"  alt="Logo error">
+        <p>
+            <a class= "btn btn-lg btn-primary" href="{{ path('home') }}">retourner à la page d'accueil</a>.
+        </p>
+    </section>
 {% endblock %}
