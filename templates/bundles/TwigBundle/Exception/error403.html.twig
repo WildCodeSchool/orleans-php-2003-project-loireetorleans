@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Erreur 403 Accès non autorisé{% endblock %}
+
+
+{% block body %}
+    <section class="d-flex align-items-center mb-5 justify-content-center flex-column">
+        <h1 class="mt-5 text-center">Accès Refusé</h1>
+        <figure class="col-12 text-center">
+            <img class="w-50 my-5 rounded" src="{{ asset('build/logo_denied.jpeg') }}"  alt="Logo denied">
+        </figure>
+        <p>
+            <a class= "btn btn-lg btn-primary" href="{{ path('home') }}">Retourner à la page d'accueil</a>.
+        </p>
+    </section>
+{% endblock %}
