@@ -38,7 +38,12 @@ class UserFixtures extends Fixture
             $user->setPostalCode('45000');
             $user->setEmploymentArea('Orleans');
             $user->setRoles(['ROLE_USER']);
-            $user->setUpdatedAt(new DateTime());
+            $bool= random_int(0, 1);
+            if ($bool === 1) {
+                $user->setPicture('5f089a3376a59499643378.jpg');
+                $user->setUpdatedAt(new DateTime());
+            }
+
             $user->setStatus('En attente');
             $manager->persist($user);
         }
@@ -54,7 +59,7 @@ class UserFixtures extends Fixture
         $user->setCity('Orleans');
         $user->setStreet('5 rue des champs');
         $user->setPostalCode('45000');
-        $user->setPicture('ambassadeur.jpg');
+        $user->setPicture('5f089a3376a59499643378.jpg');
         $user->setEmploymentArea('Orleans');
         $user->setUpdatedAt(new DateTime());
         $user->setPassword($this->passwordEncoder->encodePassword(

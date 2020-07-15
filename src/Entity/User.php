@@ -135,7 +135,7 @@ class User implements UserInterface
     private $activity;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $picture;
 
@@ -197,7 +197,7 @@ class User implements UserInterface
     private $employmentArea;
 
     /**
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(type="datetime", nullable=true)
      */
     private $updatedAt;
 
