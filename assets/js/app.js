@@ -15,6 +15,6 @@ const $ = require('jquery');
 require('bootstrap');
 
 $(document).ready(() => {
-    $('.alert').toast({ delay: 5000 });
-    $('.alert').toast('show');
+    $('.flash').toast({ delay: 5000 });
+    $('.flash').toast('show');
 });
