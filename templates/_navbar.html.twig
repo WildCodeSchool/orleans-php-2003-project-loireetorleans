@@ -19,12 +19,14 @@
                     Trombinoscope
                 </a>
             </li>
+            {% if app.user and app.user.roles.0 is same as ('ROLE_AMBASSADEUR') %}
             <li class="nav-item mx-4">
                 <a class="nav-link" href="{{ path('app_register') }}">
                     <i class="far fa-user-circle"></i>
                     Créer un compte
                 </a>
             </li>
+            {% endif %}
             {% if app.user and app.user.roles.0 is same as('ROLE_AMBASSADEUR') %}
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="#">
