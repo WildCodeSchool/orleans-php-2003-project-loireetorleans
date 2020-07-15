@@ -11,7 +11,15 @@
 {% block body %}
     <section class="d-flex align-items-center mb-5">
         <div class="d-flex align-items-center  flex-column my-5 col-12 p-0">
+<<<<<<< HEAD
             <h1 class="my-4 text-center"> Mon Profil Administrateur</h1>
+=======
+            {% if is_granted('ROLE_ADMINISTRATEUR') %}
+                <h1 class="my-4 text-center"> Mon Profil Administrateur</h1>
+            {% else %}
+                <h1 class="my-4 text-center"> Mon Profil Ambassadeur</h1>
+            {% endif %}
+>>>>>>> 585cd56631a77ae5db5532ea728ee4ea5d1933e0
             <div class=" profil d-flex col-10 col-md-8 my-3 p-4 justify-content-around flex-column flex-lg-row align-items-center">
                 <div class="col-lg-3 col-md-6 my-3">
                     <img src="{{ vich_uploader_asset(user, 'pictureFile', 'App\\Entity\\User') }}" class="card-img" alt="Photo ambassadeur">
@@ -41,7 +49,15 @@
                 </div>
             </div>
             <div class="d-flex align-items-center my-4 justify-content-center w-100 flex-md-row flex-column">
+<<<<<<< HEAD
                 <a class="btn btn-lg btn-primary mx-3 col-lg-2 col-md-4 col-8 my-2" href="{{ path('user_index') }}">Retour Trombinoscope</a>
+=======
+                {% if is_granted('ROLE_ADMINISTRATEUR') %}
+                    <a class="btn btn-lg btn-primary mx-3 col-lg-2 col-md-4 col-8 my-2" href="{{ path('admin_index') }}">Retour accueil</a>
+                {% else %}
+                    <a class="btn btn-lg btn-primary mx-3 col-lg-2 col-md-4 col-8 my-2" href="{{ path('home') }}">Retour accueil</a>
+                {% endif %}
+>>>>>>> 585cd56631a77ae5db5532ea728ee4ea5d1933e0
                 {% if app.user is same as(user) %}
                     <a class="btn btn-lg btn-primary mx-3 col-lg-2 col-md-4 col-8 my-2" href="{{ path('user_edit',  {'login': user.login}) }}">Modifier</a>
                 {% endif %}
