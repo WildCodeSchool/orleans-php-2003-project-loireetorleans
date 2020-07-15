@@ -108,10 +108,6 @@
             </div>
             {% endif %}
             <div class="d-flex flex-md-row flex-column col-10 col-md-4 p-0 justify-content-center align-items-center">
-                {% if app.user.roles[0] is same as ('ROLE_ADMINISTRATEUR') %}
-                    <a class="btn btn-lg btn-primary m-3 col-md-6"
-                       href="{{ path('document_edit', {'id': document.id}) }}">Éditer</a>
-                {% endif %}
                 <a class="btn btn-lg btn-primary m-3 col-md-6" href="{{ path('document_index') }}">Retour</a>
             </div>
         </div>

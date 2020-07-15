@@ -38,8 +38,8 @@
                                         un message</a>
                                 {% endif %}
                                 {% if app.user and app.user.roles.0 is same as('ROLE_ADMINISTRATEUR') %}
-                                    <a href="{{ path('document_show', {'id':document.id}) }}" class="btn btn-info mt-1 rounded-0">Consulter
-                                        mes messages</a>
+                                    <a href="{{ path('document_show', {'id':document.id}) }}" class="btn btn-info mt-1 rounded-0">
+                                        Mes nouveaux messages</a>
                                 {% endif %}
                                 {% if app.user and app.user.roles.0 is same as('ROLE_ADMINISTRATEUR') %}
                                     {{ include('document/_delete_form.html.twig') }}
