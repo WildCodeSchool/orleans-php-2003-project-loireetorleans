@@ -152,6 +152,9 @@ class DocumentController extends AbstractController
         $conversation = $conversationRepo->findOneByConversation($document->getId(), $author);
         $form = $this->createForm(MessageType::class, $message);
         $form->handleRequest($request);
+        if (in_array('ROLE_ADMINISTRATEUR', $user->getRoles())) {
+            $conversations = $conversationRepo->findBy(['document' => $document]);
+        }
 
         if ($form->isSubmitted() && $form->isValid()) {
             $data = $form->getData();
@@ -187,6 +190,7 @@ class DocumentController extends AbstractController
             'document' => $document,
             'conversation' => $conversation,
             'messageForm' => $form->createView(),
+            'conversations' => $conversations ?? []
         ]);
     }
 
