@@ -98,13 +98,18 @@ class UserAuthenticator extends AbstractFormLoginAuthenticator implements Passwo
         return $credentials['password'];
     }
 
+    /**
+     *  @SuppressWarnings(PHPMD)
+     */
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, $providerKey)
     {
-        $targetPath = $this->getTargetPath($request->getSession(), $providerKey);
-        if ($targetPath) {
-            return new RedirectResponse($targetPath);
+        /**
+         * @var User
+         */
+        $user = $token->getUser();
+        if (in_array('ROLE_ADMINISTRATEUR', $user->getRoles())) {
+            return new RedirectResponse($this->urlGenerator->generate('admin_index'));
         }
-
         return new RedirectResponse($this->urlGenerator->generate('home'));
     }
 

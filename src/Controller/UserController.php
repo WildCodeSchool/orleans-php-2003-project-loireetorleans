@@ -57,7 +57,7 @@ class UserController extends AbstractController
     }
 
     /**
-     * @Route("/{login}", name="user_show")
+     * @Route("/ambassadeur/{login}", name="user_show")
      * @param User $user
      * @return Response
      */

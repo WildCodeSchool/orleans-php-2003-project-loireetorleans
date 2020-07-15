@@ -36,7 +36,6 @@ class UserFixtures extends Fixture
             $user->setCity('Orleans');
             $user->setStreet('5 rue des champs');
             $user->setPostalCode('45000');
-            $user->setPicture('ambassadeur.jpg');
             $user->setEmploymentArea('Orleans');
             $user->setRoles(['ROLE_USER']);
             $user->setUpdatedAt(new DateTime());
