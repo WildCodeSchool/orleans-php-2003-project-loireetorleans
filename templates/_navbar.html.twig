@@ -8,39 +8,83 @@
     <div class="collapse navbar-collapse justify-content-end mr-3" id="navbarSupportedContent">
         <ul class="navbar-nav ml-auto">
             <li class="nav-item mx-4">
-                <a class="nav-link " href="{{ path('home') }}">Accueil</a>
+                <a class="nav-link " href="{{ path('home') }}">
+                    <i class="fas fa-home"></i>
+                    Accueil
+                </a>
             </li>
             <li class="nav-item mx-4">
-                <a class="nav-link " href="{{ path('user_index') }}">Trombinoscope</a>
+                <a class="nav-link " href="{{ path('user_index') }}">
+                    <i class="far fa-address-book"></i>
+                    Trombinoscope
+                </a>
+            </li>
+            <li class="nav-item mx-4">
+                <a class="nav-link" href="{{ path('app_register') }}">
+                    <i class="far fa-user-circle"></i>
+                    Créer un compte
+                </a>
             </li>
             {% if app.user and app.user.roles.0 is same as('ROLE_AMBASSADEUR') %}
             <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="#">Ambassadeur</a>
+                <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="#">
+                    <i class="fas fa-user-tie"></i>
+                    Ambassadeur
+                </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                    <a class="dropdown-item" href="{{ path('user_show', {login: app.user.login}) }}">Mon profil</a>
-                    <a class="dropdown-item" href="{{ path('message_index') }}">Mes échanges</a>
-                    <a class="dropdown-item" href="{{ path('document_index') }}">Documents à télécharger</a>
+                    <a class="dropdown-item" href="{{ path('user_show', {login: app.user.login}) }}">
+                        <i class="far fa-user"></i>
+                        Mon profil
+                    </a>
+                    <a class="dropdown-item" href="{{ path('message_index') }}">
+                        <i class="far fa-envelope"></i>
+                        Mes échanges
+                    </a>
+                    <a class="dropdown-item" href="{{ path('document_index') }}">
+                        <i class="fas fa-file-download"></i>
+                        Documents à télécharger
+                    </a>
                 </div>
             </li>
             {% endif %}
             {% if app.user and app.user.roles.0 is same as('ROLE_ADMINISTRATEUR') %}
                 <li class="nav-item dropdown bg-primary">
-                    <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="#">Administrateur</a>
+                    <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="#">
+                        <i class="fas fa-user-cog"></i>
+                        Administrateur
+                    </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                        <a class="dropdown-item" href="{{ path('document_index') }}">Gestion des documents</a>
-                        <a class="dropdown-item" href="{{ path('admin_conversation_index') }}">Mes échanges</a>
-                        <a class="dropdown-item" href="{{ path('admin_profile_index') }}">Profils Ambassadeur</a>
-                        <a class="dropdown-item" href="{{ path('user_show', {login: app.user.login}) }}">Mon profil</a>
+                        <a class="dropdown-item" href="{{ path('document_index') }}">
+                            <i class="far fa-file-word"></i>
+                            Gestion des documents
+                        </a>
+                        <a class="dropdown-item" href="{{ path('admin_conversation_index') }}">
+                            <i class="far fa-envelope"></i>
+                            Mes échanges
+                        </a>
+                        <a class="dropdown-item" href="{{ path('admin_profile_index') }}">
+                            <i class="fas fa-tasks"></i>
+                            Profils Ambassadeur
+                        </a>
+                        <a class="dropdown-item" href="{{ path('user_show', {login: app.user.login}) }}">
+                            <i class="far fa-user"></i>
+                            Mon profil
+                        </a>
                     </div>
                 </li>
             {% endif %}
             <li class="nav-item mx-4">
                 {% if app.user %}
-                    <a class="nav-link" href="{{ path('app_logout') }}"> Se déconnecter</a>
+                    <a class="nav-link" href="{{ path('app_logout') }}">
+                        <i class="fas fa-unlock-alt"></i>
+                        Se déconnecter
+                    </a>
                 {% else %}
-                    <a class="nav-link" href="{{ path('app_login') }}">Connexion</a>
+                    <a class="nav-link" href="{{ path('app_login') }}">
+                        <i class="fas fa-lock"></i>
+                        Connexion
+                    </a>
                 {% endif %}
-
             </li>
         </ul>
     </div>
