@@ -140,6 +140,8 @@ class User implements UserInterface
     private $picture;
 
     /**
+     * @ORM\Column(nullable=true)
+
      * @Vich\UploadableField(
      *     mapping = "picture_file",
      *     fileNameProperty = "picture",
@@ -201,7 +203,7 @@ class User implements UserInterface
      */
     private $updatedAt;
 
-    /** @ORM\Column(type="string", length=50)
+    /** @ORM\Column(type="string", length=50, nullable=true)
      * @Assert\Choice({"En attente", "Validé"})
      */
     private $status;
@@ -384,18 +386,6 @@ class User implements UserInterface
         return $this;
     }
 
-    public function getPicture(): ?string
-    {
-        return $this->picture;
-    }
-
-    public function setPicture(string $picture): self
-    {
-        $this->picture = $picture;
-
-        return $this;
-    }
-
     public function getCity(): ?string
     {
         return $this->city;
@@ -548,6 +538,18 @@ class User implements UserInterface
                 $message->setUser(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getPicture(): ?string
+    {
+        return $this->picture;
+    }
+
+    public function setPicture(?string $picture): self
+    {
+        $this->picture = $picture;
 
         return $this;
     }

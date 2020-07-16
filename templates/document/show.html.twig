@@ -76,11 +76,38 @@
                     </div>
                 </div>
             {% endif %}
+            {% if app.user.roles[0] is same as ('ROLE_ADMINISTRATEUR') %}
+            <div class="d-flex justify-content-center flex-column my-4">
+                <h3 class="my-4 text-center">Nouveaux messages</h3>
+                <table class="table table-hover col-10 p-0 mx-auto">
+                    <thead class="bg-primary">
+                    <tr class="text-center text-light">
+                        <th scope="col">Date</th>
+                        <th scope="col">Document</th>
+                        <th scope="col">Nom-Prénom-Entreprise</th>
+                        <th scope="col">Action</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for conversation in conversations %}
+                        {% if conversation.messages|last.user.roles[0] is same as('ROLE_AMBASSADEUR') %}
+                            <tr class="text-center">
+                                <td>{{ conversation.messages|last.date|date("d/m/Y à H:i") }}</td>
+                                <td>{{ conversation.document.name }}</td>
+                                {% for user in conversation.users  %}
+                                    {% if user.roles[0] is same as('ROLE_AMBASSADEUR') %}
+                                        <td>{{ user.firstname ~ ' ' ~ user.lastName ~ ' / ' ~ user.company}}</td>
+                                    {% endif %}
+                                {% endfor %}
+                                <td><a class="btn btn-info" href="{{ path('admin_conversation_show', {'id': conversation.id}) }}">Consulter</a></td>
+                            </tr>
+                        {% endif %}
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            {% endif %}
             <div class="d-flex flex-md-row flex-column col-10 col-md-4 p-0 justify-content-center align-items-center">
-                {% if app.user.roles[0] is same as ('ROLE_ADMINISTRATEUR') %}
-                    <a class="btn btn-lg btn-primary m-3 col-md-6"
-                       href="{{ path('document_edit', {'id': document.id}) }}">Éditer</a>
-                {% endif %}
                 <a class="btn btn-lg btn-primary m-3 col-md-6" href="{{ path('document_index') }}">Retour</a>
             </div>
         </div>

@@ -49,7 +49,7 @@ class RegistrationFormType extends AbstractType
                 'pictureFile',
                 VichFileType::class,
                 [
-                    'required' => true,
+                    'required' => false,
                     'allow_delete' => false,
                     'download_uri' => false,
                 ]
