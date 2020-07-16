@@ -18,18 +18,18 @@
             {% endif %}
             <div class=" profil d-flex col-10 col-md-8 my-3 p-4 justify-content-around flex-column flex-lg-row align-items-center">
                 <div class="col-lg-3 col-md-6 my-3">
-                    <img src="{{ vich_uploader_asset(user, 'pictureFile', 'App\\Entity\\User') }}" class="card-img" alt="Photo ambassadeur">
+                    <img src="{% if user.picture is empty %}{{ asset('build/img_profil_trombinoscope.png') }}{% else %}{{ vich_uploader_asset(user, 'pictureFile', 'App\\Entity\\User') }}{% endif %}" class="card-img" alt="Photo ambassadeur">
                 </div>
 
-                <div class="d-flex col-lg-6 flex-column flex-md-row justify-content-around align-items-center">
-                    <div class="d-flex flex-column">
+                <div class="d-flex col-lg-8 flex-column flex-md-row justify-content-around align-items-start">
+                    <div class="d-flex flex-column mx-md-3">
                         <h3>Général</h3>
                         <div>
                             <p>Nom : {{ user.lastName }}</p>
                             <p>Prénom : {{ user.firstname }}</p>
-                            <p><i class="fas fa-phone-alt"></i> : {{ user.phoneNumber }}</p>
-                            <p><i class="fas fa-at"></i> : {{ user.email }}</p>
-                            <p class="invisible">.</p>
+                            <p><i class="fas fa-phone-alt"></i> {{ user.phoneNumber }}</p>
+                            <p><i class="fas fa-at"></i> {{ user.email }}</p>
+                            <p><i class="far fa-map"></i> Description : {{ user.description }}</p>
                         </div>
 
                     </div>
@@ -38,9 +38,9 @@
                         <div >
                             <p>Entreprise : {{ user.company }}</p>
                             <p>Secteur d'activité : {{ user.activity }}</p>
-                            <p>{{ user.number }} {{ user.street }}</p>
+                            <p>{{ user.street }}</p>
                             <p>Code postal : {{ user.postalCode }}</p>
-                            <p><i class="fas fa-city"></i> :{{ user.city }}</p></div>
+                            <p><i class="fas fa-city"></i> {{ user.city }}</p></div>
                     </div>
                 </div>
             </div>

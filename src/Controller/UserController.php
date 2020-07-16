@@ -74,7 +74,7 @@ class UserController extends AbstractController
      * @param User $user
      * @param Request $request
      * @return Response
-     * @IsGranted("ROLE_AMBASSADEUR")
+     * @IsGranted("ROLE_USER")
      */
     public function edit(User $user, Request $request): Response
     {

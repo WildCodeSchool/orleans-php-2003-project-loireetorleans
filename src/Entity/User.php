@@ -91,10 +91,7 @@ class User implements UserInterface
     private $email;
 
     /**
-     * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank(
-     *     message="La description est requise"
-     * )
+     * @ORM\Column(type="string", length=255, nullable=true)
      * @Assert\Length(
      *     max = 255,
      *     maxMessage = "La description ne doit pas faire plus de {{ limit }} caractères",
@@ -133,6 +130,11 @@ class User implements UserInterface
      * )
      */
     private $activity;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $picture;
 
     /**
      * @ORM\Column(nullable=true)
@@ -211,11 +213,6 @@ class User implements UserInterface
      * @ORM\OneToMany(targetEntity=Message::class, mappedBy="user", orphanRemoval=true)
      */
     private $messages;
-
-    /**
-     * @ORM\Column(type="string", length=100, nullable=true)
-     */
-    private $picture;
 
     public function __construct()
     {
