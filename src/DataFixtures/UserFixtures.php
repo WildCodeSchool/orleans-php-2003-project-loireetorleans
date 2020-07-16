@@ -30,13 +30,14 @@ class UserFixtures extends Fixture
                 'loireetorleans'
             ));
             $user->setEmail($faker->email);
-            $user->setDescription('golf');
+            $user->setDescription($faker->word);
             $user->setPhoneNumber($faker->e164PhoneNumber);
-            $user->setActivity('industrie');
-            $user->setCity('Orleans');
-            $user->setStreet('5 rue des champs');
-            $user->setPostalCode('45000');
-            $user->setEmploymentArea('Orleans');
+            $user->setActivity($faker->jobTitle);
+            $user->setCity($faker->city);
+            $user->setNumber($faker->numberBetween(0, 500));
+            $user->setStreet(ucfirst($faker->streetName));
+            $user->setPostalCode($faker->postcode);
+            $user->setEmploymentArea($faker->city);
             $user->setRoles(['ROLE_USER']);
             $user->setUpdatedAt(new DateTime());
             $user->setStatus('En attente');
@@ -50,12 +51,12 @@ class UserFixtures extends Fixture
         $user->setEmail($faker->email);
         $user->setDescription('golf');
         $user->setPhoneNumber($faker->e164PhoneNumber);
-        $user->setActivity('industrie');
-        $user->setCity('Orleans');
-        $user->setStreet('5 rue des champs');
-        $user->setPostalCode('45000');
+        $user->setActivity($faker->jobTitle);
+        $user->setCity($faker->city);
+        $user->setStreet($faker->streetName);
+        $user->setPostalCode($faker->postcode);
         $user->setPicture('ambassadeur.jpg');
-        $user->setEmploymentArea('Orleans');
+        $user->setEmploymentArea($faker->city);
         $user->setUpdatedAt(new DateTime());
         $user->setPassword($this->passwordEncoder->encodePassword(
             $user,
