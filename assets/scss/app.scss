@@ -43,6 +43,10 @@ body {
     width: 100%;
 }
 
+section {
+    min-height: 80vh;
+}
+
 h1 {
     font-family: $font-title;
     font-size: $size-title;
