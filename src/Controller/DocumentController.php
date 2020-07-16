@@ -61,7 +61,7 @@ class DocumentController extends AbstractController
         );
 
         return $this->render('document/index.html.twig', [
-            'form' => $form->createView(),
+            'form'      => $form->createView(),
             'documents' => $docs,
         ]);
     }
@@ -78,7 +78,9 @@ class DocumentController extends AbstractController
     public function new(Request $request, MailerInterface $mailer, UserRepository $userRepository): Response
     {
         $document = new Document();
-        $form = $this->createForm(DocumentType::class, $document);
+        $form = $this->createForm(DocumentType::class, $document, [
+            'validation_groups' => ['add'],
+        ]);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -112,13 +114,14 @@ class DocumentController extends AbstractController
                 'success',
                 'Le document a bien été ajouté !'
             );
+
             return $this->redirectToRoute('document_index');
         }
 
 
         return $this->render('document/new.html.twig', [
-            'document' => $document,
-            'form' => $form->createView(),
+            'document'         => $document,
+            'form'             => $form->createView(),
             'registrationForm' => $form->createView(),
         ]);
     }
@@ -181,16 +184,17 @@ class DocumentController extends AbstractController
                 'success',
                 'Votre message a bien été envoyé !'
             );
+
             return $this->redirectToRoute('document_show', [
                 'id' => $document->getId(),
             ]);
         }
 
         return $this->render('document/show.html.twig', [
-            'document' => $document,
-            'conversation' => $conversation,
-            'messageForm' => $form->createView(),
-            'conversations' => $conversations ?? []
+            'document'      => $document,
+            'conversation'  => $conversation,
+            'messageForm'   => $form->createView(),
+            'conversations' => $conversations ?? [],
         ]);
     }
 
@@ -212,12 +216,13 @@ class DocumentController extends AbstractController
                 'success',
                 'Le document a bien été mis à jour !'
             );
+
             return $this->redirectToRoute('document_index');
         }
 
         return $this->render('document/edit.html.twig', [
             'document' => $document,
-            'form' => $form->createView(),
+            'form'     => $form->createView(),
         ]);
     }
 
@@ -239,6 +244,7 @@ class DocumentController extends AbstractController
             'success',
             'Le document a bien été supprimé !'
         );
+
         return $this->redirectToRoute('document_index');
     }
 }

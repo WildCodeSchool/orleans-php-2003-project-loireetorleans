@@ -38,13 +38,13 @@ class Document
 
     /**
      * @Vich\UploadableField(mapping="document_file", fileNameProperty="document")
-     * @var File
+     * @var ?File
      * @Assert\File(
      *     mimeTypes={"application/pdf","application/msword","application/vnd.oasis.opendocument.text","text/plain",
      *     "application/vnd.openxmlformats-officedocument.wordprocessingml.document"},
      *     mimeTypesMessage="Veuillez insérer un fichier au format {{ types }}"
      * )
-     * @Assert\NotBlank(message="Veuillez insérer un fichier")
+     * @Assert\NotBlank(message="Veuillez insérer un fichier", groups={"add"})
      */
     private $documentFile;
 
@@ -98,7 +98,7 @@ class Document
         return $this;
     }
 
-    public function setDocumentFile(File $image)
+    public function setDocumentFile(?File $image)
     {
         $this->documentFile = $image;
         $this->updatedAt = new DateTime('now');

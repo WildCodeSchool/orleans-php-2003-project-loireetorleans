@@ -16,7 +16,7 @@ class DocumentType extends AbstractType
         $builder
             ->add('name')
             ->add('documentFile', VichImageType::class, [
-                'required'      => true,
+                'required'      => false,
                 'allow_delete'  => false,
                 'download_uri' => false,
                 'attr' => ['class' => 'col-12 p-0'],
