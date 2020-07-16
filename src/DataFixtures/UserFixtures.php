@@ -75,7 +75,7 @@ class UserFixtures extends Fixture
             $user->setRoles((array)self::ROLES[array_rand(self::ROLES, 1)]);
             $bool= random_int(0, 1);
             if ($bool === 1) {
-                $user->setPicture('5f089a3376a59499643378.jpg');
+                $user->setPicture('ambassadeur.jpeg');
                 $user->setUpdatedAt(new DateTime());
             }
 
