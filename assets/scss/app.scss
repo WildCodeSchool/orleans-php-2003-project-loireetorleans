@@ -41,6 +41,11 @@ body {
     background-color: $light-color;
     display: table;
     width: 100%;
+
+    & section {
+        min-height: 80vh;
+        max-width: 100vw;
+    }
 }
 
 section {
