@@ -5,7 +5,7 @@
   {% endblock %}
 {% block body %}
     <section class="mb-5">
-        <h1 class="text-center my-5">Loire&Orléans</h1>
+        <h1 class="text-center my-5">Les Ambassadeurs de Loire&Orléans</h1>
         <div class="row d-flex align-items-top justify-content-center mx-0 ">
             <figure class=" col-10 col-lg-4 text-center">
                 <img class="col-12 rounded p-0" src="{{ asset('build/work.jpg') }}" alt="work">
@@ -53,11 +53,14 @@
                     sur laquelle il s’engage dès son arrivée..</p>
             </div>
             <figure class="col-10 col-lg-4 text-center">
-                <img class="col-12 rounded p-0 mb-5" src="{{ asset('build/amb_picture.jpg') }}" alt="Description">
+                <img class="col-12 rounded p-0" src="{{ asset('build/amb_picture.jpg') }}" alt="Description">
+                <figcaption class="mb-3 font-italic ">
+                    Emmanuel Vasseneix, Président de la Laiterie de Saint Denis (LSDH) et Ambassadeur Loire&Orléans.
+                    @Didier.Depoorter
+                </figcaption>
                 <a class="btn-lg btn-primary mt-3 col-12" href="{{ path('user_index') }}">
                     Découvrir nos Ambassadeurs
                 </a>
-
             </figure>
             <div class="card col-8 mt-2 my-4 pb-3 mx-0">
                 <h3 class="text-center my-4">Quelques mots de nos ambassadeurs <i class="far fa-comment-dots"></i></h3>
