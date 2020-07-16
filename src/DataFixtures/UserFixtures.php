@@ -34,7 +34,6 @@ class UserFixtures extends Fixture
             $user->setPhoneNumber($faker->e164PhoneNumber);
             $user->setActivity($faker->jobTitle);
             $user->setCity($faker->city);
-            $user->setNumber($faker->numberBetween(0, 500));
             $user->setStreet(ucfirst($faker->streetName));
             $user->setPostalCode($faker->postcode);
             $user->setEmploymentArea($faker->city);
