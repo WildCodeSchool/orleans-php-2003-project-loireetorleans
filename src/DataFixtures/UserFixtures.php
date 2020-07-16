@@ -39,7 +39,12 @@ class UserFixtures extends Fixture
             $user->setPostalCode($faker->postcode);
             $user->setEmploymentArea($faker->city);
             $user->setRoles(['ROLE_USER']);
-            $user->setUpdatedAt(new DateTime());
+            $bool= random_int(0, 1);
+            if ($bool === 1) {
+                $user->setPicture('5f089a3376a59499643378.jpg');
+                $user->setUpdatedAt(new DateTime());
+            }
+
             $user->setStatus('En attente');
             $manager->persist($user);
         }
@@ -51,6 +56,7 @@ class UserFixtures extends Fixture
         $user->setEmail($faker->email);
         $user->setDescription('golf');
         $user->setPhoneNumber($faker->e164PhoneNumber);
+
         $user->setActivity($faker->jobTitle);
         $user->setCity($faker->city);
         $user->setStreet($faker->streetName);

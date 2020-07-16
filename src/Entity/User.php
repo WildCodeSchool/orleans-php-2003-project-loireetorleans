@@ -135,7 +135,13 @@ class User implements UserInterface
     private $activity;
 
     /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $picture;
+
+    /**
      * @ORM\Column(nullable=true)
+
      * @Vich\UploadableField(
      *     mapping = "picture_file",
      *     fileNameProperty = "picture",
@@ -211,11 +217,6 @@ class User implements UserInterface
      * @ORM\OneToMany(targetEntity=Message::class, mappedBy="user", orphanRemoval=true)
      */
     private $messages;
-
-    /**
-     * @ORM\Column(type="string", length=100, nullable=true)
-     */
-    private $picture;
 
     /**
      * @ORM\Column(type="integer")
