@@ -10,6 +10,41 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class UserFixtures extends Fixture
 {
+
+    const ACTIVITIES = [
+        'Aéronautique - défense',
+        'Agroalimentaire',
+        'Equipementiers automobile',
+        'Centre d\'appels - Relation clients',
+        'Energies nouvelles renouvelables',
+        'Nucléaire',
+        'Logistique - Transports',
+        'Equipementiers machinisme agricoles',
+        'Mécanique - Travaux des métaux',
+        'Matériaux composites',
+        'Banque assurance et mutuelle',
+        'Objets connectés - IA - Electronique',
+        'ESN',
+        'Industrie graphique',
+        'Parfumerie cosmétique',
+        'Santé - Pharmacie',
+        'Transformation du bois',
+        'Economie scoiale et solidaire',
+        'Autre',
+    ];
+
+    const EMPLOYMENT_AREA = [
+        'Orléans',
+        'Pithiviers',
+        'Montargis',
+        'Gien',
+    ];
+
+    const ROLES = [
+      'ROLE_AMBASSADEUR',
+      'ROLE_USER',
+    ];
+
     private $passwordEncoder;
     public function __construct(UserPasswordEncoderInterface $passwordEncoder)
     {
@@ -30,15 +65,20 @@ class UserFixtures extends Fixture
                 'loireetorleans'
             ));
             $user->setEmail($faker->email);
-            $user->setDescription('golf');
+            $user->setDescription($faker->text(255));
             $user->setPhoneNumber($faker->e164PhoneNumber);
-            $user->setActivity('industrie');
-            $user->setCity('Orleans');
-            $user->setStreet('5 rue des champs');
-            $user->setPostalCode('45000');
-            $user->setEmploymentArea('Orleans');
-            $user->setRoles(['ROLE_USER']);
-            $user->setUpdatedAt(new DateTime());
+            $user->setActivity(self::ACTIVITIES[array_rand(self::ACTIVITIES, 1)]);
+            $user->setCity($faker->city);
+            $user->setStreet(ucfirst($faker->streetName));
+            $user->setPostalCode($faker->postcode);
+            $user->setEmploymentArea(self::EMPLOYMENT_AREA[array_rand(self::EMPLOYMENT_AREA, 1)]);
+            $user->setRoles((array)self::ROLES[array_rand(self::ROLES, 1)]);
+            $bool= random_int(0, 1);
+            if ($bool === 1) {
+                $user->setPicture('ambassadeur.jpeg');
+                $user->setUpdatedAt(new DateTime());
+            }
+
             $user->setStatus('En attente');
             $manager->persist($user);
         }
@@ -50,12 +90,13 @@ class UserFixtures extends Fixture
         $user->setEmail($faker->email);
         $user->setDescription('golf');
         $user->setPhoneNumber($faker->e164PhoneNumber);
-        $user->setActivity('industrie');
-        $user->setCity('Orleans');
-        $user->setStreet('5 rue des champs');
-        $user->setPostalCode('45000');
+
+        $user->setActivity($faker->jobTitle);
+        $user->setCity($faker->city);
+        $user->setStreet($faker->streetName);
+        $user->setPostalCode($faker->postcode);
         $user->setPicture('ambassadeur.jpg');
-        $user->setEmploymentArea('Orleans');
+        $user->setEmploymentArea($faker->city);
         $user->setUpdatedAt(new DateTime());
         $user->setPassword($this->passwordEncoder->encodePassword(
             $user,

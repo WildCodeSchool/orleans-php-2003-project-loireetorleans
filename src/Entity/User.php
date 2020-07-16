@@ -91,10 +91,7 @@ class User implements UserInterface
     private $email;
 
     /**
-     * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank(
-     *     message="La description est requise"
-     * )
+     * @ORM\Column(type="string", length=255, nullable=true)
      * @Assert\Length(
      *     max = 255,
      *     maxMessage = "La description ne doit pas faire plus de {{ limit }} caractères",
@@ -135,11 +132,12 @@ class User implements UserInterface
     private $activity;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $picture;
 
     /**
+     * @ORM\Column(nullable=true)
      * @Vich\UploadableField(
      *     mapping = "picture_file",
      *     fileNameProperty = "picture",
@@ -197,11 +195,11 @@ class User implements UserInterface
     private $employmentArea;
 
     /**
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(type="datetime", nullable=true)
      */
     private $updatedAt;
 
-    /** @ORM\Column(type="string", length=50)
+    /** @ORM\Column(type="string", length=50, nullable=true)
      * @Assert\Choice({"En attente", "Validé"})
      */
     private $status;
@@ -384,18 +382,6 @@ class User implements UserInterface
         return $this;
     }
 
-    public function getPicture(): ?string
-    {
-        return $this->picture;
-    }
-
-    public function setPicture(string $picture): self
-    {
-        $this->picture = $picture;
-
-        return $this;
-    }
-
     public function getCity(): ?string
     {
         return $this->city;
@@ -548,6 +534,18 @@ class User implements UserInterface
                 $message->setUser(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getPicture(): ?string
+    {
+        return $this->picture;
+    }
+
+    public function setPicture(?string $picture): self
+    {
+        $this->picture = $picture;
 
         return $this;
     }

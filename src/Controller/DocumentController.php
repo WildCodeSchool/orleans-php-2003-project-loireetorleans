@@ -90,7 +90,7 @@ class DocumentController extends AbstractController
             } else {
                 $document->setExt($extension);
             }
-
+            $document->setDocument($extension);
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($document);
             $entityManager->flush();
@@ -203,10 +203,23 @@ class DocumentController extends AbstractController
      */
     public function edit(Request $request, Document $document): Response
     {
-        $form = $this->createForm(DocumentType::class, $document);
+        $form = $this->createForm(DocumentType::class, $document, [
+            'validation_groups' => ['add'],
+        ]);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $data = $form->getData();
+            if ($data->getDocumentFile() !== null) {
+                $extension = $data->getDocumentFile()->getClientOriginalName();
+                $extension = pathinfo($extension, PATHINFO_EXTENSION);
+                if ($extension === 'docx' || $extension === 'doc') {
+                    $document->setExt('word');
+                } else {
+                    $document->setExt($extension);
+                }
+            }
+
             $this->getDoctrine()->getManager()->flush();
             $this->addFlash(
                 'success',
@@ -214,6 +227,7 @@ class DocumentController extends AbstractController
             );
             return $this->redirectToRoute('document_index');
         }
+
 
         return $this->render('document/edit.html.twig', [
             'document' => $document,

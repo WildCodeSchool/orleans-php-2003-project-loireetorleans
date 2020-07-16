@@ -19,11 +19,19 @@
                     Trombinoscope
                 </a>
             </li>
-            {% if app.user and app.user.roles.0 is same as ('ROLE_AMBASSADEUR') %}
+            {% if app.user is empty %}
             <li class="nav-item mx-4">
                 <a class="nav-link" href="{{ path('app_register') }}">
                     <i class="far fa-user-circle"></i>
                     Créer un compte
+                </a>
+            </li>
+            {% endif %}
+            {% if app.user and app.user.roles.0 is same as('ROLE_USER') %}
+            <li class="nav-item mx-4">
+                <a class="nav-link " href="{{ path('user_show', {'login': app.user.login}) }}">
+                    <i class="far fa-address-book"></i>
+                    Mon profil
                 </a>
             </li>
             {% endif %}

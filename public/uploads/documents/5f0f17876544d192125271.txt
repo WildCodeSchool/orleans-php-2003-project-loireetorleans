@@ -1,0 +1,9 @@
+
+- envoi de photo à mettre sur la page d'accueil(fin de semaine)
+- mentions légales en attente
+
+- recherche par thématique du bessin d'emploi / thématique filière economique 
+- en attente du listing des bassin d'emploi pour le système de recherche (20)
+
+- pas de theme sur le fichiers : l'archivage se fait par heure/date
+- pas de mail type mais reprise de mail ou création de mail spécifique (essayer de travailler sur un mail type entre Ambassadeur
