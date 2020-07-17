@@ -31,6 +31,7 @@ $font-text: 'Open Sans Light', sans-serif;
 $font-title: 'Open Sans Bold', sans-serif;
 
 $size-text: calc(16px + (16 - 12) * ((100vw - 300px) / (1600 - 300)));
+$size-quote:18px;
 $size-footer-text: 10px;
 $size-navbar-text: 18px;
 $size-intermediate :calc(2.5 * var($size-text));

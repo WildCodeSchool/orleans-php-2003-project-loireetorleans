@@ -10,6 +10,41 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class UserFixtures extends Fixture
 {
+
+    const ACTIVITIES = [
+        'Aéronautique - défense',
+        'Agroalimentaire',
+        'Equipementiers automobile',
+        'Centre d\'appels - Relation clients',
+        'Energies nouvelles renouvelables',
+        'Nucléaire',
+        'Logistique - Transports',
+        'Equipementiers machinisme agricoles',
+        'Mécanique - Travaux des métaux',
+        'Matériaux composites',
+        'Banque assurance et mutuelle',
+        'Objets connectés - IA - Electronique',
+        'ESN',
+        'Industrie graphique',
+        'Parfumerie cosmétique',
+        'Santé - Pharmacie',
+        'Transformation du bois',
+        'Economie scoiale et solidaire',
+        'Autre',
+    ];
+
+    const EMPLOYMENT_AREA = [
+        'Orléans',
+        'Pithiviers',
+        'Montargis',
+        'Gien',
+    ];
+
+    const ROLES = [
+      'ROLE_AMBASSADEUR',
+      'ROLE_USER',
+    ];
+
     private $passwordEncoder;
     public function __construct(UserPasswordEncoderInterface $passwordEncoder)
     {
@@ -30,18 +65,17 @@ class UserFixtures extends Fixture
                 'loireetorleans'
             ));
             $user->setEmail($faker->email);
-            $user->setDescription($faker->word);
+            $user->setDescription($faker->text(255));
             $user->setPhoneNumber($faker->e164PhoneNumber);
-            $user->setActivity($faker->jobTitle);
+            $user->setActivity(self::ACTIVITIES[array_rand(self::ACTIVITIES, 1)]);
             $user->setCity($faker->city);
-            $user->setNumber($faker->numberBetween(0, 500));
             $user->setStreet(ucfirst($faker->streetName));
             $user->setPostalCode($faker->postcode);
-            $user->setEmploymentArea($faker->city);
-            $user->setRoles(['ROLE_USER']);
+            $user->setEmploymentArea(self::EMPLOYMENT_AREA[array_rand(self::EMPLOYMENT_AREA, 1)]);
+            $user->setRoles((array)self::ROLES[array_rand(self::ROLES, 1)]);
             $bool= random_int(0, 1);
             if ($bool === 1) {
-                $user->setPicture('5f089a3376a59499643378.jpg');
+                $user->setPicture('ambassadeur.jpeg');
                 $user->setUpdatedAt(new DateTime());
             }
 

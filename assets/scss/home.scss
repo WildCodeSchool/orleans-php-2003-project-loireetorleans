@@ -9,6 +9,14 @@ p {
     font-family: $font-text;
 }
 
+figcaption {
+    font-family: $font-text;
+}
+
+blockquote{
+    font-size: $size-quote;
+}
+
 h2 {
     font-family: $font-title;
 }

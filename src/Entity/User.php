@@ -91,10 +91,7 @@ class User implements UserInterface
     private $email;
 
     /**
-     * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank(
-     *     message="La description est requise"
-     * )
+     * @ORM\Column(type="string", length=255, nullable=true)
      * @Assert\Length(
      *     max = 255,
      *     maxMessage = "La description ne doit pas faire plus de {{ limit }} caractères",
@@ -141,7 +138,6 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(nullable=true)
-
      * @Vich\UploadableField(
      *     mapping = "picture_file",
      *     fileNameProperty = "picture",
@@ -217,11 +213,6 @@ class User implements UserInterface
      * @ORM\OneToMany(targetEntity=Message::class, mappedBy="user", orphanRemoval=true)
      */
     private $messages;
-
-    /**
-     * @ORM\Column(type="integer")
-     */
-    private $number;
 
     public function __construct()
     {
@@ -555,18 +546,6 @@ class User implements UserInterface
     public function setPicture(?string $picture): self
     {
         $this->picture = $picture;
-
-        return $this;
-    }
-
-    public function getNumber(): ?int
-    {
-        return $this->number;
-    }
-
-    public function setNumber(int $number): self
-    {
-        $this->number = $number;
 
         return $this;
     }
