@@ -21,7 +21,6 @@ class SearchingType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'method' => 'get',
             'csrf_protection' => false
         ]);
     }
