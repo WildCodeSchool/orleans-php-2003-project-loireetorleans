@@ -40,7 +40,7 @@ class UserController extends AbstractController
             $data = $form->getData();
             $ambassadors = $userRepository->findBySearch($data['search']);
         } else {
-            $ambassadors = $userRepository->findAll();
+            $ambassadors = $userRepository->findBy(['status' => 'Validé']);
         }
 
         $users = $paginator->paginate(

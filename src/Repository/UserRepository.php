@@ -79,6 +79,8 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
             ->orWhere('u.activity LIKE :search')
             ->orWhere('u.description LIKE :search')
             ->setParameter('search', '%' . $search . '%')
+            ->andWhere('u.status = :status ')
+            ->setParameter('status', 'Validé')
             ->getQuery()
             ->getResult();
     }
