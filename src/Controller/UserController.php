@@ -46,13 +46,13 @@ class UserController extends AbstractController
                 ['pageOutOfRange' => 'fix']
             );
         } else {
-            $ambassadors = $userRepository->findAll();
+            $ambassadors = $userRepository->findBy(['status' => 'Validé']);
             $users = $paginator->paginate(
                 $ambassadors,
                 $request->query->getInt('page', 1),
                 self::USERS_PER_PAGE,
                 ['pageOutOfRange' => 'fix']
-            );
+            );   
         }
 
         return $this->render('trombinoscope/index.html.twig', [
