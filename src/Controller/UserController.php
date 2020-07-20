@@ -39,15 +39,21 @@ class UserController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $data = $form->getData();
             $ambassadors = $userRepository->findBySearch($data['search']);
+            $users = $paginator->paginate(
+                $ambassadors,
+                $request->query->getInt('page', 1),
+                self::USERS_PER_PAGE,
+                ['pageOutOfRange' => 'fix']
+            );
         } else {
-            $ambassadors = $userRepository->findAll();
+            $ambassadors = $userRepository->findBy(['status' => 'Validé']);
+            $users = $paginator->paginate(
+                $ambassadors,
+                $request->query->getInt('page', 1),
+                self::USERS_PER_PAGE,
+                ['pageOutOfRange' => 'fix']
+            );
         }
-
-        $users = $paginator->paginate(
-            $ambassadors,
-            $request->query->getInt('page', 1),
-            self::USERS_PER_PAGE
-        );
 
         return $this->render('trombinoscope/index.html.twig', [
             'form' => $form->createView(),
