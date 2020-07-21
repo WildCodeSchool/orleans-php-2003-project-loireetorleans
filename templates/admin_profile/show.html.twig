@@ -9,38 +9,65 @@
     {% endblock %}
 
 {% block body %}
-    <section class="d-flex align-items-center mb-5">
-        <div class="w-100 text-center">
-            <div class="d-flex align-items-center flex-column col-12">
-                <h1 class="my-4 text-center">Profil de {{ user.firstname ~ ' ' ~ user.lastname }}</h1>
-                <h2 class="my-3 text-center">Statut : {{ user.status }}</h2>
-                <div class=" profil d-flex flex-lg-row flex-column col-md-10 my-3 p-4 align-items-center">
-                    <div class="col-lg-3 col-md-6">
-                        <img src="{% if user.picture is empty %}{{ asset('build/img_profil_trombinoscope.png') }}{% else %}{{ vich_uploader_asset(user, 'pictureFile', 'App\\Entity\\User') }}{% endif %}" class="card-img" alt="Photo ambassadeur">
+    <section>
+        {% if user.status is same as ('En attente') %}
+        <div class="d-flex flex-column col-12 p-0 align-items-center">
+            <div class="message-validation col-lg-6 mt-4 d-flex justify-content-center">
+                <p class="m-0">Utilisateur en attente de confirmation
+                    <a class="btn btn-primary my-3 ml-3" href="">Valider le statut Ambassadeur</a>
+                </p>
+            </div>
+            {% endif %}
+            <div class="d-flex align-items-end flex-column flex-lg-row mt-5">
+                <div class="col-md-4 p-0">
+                    <figure class="img_ambassador m-0">
+                        <img src="{% if user.picture is empty %}{{ asset('build/img_profil_trombinoscope.png') }}{% else %}{{ vich_uploader_asset(user, 'pictureFile', 'App\\Entity\\User') }}{% endif %}"
+                             class="card-img col-lg-12" alt="Photo Ambassadeur">
+                    </figure>
+                </div>
+                <div class="col-md-8 mt-5">
+                    <h1 class="card-title">{{ user.firstname }} {{ user.lastname }}</h1>
+                    <div class="card-body m-0 mr-5 mt-5">
+                        <p><i class="fas fa-at"></i>
+                            <u>{{ user.email }}</u>
+                        </p>
+                        <p>
+                            <i class="fas fa-phone-alt"></i>
+                            {{ user.phonenumber }}
+                        </p>
+                        <p class="mb-0">
+                            <i class="fas fa-angle-double-left"></i>
+                            {{ user.description }}
+                            <i class="fas fa-angle-double-right"></i>
+                        </p>
                     </div>
-                    <div class="d-flex flex-column flex-md-row col-lg-9 justify-content-around">
-                        <div class="d-flex flex-column text-left">
-                            <h3 class="my-3">Général</h3>
-                            <p>Nom : {{ user.lastName }}</p>
-                            <p>Prénom : {{ user.firstname }}</p>
-                            <p><i class="fas fa-phone-alt"></i> : {{ user.phoneNumber }}</p>
-                            <p><i class="fas fa-at"></i> : {{ user.email }}</p>
-                        </div>
-                        <div class="d-flex flex-column text-left">
-                            <h3 class="my-3">Professionnel</h3>
-                            <p>Entreprise : {{ user.company }}</p>
-                            <p>Secteur d'activité : {{ user.activity }}</p>
-                            <p> Rue : {{ user.street }}</p>
-                            <p>Code postal : {{ user.postalCode }}</p>
-                            <p><i class="fas fa-city"></i> :{{ user.city }}</p></div>
-
+                    <div class="card-body mt-5 mr-5">
+                        <h2 class="card-title">
+                            <i class="fas fa-building"></i>
+                            {{ user.company }}
+                        </h2>
+                        <p class="mb-0">
+                            <i class="fas fa-map-marker-alt"></i>
+                            {{ user.street }}
+                        </p>
+                        <p>
+                            <span class="ml-3">{{ user.postalCode }} {{ user.city }}</span>
+                        </p>
+                        <p class="mb-0">
+                            <i class="fas fa-industry"></i>
+                            {{ user.activity }}
+                        </p>
+                        <p class="mb-0">
+                            <i class="fas fa-map-marked-alt"></i>
+                            {{ user.employmentArea }}
+                        </p>
                     </div>
                 </div>
             </div>
-            {{ include('admin_profile/_form.html.twig') }}
-            <a class="btn btn-primary my-4 col-md-2 col-10" href="{{ path('admin_profile_index') }}">Retour</a>
+            <div class="col-12 p-0 d-flex justify-content-center mt-3">
+                <a class="btn btn-primary col-md-2 m-3" href="{{ path('admin_profile_index') }}">Retour</a>
+            </div>
         </div>
-
     </section>
 {% endblock %}
 

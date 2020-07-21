@@ -105,6 +105,17 @@ h1 {
     box-shadow: 2px 3px 5px 1px $nav-bar;
 }
 
+.card-body {
+    background-color: $widget-light-color;
+    border-radius: 3px;
+}
+
+.message-validation {
+    background-color: $widget-light-color;
+    border-radius: 3px;
+    border: solid 1px $nav-bar;
+}
+
 @media screen and (max-width: 900px) {
     .pagination .page-item {
         display: none;
