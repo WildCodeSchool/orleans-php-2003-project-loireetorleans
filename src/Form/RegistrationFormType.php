@@ -126,16 +126,18 @@ class RegistrationFormType extends AbstractType
                 [
                     'type' => PasswordType::class,
                     'invalid_message' => 'Le mot de passe de confirmation ne correspond pas',
-                    'required' => false,
+                    'required' => true,
                     'first_options' => [
                         'label' => 'Mot de passe',
-                        'attr' => ['class' => 'd-flex flex-column my-3 col-12 p-0']
+                        'attr' => ['class' => 'd-flex flex-column col-12 p-0'],
+
                     ],
                     'second_options' => [
                         'label' => 'Confirmation du mot de passe',
-                        'attr' => ['class' => 'd-flex flex-column my-3 col-12 p-0']
+                        'attr' => ['class' => 'd-flex flex-column col-12 p-0'],
+
                     ],
-                    'mapped' => true,
+                    'mapped' => false,
                 ]
             );
     }

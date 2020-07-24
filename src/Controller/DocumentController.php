@@ -38,6 +38,7 @@ class DocumentController extends AbstractController
      * @param Request $request
      * @param PaginatorInterface $paginator
      * @IsGranted("ROLE_AMBASSADEUR")
+     * @return Response
      */
     public function index(
         DocumentRepository $documentRepository,
@@ -57,7 +58,8 @@ class DocumentController extends AbstractController
         $docs = $paginator->paginate(
             $documents,
             $request->query->getInt('page', 1),
-            self::DOCS_PER_PAGE
+            self::DOCS_PER_PAGE,
+            ['pageOutOfRange' => 'fix']
         );
 
         return $this->render('document/index.html.twig', [
