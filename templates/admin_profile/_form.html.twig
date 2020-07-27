@@ -1,7 +1,7 @@
 {{ form_start(form, {'attr': {'class': 'col-12 d-flex flex-md-row flex-column justify-content-center ' }}) }}
-<div class="form mx-3 my-3 my-md-0 d-flex align-items-center">
+<div class="validation mx-3 my-3 my-md-0 d-flex align-items-center border-0 mr-3">
     {{ form_label(form.status, 'Statut') }}
-    {{ form_widget(form.status) }}
+    {{ form_widget(form.status, {'attr': {'class': 'col-lg-7 mr-2'}}) }}
 </div>
 <button class="btn btn-primary mx-3">{{ button_label|default('Enregistrer') }}</button>
 {{ form_end(form) }}
