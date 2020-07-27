@@ -10,14 +10,12 @@
 
 {% block body %}
     <section>
-        {% if user.status is same as ('En attente') %}
         <div class="d-flex flex-column col-12 p-0 align-items-center">
             <div class="message-validation col-lg-6 mt-4 d-flex justify-content-center">
                 <p class="m-0">Utilisateur en attente de confirmation
-                    <a class="btn btn-primary my-3 ml-3" href="">Valider le statut Ambassadeur</a>
+                    {{ include('admin_profile/_form.html.twig') }}
                 </p>
             </div>
-            {% endif %}
             <div class="d-flex align-items-end flex-column flex-lg-row mt-5">
                 <div class="col-md-4 p-0">
                     <figure class="img_ambassador m-0">

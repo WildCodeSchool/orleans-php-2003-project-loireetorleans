@@ -19,3 +19,8 @@ form {
 label {
     font-family: $font-text;
 }
+
+.card-body {
+    background-color: $widget-light-color;
+    border-radius: 3px;
+}
