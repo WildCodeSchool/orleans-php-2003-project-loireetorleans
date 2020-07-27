@@ -105,10 +105,19 @@ h1 {
     box-shadow: 2px 3px 5px 1px $nav-bar;
 }
 
-.message-validation {
+.confirmation {
     background-color: $widget-light-color;
     border-radius: 3px;
-    border: solid 1px $nav-bar;
+}
+
+.form {
+    background-color: $widget-light-color;
+}
+
+.alert-danger {
+    > ul {
+        padding: 0 1%;
+    }
 }
 
 @media screen and (max-width: 900px) {

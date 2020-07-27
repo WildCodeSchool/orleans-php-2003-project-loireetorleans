@@ -1,6 +1,6 @@
 {{ form_start(form, {'attr': {'class': 'col-12 d-flex flex-md-row flex-column justify-content-center ' }}) }}
-<div class="mx-3 my-3 my-md-0 d-flex align-items-center">
-    {{ form_label(form.status, 'Statut Ambassadeur') }}
+<div class="form mx-3 my-3 my-md-0 d-flex align-items-center">
+    {{ form_label(form.status, 'Statut') }}
     {{ form_widget(form.status) }}
 </div>
 <button class="btn btn-primary mx-3">{{ button_label|default('Enregistrer') }}</button>
