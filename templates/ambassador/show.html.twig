@@ -47,7 +47,6 @@
             <div class="d-flex align-items-center my-4 justify-content-center w-100 flex-md-row flex-column">
                 {% if is_granted('ROLE_ADMINISTRATEUR') %}
                      <a class="btn btn-lg btn-primary mx-3 col-lg-2 col-md-4 col-8 my-2" href="{{ path('admin_index') }}">Espace Administration</a>
-                     <a class="btn btn-lg btn-primary mx-3 col-lg-2 col-md-4 col-8 my-2" href="{{ path('user_index') }}">Retour Trombinoscope</a>
                 {% else %}
                     <a class="btn btn-lg btn-primary mx-3 col-lg-2 col-md-4 col-8 my-2" href="{{ path('user_index') }}">Retour Trombinoscope</a>
                 {% endif %}

@@ -105,6 +105,22 @@ h1 {
     box-shadow: 2px 3px 5px 1px $nav-bar;
 }
 
+.confirmation {
+    background-color: $widget-light-color;
+    border-radius: 3px;
+}
+
+.validation {
+    background-color: $widget-light-color;
+    border-radius: 3px;
+}
+
+.alert-danger {
+    > ul {
+        padding: 0 1%;
+    }
+}
+
 @media screen and (max-width: 900px) {
     .pagination .page-item {
         display: none;
