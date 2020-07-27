@@ -14,6 +14,17 @@
                     <a class="btn btn-lg btn-primary mt-3" href="{{ path('document_new') }}">Ajouter un document</a>
                 </div>
             {% endif %}
+            <div class="form-group">
+                <div class="d-flex justify-content-center my-4">
+                        <span class="infobulle"
+                              aria-label="Veuillez saisir un nom, un prénom, une entreprise, un bassin d'activité ou un mot clé.">
+                            {{ form_start(form, {'attr': {'class': 'form-inline my-2 my-lg-0 justify-content-center'}}) }}
+                            {{ form_widget(form.search, {'attr': {'class': 'form-control mr-sm-2 col-md-7', 'placeholder': "Marc, Pichon, SARL ..."}}) }}
+                            <button class="btn btn-primary my-2 my-sm-0 mt-4" type="submit">Rechercher</button>
+                        {{ form_end(form) }}
+                        </span>
+                </div>
+            </div>
             <div class="row m-0 justify-content-center">
                 {% for document in documents %}
                     <div class="blur my-4 mx-5 col-md-4 col-10 p-0 col-lg-2 d-flex flex-column align-items-start">

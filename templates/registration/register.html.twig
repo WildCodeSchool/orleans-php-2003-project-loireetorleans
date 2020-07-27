@@ -14,69 +14,154 @@
                         <div class="form-group d-flex flex-column my-3 col-md-6">
                             {{ form_label(registrationForm.firstname, 'Prénom') }}
                             {{ form_widget(registrationForm.firstname) }}
+                            {% if registrationForm.firstname.vars.errors is not empty %}
+                                <div class="mt-2 text-left alert alert-danger">
+                                    {{ form_errors(registrationForm.firstname) }}
+                                </div>
+                            {% endif %}
+
                         </div>
                         <div class="form-group d-flex flex-column my-3 col-md-6">
                             {{ form_label(registrationForm.lastName, 'Nom') }}
                             {{ form_widget(registrationForm.lastName) }}
+                            {% if registrationForm.lastName.vars.errors is not empty %}
+                                <div class="mt-2 text-left alert alert-danger">
+                                    {{ form_errors(registrationForm.lastName) }}
+                                </div>
+                            {% endif %}
                         </div>
                     </div>
                     <div class="d-flex flex-lg-row flex-column col-md-10 p-0">
                         <div class="form-group d-flex flex-column my-3 col-lg-6 text-truncate">
                             {{ form_label(registrationForm.pictureFile, 'Photo') }}
                             {{ form_widget(registrationForm.pictureFile, {'attr': {'class': 'text-truncate'}}) }}
+                            {% if registrationForm.pictureFile.vars.errors is not empty %}
+                                <div class="mt-2 text-left alert alert-danger">
+                                    {{ form_errors(registrationForm.pictureFile) }}
+                                </div>
+                            {% endif %}
                         </div>
                         <div class="form-group d-flex flex-column my-3 col-lg-6">
                             {{ form_label(registrationForm.company, 'Entreprise') }}
                             {{ form_widget(registrationForm.company) }}
+                            {% if registrationForm.company.vars.errors is not empty %}
+                                <div class="mt-2 text-left alert alert-danger">
+                                    {{ form_errors(registrationForm.company) }}
+                                </div>
+                            {% endif %}
                         </div>
                     </div>
-                    <div class="d-flex col-md-10 p-0">
-                        <div class="form-group d-flex flex-lg-row flex-column my-3 col-md-6 align-items-center">
+                    <div class="d-flex col-md-10 p-0 flex-column flex-lg-row">
+                        <div class="form-group d-flex flex-column my-3 col-lg-6 align-items-center">
                             {{ form_label(registrationForm.activity,'Activité') }}
-                            {{ form_widget(registrationForm.activity,{'attr': {'class': 'mx-lg-3'}}) }}
+                            {{ form_widget(registrationForm.activity,{'attr': {'class': 'mx-lg-3 w-100'}}) }}
+                            {% if registrationForm.activity.vars.errors is not empty %}
+                                <div class="mt-2 text-left alert alert-danger w-100">
+                                    {{ form_errors(registrationForm.activity) }}
+                                </div>
+                            {% endif %}
                         </div>
-                        <div class="form-group d-flex flex-lg-row flex-column my-3 col-md-6 align-items-center">
+                        <div class="form-group d-flex flex-column my-3 col-lg-6 align-items-center">
                             {{ form_label(registrationForm.employmentArea, 'Bassin d\'emploi') }}
-                            {{ form_widget(registrationForm.employmentArea,{'attr': {'class': 'mx-lg-3'}}) }}
+                            {{ form_widget(registrationForm.employmentArea,{'attr': {'class': 'mx-lg-3 w-100'}}) }}
+                            {% if registrationForm.employmentArea.vars.errors is not empty %}
+                                <div class="mt-2 text-left alert alert-danger w-100">
+                                    {{ form_errors(registrationForm.employmentArea) }}
+                                </div>
+                            {% endif %}
                         </div>
                     </div>
                     <div class="d-flex flex-lg-row flex-column col-md-10 p-0">
                         <div class="form-group d-flex flex-column my-3 col-lg-6">
                             {{ form_label(registrationForm.email, 'Email') }}
                             {{ form_widget(registrationForm.email) }}
+                            {% if registrationForm.email.vars.errors is not empty %}
+                                <div class="mt-2 text-left alert alert-danger">
+                                    {{ form_errors(registrationForm.email) }}
+                                </div>
+                            {% endif %}
                         </div>
                         <div class="form-group d-flex flex-column my-3 col-lg-6">
                             {{ form_label(registrationForm.phoneNumber, 'Téléphone') }}
                             {{ form_widget(registrationForm.phoneNumber) }}
+                            {% if registrationForm.phoneNumber.vars.errors is not empty %}
+                                <div class="mt-2 text-left alert alert-danger">
+                                    {{ form_errors(registrationForm.phoneNumber) }}
+                                </div>
+                            {% endif %}
                         </div>
                     </div>
                     <div class="form-group d-flex flex-column my-3 col-md-10">
                         {{ form_label(registrationForm.street, 'Rue') }}
                         {{ form_widget(registrationForm.street) }}
+                        {% if registrationForm.street.vars.errors is not empty %}
+                            <div class="mt-2 text-left alert alert-danger">
+                                {{ form_errors(registrationForm.street) }}
+                            </div>
+                        {% endif %}
                     </div>
                     <div class="d-flex flex-md-row flex-column col-md-10 p-0">
                         <div class="form-group d-flex flex-column my-3 col-md-6">
                             {{ form_label(registrationForm.city, 'Ville') }}
                             {{ form_widget(registrationForm.city) }}
+                            {% if registrationForm.city.vars.errors is not empty %}
+                                <div class="mt-2 text-left alert alert-danger">
+                                    {{ form_errors(registrationForm.city) }}
+                                </div>
+                            {% endif %}
                         </div>
                         <div class="form-group d-flex flex-column my-3 col-md-6">
                             {{ form_label(registrationForm.postalCode, 'Code postal') }}
                             {{ form_widget(registrationForm.postalCode) }}
+                            {% if registrationForm.postalCode.vars.errors is not empty %}
+                                <div class="mt-2 text-left alert alert-danger">
+                                    {{ form_errors(registrationForm.postalCode) }}
+                                </div>
+                            {% endif %}
                         </div>
                     </div>
                     <div class="form-group d-flex flex-column my-3 col-md-10">
                         {{ form_label(registrationForm.description, 'Description') }}
                         {{ form_widget(registrationForm.description, {'attr': {'rows':'10'}}) }}
+                        {% if registrationForm.description.vars.errors is not empty %}
+                            <div class="mt-2 text-left alert alert-danger">
+                                {{ form_errors(registrationForm.description) }}
+                            </div>
+                        {% endif %}
                     </div>
                     <div class="form-group d-flex flex-column my-3 col-10 col-lg-6">
                         {{ form_label(registrationForm.login, 'Identifiant') }}
                         {{ form_widget(registrationForm.login) }}
+                        {% if registrationForm.login.vars.errors is not empty %}
+                            <div class="mt-2 text-left alert alert-danger">
+                                {{ form_errors(registrationForm.login) }}
+                            </div>
+                        {% endif %}
                     </div>
-                    {{ form_widget(registrationForm.password, {'attr': {'class': 'd-flex flex-column my-3 col-10 col-lg-6'}}) }}
-                    <button type="submit" class="btn btn-lg btn-primary mt-4 col-md-4">Soumettre</button>
+                    <div class="form-group d-flex flex-column my-3 col-10 col-lg-6">
+                        {{ form_label(registrationForm.password.first, 'Mot de passe') }}
+                        {{ form_widget(registrationForm.password.first) }}
+                        {% if registrationForm.password.first.vars.errors is not empty %}
+                            <div class="mt-2 text-left alert alert-danger">
+                                {{ form_errors(registrationForm.password.first) }}
+                            </div>
+                        {% endif %}
+                    </div>
+                    <div class="form-group d-flex flex-column my-3 col-10 col-lg-6">
+                        {{ form_label(registrationForm.password.second, 'Confirmation mot de passe') }}
+                        {{ form_widget(registrationForm.password.second) }}
+                        {% if registrationForm.password.second.vars.errors is not empty %}
+                            <div class="mt-2 text-left alert alert-danger">
+                                {{ form_errors(registrationForm.password.second) }}
+                            </div>
+                        {% endif %}
+                    </div>
+
+                    <button type="submit" class="btn btn-primary mt-4 col-md-4">Soumettre</button>
                     {{ form_end(registrationForm) }}
                 </div>
             </div>
+            <a href="{{ path('home') }}" class="btn btn-primary my-4 col-lg-2 col-md-4 col-6">Retour</a>
         </div>
 
     </section>
