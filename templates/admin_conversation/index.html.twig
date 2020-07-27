@@ -33,9 +33,13 @@
                                 <td><a class="btn btn-info" href="{{ path('admin_conversation_show', {'id': conversation.id}) }}">Consulter</a></td>
                             </tr>
                         {% endif %}
+
                     {% endfor %}
                     </tbody>
                 </table>
+                {% if  conversations is empty %}
+                    <p class="text-center">'Pas de nouveaux messages'</p>
+                {% endif %}
             </div>
             <div class="d-flex flex-column justify-content-center my-4">
                 <h3 class="my-4 text-center">Messages traités</h3>

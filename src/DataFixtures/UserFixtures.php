@@ -77,9 +77,12 @@ class UserFixtures extends Fixture
             if ($bool === 1) {
                 $user->setPicture('ambassadeur.jpeg');
                 $user->setUpdatedAt(new DateTime());
+                $user->setStatus('Validé');
+            } else {
+                $user->setStatus('En attente');
             }
 
-            $user->setStatus('En attente');
+
             $manager->persist($user);
         }
         $user->setLogin('hadef');

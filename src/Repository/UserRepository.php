@@ -45,15 +45,27 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
     // /**
     //  * @return User[] Returns an array of User objects
     //  */
-    public function findAllWhithoutAdmin()
+    public function findAllValidateWhithoutAdmin()
     {
         return $this->createQueryBuilder('u')
+            ->where('u.status = :status ')
+            ->setParameter('status', 'Validé')
             ->andWhere('u.roles NOT LIKE :role')
             ->setParameter('role', '%ROLE_ADMINISTRATEUR%')
             ->getQuery()
             ->getResult();
     }
 
+    public function findAllWaitingWhithoutAdmin()
+    {
+        return $this->createQueryBuilder('u')
+            ->where('u.status = :status ')
+            ->setParameter('status', 'En attente')
+            ->andWhere('u.roles NOT LIKE :role')
+            ->setParameter('role', '%ROLE_ADMINISTRATEUR%')
+            ->getQuery()
+            ->getResult();
+    }
 
     public function findTwoForMessage(string $login)
     {
@@ -101,7 +113,23 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
             ->getResult();
     }
 
-
+    public function findBySearchValidatesWhithoutAdmin(?string $search)
+    {
+        return $this->createQueryBuilder('u')
+            ->where('u.status = :status ')
+            ->setParameter('status', 'Validé')
+            ->andWhere('u.firstname LIKE :search')
+            ->orWhere('u.lastName LIKE :search')
+            ->orWhere('u.company LIKE :search')
+            ->orWhere('u.employmentArea LIKE :search')
+            ->orWhere('u.activity LIKE :search')
+            ->orWhere('u.description LIKE :search')
+            ->setParameter('search', '%' . $search . '%')
+            ->andWhere('u.roles NOT LIKE :role')
+            ->setParameter('role', '%ROLE_ADMINISTRATEUR%')
+            ->getQuery()
+            ->getResult();
+    }
 
     /*
     public function findOneBySomeField($value): ?User
