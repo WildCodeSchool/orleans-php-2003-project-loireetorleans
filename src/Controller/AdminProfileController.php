@@ -6,6 +6,7 @@ use App\Entity\User;
 use App\Form\SearchingType;
 use App\Form\StatusType;
 use App\Repository\UserRepository;
+use Knp\Component\Pager\PaginatorInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -17,27 +18,46 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class AdminProfileController extends AbstractController
 {
+    const DOCS_PER_PAGE = 8;
+
     /**
      * @Route("/", name="_index")
      * @param UserRepository $userRepository
      * @param Request $request
+     * @param PaginatorInterface $paginator
      * @return Response
      * @IsGranted("ROLE_ADMINISTRATEUR")
      */
-    public function index(UserRepository $userRepository, Request $request) : Response
+    public function index(UserRepository $userRepository, Request $request, PaginatorInterface $paginator) : Response
     {
         $form = $this->createForm(SearchingType::class);
         $form->handleRequest($request);
 
-        $users = $userRepository->findAllWhithoutAdmin();
+        $waiting = $userRepository->findAllWaitingWhithoutAdmin();
+
 
         if ($form->isSubmitted() && $form->isValid()) {
             $data = $form->getData();
-            $users = $userRepository->findBySearchWhithoutAdmin($data['search']);
+            $validate = $userRepository->findBySearchValidatesWhithoutAdmin($data['search']);
+        } else {
+            $validate = $userRepository->findAllValidateWhithoutAdmin();
         }
+        $validates = $paginator->paginate(
+            $validate,
+            $request->query->getInt('page', 1),
+            self::DOCS_PER_PAGE,
+            ['pageOutOfRange' => 'fix']
+        );
+        $waitings = $paginator->paginate(
+            $waiting,
+            $request->query->getInt('page', 1),
+            self::DOCS_PER_PAGE,
+            ['pageOutOfRange' => 'fix']
+        );
 
         return $this->render('admin_profile/index.html.twig', [
-            'users' => $users,
+            'validates' => $validates,
+            'waitings' => $waitings,
             'form' => $form->createView()
         ]);
     }

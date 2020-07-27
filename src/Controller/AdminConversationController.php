@@ -28,6 +28,7 @@ class AdminConversationController extends AbstractController
      */
     public function index(ConversationRepository $conversationRepo): Response
     {
+
         return $this->render('admin_conversation/index.html.twig', [
             'conversations'=> $conversationRepo->findAll()
         ]);

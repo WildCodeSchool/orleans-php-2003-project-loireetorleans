@@ -97,7 +97,7 @@ class DocumentController extends AbstractController
             $entityManager->persist($document);
             $entityManager->flush();
 
-            $users = $userRepository->findAllWhithoutAdmin();
+            $users = $userRepository->findAllValidateWhithoutAdmin();
 
             $email = (new Email())
                 ->from('noreply@loireetorleans.fr');
