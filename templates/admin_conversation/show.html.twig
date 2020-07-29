@@ -20,7 +20,7 @@
                     {% for message in conversation.messages %}
                         {% if message.user.roles[0] is same as('ROLE_AMBASSADEUR') %}
                             <div class="col-12 ">
-                                <div class="col-11 col-md-8 text-break p-1 my-3 bg-primary mr-auto">
+                                <div class="col-11 col-md-8 text-break p-1 my-3 bg-primary mr-auto d-flex flex-column">
                                     <p class="p-3 m-0 bg-light">{{ message.message }}</p>
                                         <p class=" p-1 m-0 bg-primary text-right text-light m-0">{{ message.user.firstname ~ ' ' ~ message.user.lastname ~ ' Le ' ~ message.date|date("d/m/Y à H:i") }}</p>
                                 </div>
@@ -28,7 +28,7 @@
 
                         {% else %}
                             <div class="col-12 ">
-                                <div class="col-11 col-md-8 bg-primary text-break p-1 my-3 ml-auto">
+                                <div class="col-11 col-md-8 bg-primary text-break p-1 my-3 ml-auto d-flex flex-column">
                                     <p class="p-3 m-0 bg-light">{{ message.message }}</p>
                                     <div class="align-items-center pt-1 m-0 bg-primary d-flex justify-content-between">
                                         {{ include('message/_delete_form.html.twig') }}

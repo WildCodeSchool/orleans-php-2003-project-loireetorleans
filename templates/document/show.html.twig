@@ -31,14 +31,14 @@
                             {% for message in conversation.messages %}
                                 {% if message.user.roles[0] is same as('ROLE_ADMINISTRATEUR') %}
                                     <div class="col-12">
-                                        <div class="col-11 d-flex col-md-8 text-wrap p-1 my-3 bg-primary mr-auto">
+                                        <div class="col-11 d-flex col-md-8 text-wrap p-1 my-3 bg-primary mr-auto flex-column">
                                             <p class="p-3 m-0 bg-light overflow-auto text-wrap">{{ message.message|nl2br }}</p>
                                                 <p class=" p-1 m-0 bg-primary text-right text-light m-0">{{ message.user.firstname ~ ' ' ~ message.user.lastname ~ ' Le ' ~ message.date|date("d/m/Y à H:i") }}</p>
                                         </div>
                                     </div>
                                 {% else %}
                                     <div class="col-12">
-                                        <div class="col-11 d-flex col-md-8 bg-primary text-wrap p-1 my-3 ml-auto">
+                                        <div class="col-11 d-flex col-md-8 bg-primary text-wrap p-1 my-3 ml-auto flex-column">
                                             <p class="p-3 m-0 bg-light overflow-auto text-wrap">{{ message.message|nl2br }}</p>
                                             <div class="align-items-center pt-1 m-0 bg-primary d-flex justify-content-between">
                                                 {{ include('message/_delete_form.html.twig') }}
@@ -77,7 +77,7 @@
                 </div>
             {% endif %}
             {% if app.user.roles[0] is same as ('ROLE_ADMINISTRATEUR') %}
-            <div class="d-flex justify-content-center flex-column my-4">
+            <div class="d-flex justify-content-center flex-column my-4 col-12 p-0">
                 <h3 class="my-4 text-center">Nouveaux messages</h3>
                 <table class="table table-hover col-10 p-0 mx-auto">
                     <thead class="bg-primary">
@@ -102,6 +102,7 @@
                                 <td><a class="btn btn-info" href="{{ path('admin_conversation_show', {'id': conversation.id}) }}">Consulter</a></td>
                             </tr>
                         {% endif %}
+
                     {% endfor %}
                     </tbody>
                 </table>
