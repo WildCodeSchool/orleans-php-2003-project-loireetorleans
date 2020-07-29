@@ -137,7 +137,7 @@ class RegistrationFormType extends AbstractType
                         'attr' => ['class' => 'd-flex flex-column col-12 p-0'],
 
                     ],
-                    'mapped' => false,
+                    'mapped' => true,
                 ]
             );
     }
