@@ -80,7 +80,9 @@ class DocumentController extends AbstractController
     public function new(Request $request, MailerInterface $mailer, UserRepository $userRepository): Response
     {
         $document = new Document();
-        $form = $this->createForm(DocumentType::class, $document);
+        $form = $this->createForm(DocumentType::class, $document, [
+            'validation_groups' => ['add','default'],
+        ]);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -206,7 +208,7 @@ class DocumentController extends AbstractController
     public function edit(Request $request, Document $document): Response
     {
         $form = $this->createForm(DocumentType::class, $document, [
-            'validation_groups' => ['add'],
+            'validation_groups' => ['default'],
         ]);
         $form->handleRequest($request);
 

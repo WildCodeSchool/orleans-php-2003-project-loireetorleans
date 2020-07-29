@@ -27,7 +27,7 @@ class Document
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank(message="Veuillez entrer un nom de fichier")
+     * @Assert\NotBlank(message="Veuillez entrer un nom de fichier", groups={"default"})
      */
     private $name;
 
@@ -42,7 +42,7 @@ class Document
      * @Assert\File(
      *     mimeTypes={"application/pdf","application/msword","application/vnd.oasis.opendocument.text","text/plain",
      *     "application/vnd.openxmlformats-officedocument.wordprocessingml.document"},
-     *     mimeTypesMessage="Veuillez insérer un fichier au format {{ types }}"
+     *     mimeTypesMessage="Veuillez insérer un fichier au format {{ types }}", groups={"default"}
      * )
      * @Assert\NotBlank(message="Veuillez joindre un fichier", groups={"add"})
      */
@@ -79,7 +79,7 @@ class Document
         return $this->name;
     }
 
-    public function setName(string $name): self
+    public function setName(?string $name): self
     {
         $this->name = $name;
 
